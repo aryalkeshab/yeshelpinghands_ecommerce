@@ -59,8 +59,7 @@ class PasswordResetScreen extends StatelessWidget {
                         Text("Forgot your password?",
                             style: theme.textTheme.headline6),
                         config.verticalSpaceSmall(),
-                        const Text(
-                            "Please enter your email address below to receive a password reset link.",
+                        const Text("Please enter your email address.",
                             textAlign: TextAlign.center),
                         config.verticalSpaceLarge(),
                         PrimaryFormField(

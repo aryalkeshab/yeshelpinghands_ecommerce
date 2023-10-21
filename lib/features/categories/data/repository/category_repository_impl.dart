@@ -19,9 +19,8 @@ class CategoryRepositoryImpl implements CategoryRepository {
       try {
         final result = await categoryRemoteDataSource.getAllCategories();
 
-        final categoryList = result["children_data"]
-            .map<Category>((e) => Category.fromJson(e))
-            .toList();
+        final categoryList =
+            result["data"].map<Category>((e) => Category.fromJson(e)).toList();
         return ApiResponse(data: categoryList);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

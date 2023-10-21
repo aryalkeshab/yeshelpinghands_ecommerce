@@ -27,7 +27,7 @@ class PasswordResetRepositoryImpl implements PasswordResetRepository {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data['message']));
+                  value: e.response?.data['message'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

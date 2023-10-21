@@ -25,7 +25,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data[0]['message']));
+                  value: e.response?.data['message'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

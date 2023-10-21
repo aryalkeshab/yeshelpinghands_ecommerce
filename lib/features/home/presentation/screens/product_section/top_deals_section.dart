@@ -32,7 +32,7 @@ class TopDealProductsSection extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SectionHeader(
-                    title: "Top Deal Products",
+                    title: "New Arrivals Products",
                     onViewAllProductTap: () {
                       Get.toNamed(
                         Routes.productListingScreen,

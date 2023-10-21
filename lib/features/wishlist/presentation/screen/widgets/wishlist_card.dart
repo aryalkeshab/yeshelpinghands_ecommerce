@@ -49,7 +49,7 @@ class WishlistCard extends StatelessWidget {
                   onTap: navigateToProductDetails,
                   child: SizedBox(
                     child: CustomCachedNetworkImage(
-                        isCompleteUrl: false, "${wishListProduct.image}"),
+                        isCompleteUrl: false, "${wishListProduct.thumbnail}"),
                     width: 100,
                   ),
                 ),
@@ -67,7 +67,7 @@ class WishlistCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "$currency ${NumberParser.twoDecimalDigit(wishListProduct.price)}",
+                            "$currency ${NumberParser.twoDecimalDigit(wishListProduct.price.toString())}",
                             style: themeData.textTheme.bodyText1
                                 ?.copyWith(fontWeight: FontWeight.w600),
                           ),
@@ -82,7 +82,8 @@ class WishlistCard extends StatelessWidget {
                                       Get.find<WishListController>()
                                           .removeProductFromWishListScreen(
                                         context,
-                                        int.parse(wishListProduct.entityId!),
+                                        int.parse(
+                                            wishListProduct.id.toString()),
                                       );
                                       Get.back();
                                     },
@@ -95,13 +96,13 @@ class WishlistCard extends StatelessWidget {
                       PrimaryOutlinedButton(
                         height: MediaQuery.of(context).size.height * 0.04,
                         width: MediaQuery.of(context).size.width * 0.02,
-                        borderColor: wishListProduct.isProductInStock
+                        borderColor: wishListProduct.isProductInStock!
                             ? primaryColor
                             : lightGreen,
-                        title: wishListProduct.isProductInStock
+                        title: wishListProduct.isProductInStock!
                             ? "Add to Cart"
                             : "Out of Stock",
-                        onPressed: wishListProduct.isProductInStock
+                        onPressed: wishListProduct.isProductInStock!
                             ? () {
                                 Get.find<CartController>().addToCart(
                                     context,

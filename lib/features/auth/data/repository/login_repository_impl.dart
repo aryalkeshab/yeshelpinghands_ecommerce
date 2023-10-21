@@ -38,7 +38,7 @@ class LoginRepositoryImpl extends LoginRepository {
           print(e.response?.data);
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data[0]['message']));
+                  value: e.response?.data['message'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }
@@ -64,7 +64,7 @@ class LoginRepositoryImpl extends LoginRepository {
           print(e.response?.data);
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data[0]['message']));
+                  value: e.response?.data['message'] ?? ''));
         } else if (e is SocialLoginException) {
           return ApiResponse(
               error: NetworkException.defaultError(value: e.message));
@@ -93,7 +93,7 @@ class LoginRepositoryImpl extends LoginRepository {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data[0]['message']));
+                  value: e.response?.data['message'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

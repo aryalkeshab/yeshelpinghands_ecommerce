@@ -25,7 +25,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: isCompleteUrl
           ? "$imageUrl"
-          : "${APIPathHelper.baseUrl}/media/catalog/product$imageUrl",
+          : "${APIPathHelper.baseUrlImage}$imageUrl",
       imageBuilder: (context, imageProvider) => AspectRatio(
         aspectRatio: aspectRatio ?? 1,
         child: Container(

@@ -26,16 +26,23 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final result =
             await productsRemoteDataSource.getAllProducts(filterQueryParams);
 
-        final productsList = result[0]['items']
+        final productsList = result['data']["data"]
             .map<ProductModel>((e) => ProductModel.fromJson(e))
             .toList();
+
+        // TODO: page size manage
 
         return ApiResponse(
             data: PagedResponse<ProductModel>(
                 items: productsList,
-                perPage: result[0]["page_size"],
-                isNextPageAvailable: result[0]["isNextPageAvailable"],
-                totalCount: result[0]["total_count"]));
+                perPage: result["data"]["current_page"],
+                isNextPageAvailable: true,
+                totalCount: result["data"]["total"]));
+        // data: PagedResponse<ProductModel>(
+        // items: productsList,
+        // perPage: result[0]["page_size"],
+        // isNextPageAvailable: result[0]["isNextPageAvailable"],
+        // totalCount: result[0]["total_count"]));
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
       }
@@ -52,7 +59,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final result = await productsRemoteDataSource
             .getBestSellingProducts(filterQueryParams);
 
-        final productsList = result[0]['items']
+        final productsList = result['data']["data"]
             .map<ProductModel>((e) => ProductModel.fromJson(e))
             .toList();
 
@@ -73,7 +80,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final result = await productsRemoteDataSource
             .getTopRatedProducts(filterQueryParams);
 
-        final productsList = result[0]['items']
+        final productsList = result['data']["data"]
             .map<ProductModel>((e) => ProductModel.fromJson(e))
             .toList();
 
@@ -94,7 +101,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final result = await productsRemoteDataSource
             .getExclusiveDealsProduct(filterQueryParams);
 
-        final productsList = result[0]['items']
+        final productsList = result['data']["data"]
             .map<ProductModel>((e) => ProductModel.fromJson(e))
             .toList();
 
@@ -115,7 +122,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final result = await productsRemoteDataSource
             .getCashBackOfferProducts(filterQueryParams);
 
-        final productsList = result[0]['items']
+        final productsList = result['data']["data"]
             .map<ProductModel>((e) => ProductModel.fromJson(e))
             .toList();
 
@@ -136,7 +143,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final result = await productsRemoteDataSource
             .getNewArrivalProducts(filterQueryParams);
 
-        final productsList = result[0]['items']
+        final productsList = result['data']["data"]
             .map<ProductModel>((e) => ProductModel.fromJson(e))
             .toList();
 

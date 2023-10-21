@@ -1,7 +1,8 @@
 class RegisterParams {
   String? email;
-  String? firstName;
-  String? lastName;
+  String? name;
+  String? username;
+
   String? password;
   String? confirmPassword;
   String? contactNumber;
@@ -22,10 +23,11 @@ class RegisterParams {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['email'] = email;
-    map['firstname'] = firstName;
-    map['lastname'] = lastName;
+    map['name'] = name;
+    map['username'] = username;
     map['password'] = password;
-    map['phoneno'] = contactNumber;
+    map['mobile'] = contactNumber;
+    map["confirm_password"] = confirmPassword;
 
     return map;
   }

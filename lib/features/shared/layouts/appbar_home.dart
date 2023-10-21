@@ -201,7 +201,11 @@ class SearchBarContainer extends StatelessWidget
               right: config.appHorizontalPaddingSmall()),
           height: 40,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              width: 1,
+              color: Colors.black38.withOpacity(0.2),
+            ),
             color: fillColor ?? const Color(0xfff2f2f2),
           ),
           child: Row(

@@ -32,7 +32,7 @@ class BestSellerSection extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SectionHeader(
-                  title: "Best Seller Products",
+                  title: "Trending Products",
                   onViewAllProductTap: () {
                     Get.toNamed(
                       Routes.productListingScreen,

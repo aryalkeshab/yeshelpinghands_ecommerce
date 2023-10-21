@@ -24,7 +24,7 @@ abstract class NetworkException {
         return NetworkException.unauthorizedRequest();
       case 404:
         return NetworkException.defaultError(
-            value: error.response?.data[0]["error"]);
+            value: error.response?.data["error"] ?? '');
 
       case 500:
         return NetworkException.internalServerError();

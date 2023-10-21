@@ -75,7 +75,7 @@ class WishListRepositoryImpl implements WishListRepository {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data[0]['error']));
+                  value: e.response?.data[0]['error'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

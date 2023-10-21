@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yeshelpinghand/core/data/data_source/remote/api_constants.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/circular_cached_network_image_builder.dart';
@@ -65,7 +66,8 @@ class MultiBannerView extends StatelessWidget {
                       child: CircularCachedNetworkImageBuilder(
                           borderRadius: 5,
                           isBorderEnabled: false,
-                          imageUrl: bannerResponseList[index].link),
+                          imageUrl: APIPathHelper.baseUrlImage +
+                              bannerResponseList[index].image),
                     )),
           );
         } else if (result.hasError) {

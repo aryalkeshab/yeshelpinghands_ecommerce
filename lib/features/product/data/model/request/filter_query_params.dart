@@ -1,6 +1,6 @@
 class FilterQueryParams {
   FilterQueryParams({
-    this.pageSize = 20,
+    this.pageSize = 10,
     this.searchQuery,
     this.currentPage = 1,
     this.categoryId,
@@ -34,21 +34,21 @@ class FilterQueryParams {
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
     if (searchQuery != null && searchQuery!.isNotEmpty) {
-      map['searchQuery'] = searchQuery.toString();
+      map['search'] = searchQuery.toString();
     }
-    map["searchCriteria[PageSize]"] = pageSize.toString();
-    map["searchCriteria[CurrentPage]"] = currentPage.toString();
+    // map["page"] = pageSize.toString();
+    // map["current_page"] = currentPage.toString();
     if (categoryId != null) map['categoryId'] = categoryId.toString();
 
     if (brandId != null) map['brandId'] = brandId.toString();
-    if (categoryId != null) map['categoryId'] = categoryId.toString();
-    if (topRated != null) map['topRated'] = true;
-    if (bestSeller != null) map['bestSeller'] = true;
-    if (topDeals != null) map['bestDeals'] = true;
+    if (categoryId != null) map['category_id'] = categoryId.toString();
+    // if (topRated != null) map['featured'] = 1;
+    // if (bestSeller != null) map['trending'] = 1;
+    // if (topDeals != null) map['new'] = 1;
     if (sort != null) map['sort'] = sort;
     if (order != null) map['order'] = order;
-    if (minPrice != null) map['minPrice'] = minPrice;
-    if (maxPrice != null) map['maxPrice'] = maxPrice;
+    if (minPrice != null) map['min_price'] = minPrice;
+    if (maxPrice != null) map['max_price'] = maxPrice;
     if (inStock != null) map['instock'] = true;
     if (outOfStock != null) map['outstock'] = true;
     return map;

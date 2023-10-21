@@ -9,8 +9,11 @@ import 'package:yeshelpinghand/features/categories/presentation/controller/categ
 import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_loading_view.dart';
 import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_tab_view.dart';
 import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_vertical_tabs.dart';
+import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 
+import '../../../../core/data/data_source/remote/api_constants.dart';
+import '../../../../core/presentation/widgets/cached_network_image_builder.dart';
 import '../../../shared/layouts/appbar_home.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -51,54 +54,62 @@ class CategoryBody extends StatelessWidget {
             final result = Get.find<CategoryController>().categoryApiResponse;
             if (result.hasData) {
               final List<Category> categoryList = result.data;
-              // categoryList.sort((a, b) => a.name!.compareTo(b.name!));
-              // categoryList.sort((a, b) {
-              //   final nameA = a.name!;
-              //   final nameB = b.name!;
 
-              //   final nameAChars = Characters(nameA.toLowerCase());
-              //   final nameBChars = Characters(nameB.toLowerCase());
-
-              //   final nameAIterator = nameAChars.iterator;
-              //   final nameBIterator = nameBChars.iterator;
-
-              //   while (nameAIterator.moveNext() && nameBIterator.moveNext()) {
-              //     final charA = nameAIterator.current;
-              //     final charB = nameBIterator.current;
-
-              //     final comparisonResult = charA.compareTo(charB);
-              //     if (comparisonResult != 0) {
-              //       return comparisonResult;
-              //     }
-              //   }
-
-              //   return nameAChars.length.compareTo(nameBChars.length);
-              // });
               return Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: config.appEdgePadding(),
                   vertical: config.appHorizontalPaddingSmall(),
                 ),
                 child: GridView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent:
-                            MediaQuery.of(context).size.width / 3.5,
-                        childAspectRatio: 4 / 5,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20),
-                    itemBuilder: (context, index) {
-                      return Container(
-                          height: 300,
-                          decoration: BoxDecoration(
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: MediaQuery.of(context).size.width / 3,
+                      childAspectRatio: 3.85 / 5,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemCount: categoryList.length,
+                  itemBuilder: (context, index) {
+                    final category = categoryList[index];
+                    return InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.productListingScreen,
+                            arguments:
+                                FilterQueryParams(categoryId: category.id));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            // color: theme.primaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
                               color: theme.primaryColor,
-                              borderRadius: BorderRadius.circular(8)),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Center(child: Text("Herllo")),
-                          ));
-                    },
-                    itemCount: categoryList.length),
+                              width: 2,
+                            )),
+                        child: InkWell(
+                          onTap: () {
+                            // Handle the category item tap here
+                            selectedCategoryId.value = category.id;
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomCachedNetworkImage(
+                                isCompleteUrl: true,
+                                "${APIPathHelper.baseUrlImage + category.image}",
+                              ),
+                              Divider(),
+                              // config.verticalSpaceSmall(),
+                              Text(category.name,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600))
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               );
             } else if (result.hasError) {
               return Center(

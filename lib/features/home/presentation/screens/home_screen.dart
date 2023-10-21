@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
+import 'package:yeshelpinghand/core/presentation/resources/colors.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/circular_cached_network_image_builder.dart';
@@ -21,6 +22,7 @@ import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import 'package:yeshelpinghand/features/wishlist/data/model/wishlist.dart';
 import 'package:yeshelpinghand/features/wishlist/presentation/controller/wishlist_controller.dart';
 
+import '../../../../core/data/data_source/remote/api_constants.dart';
 import '../../../../core/presentation/resources/ui_assets.dart';
 import '../../../../core/presentation/widgets/buttons.dart';
 import '../../../profile/presentation/controller/profile_controller.dart';
@@ -143,7 +145,22 @@ class HomeScreen extends StatelessWidget {
             );
           }),
       appBar: AppBar(
-      back
+        backgroundColor: Colors.white,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: primaryColor,
+                size: 25,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: config.appHorizontalPaddingLarge()),
@@ -151,7 +168,11 @@ class HomeScreen extends StatelessWidget {
                 GetBuilder<WishListController>(builder: (wishlistController) {
               return wishlistController.wishList.isEmpty
                   ? IconButton(
-                      icon: Icon(Icons.favorite_border),
+                      icon: Icon(
+                        Icons.favorite_border,
+                        size: 25,
+                        color: Theme.of(context).primaryColor,
+                      ),
                       onPressed: () {
                         Get.toNamed(Routes.wishList);
                       },
@@ -159,8 +180,9 @@ class HomeScreen extends StatelessWidget {
                   : Stack(
                       children: [
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.favorite_border,
+                            color: Theme.of(context).primaryColor,
                             size: 25,
                           ),
                           onPressed: () {
@@ -239,7 +261,7 @@ class HomeScreen extends StatelessWidget {
                   config.verticalSpaceLarge(),
                   const TopDealProductsSection(),
                   config.verticalSpaceMedium(),
-                  const SingleBannerView(),
+                  // const SingleBannerView(),
                   // config.verticalSpaceLarge(),
                   // const HomeBrandSection(),
                 ],
@@ -273,7 +295,8 @@ class HomeCarousal extends StatelessWidget {
                   dotBgColor: Colors.transparent,
                   images: sliderResponseList
                       .map((slider) => CircularCachedNetworkImageBuilder(
-                            imageUrl: "${slider.link}",
+                            imageUrl:
+                                "${APIPathHelper.baseUrlImage + slider.image}",
                             borderRadius: 8,
                             isBorderEnabled: false,
                           ))

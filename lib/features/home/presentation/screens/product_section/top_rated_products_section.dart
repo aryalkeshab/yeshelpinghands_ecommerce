@@ -33,7 +33,7 @@ class TopRatedProductsSection extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SectionHeader(
-                    title: "Top Rated Products",
+                    title: "Featured Products",
                     onViewAllProductTap: () {
                       Get.toNamed(
                         Routes.productListingScreen,

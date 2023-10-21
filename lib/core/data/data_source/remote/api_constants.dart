@@ -86,16 +86,19 @@ enum APIPath {
 }
 
 class APIPathHelper {
-  static const String baseUrl = "https://qmbmart.com";
+  // static const String baseUrl = "https://qmbmart.com";
+  static const String baseUrl = "https://yeshelpinghand.com";
+
   static const String reCaptchaToken = "ybntheqhyl90wx5ogfv8fwii1aisa969";
+  static const String baseUrlImage = "https://yeshelpinghand.com/";
 
   static String authAPIs(APIPath path, {String? keyword}) {
     switch (path) {
       case APIPath.login:
-        return "/rest/V1/customer/login";
+        return "/api/V1/login";
 
       case APIPath.register:
-        return "/rest/V1/customer/register";
+        return "/api/V1/register";
 
       case APIPath.passwordReset:
         return "/rest/V1/customers/password";
@@ -121,13 +124,13 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.imageSlider:
-        return "/rest/V1/homepage/sliders?filter=qmb-sliders";
+        return "/api/V1/get-sliders";
 
       case APIPath.featuredCategory:
         return "/rest/V1/category/featured";
 
       case APIPath.banners:
-        return "/rest/V1/homepage/sliders?filter=$keyword";
+        return "/api/V1/get-advertisements";
 
       default:
         return "";
@@ -155,10 +158,10 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.products:
-        return "/rest/V1/custom/products";
+        return "/api/V1/get-products";
 
       case APIPath.allProducts:
-        return "/rest/V1/custom/products";
+        return "/api/V1/get-products";
       case APIPath.productDetail:
         return "/rest/V1/product?sku=$keyword";
 
@@ -382,7 +385,7 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.category:
-        return "/rest/V1/categories";
+        return "/api/V1/get-categories";
 
       case APIPath.register:
         return "/products/$id";

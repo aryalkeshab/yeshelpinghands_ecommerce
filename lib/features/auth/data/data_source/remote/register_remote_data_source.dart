@@ -14,6 +14,6 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
   @override
   Future register(RegisterParams registerParams) {
     return apiClient.validatedPost(APIPathHelper.authAPIs(APIPath.register),
-        data: registerParams.toJson(), token: APIPathHelper.reCaptchaToken);
+        data: registerParams.toJson());
   }
 }

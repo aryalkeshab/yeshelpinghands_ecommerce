@@ -89,7 +89,7 @@ class CartRepositoryImpl implements CartRepository {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: "${e.response?.data[0]['error']}"));
+                  value: "${e.response?.data['error'] ?? ''}"));
         }
         {
           return ApiResponse(error: NetworkException.getException(e));

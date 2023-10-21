@@ -38,7 +38,7 @@ class FeaturedCategorySection extends StatelessWidget {
                       SizedBox(
                           height: 85,
                           child: CustomCachedNetworkImage(
-                              "${featuredCategory.link}")),
+                              "${featuredCategory.image}")),
                       // _FeaturedCategoryCard(
                       //     title: featuredCategory.categoryName.toString(),
                       //     image: featuredCategory.categoryImage.toString(),

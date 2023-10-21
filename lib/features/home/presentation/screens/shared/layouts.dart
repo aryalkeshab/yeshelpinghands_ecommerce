@@ -21,10 +21,10 @@ class SectionHeader extends StatelessWidget {
       height: 35,
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.only(left: 10),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.primary),
-        borderRadius: BorderRadius.circular(3),
-      ),
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Theme.of(context).colorScheme.primary),
+      //   borderRadius: BorderRadius.circular(3),
+      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -32,20 +32,28 @@ class SectionHeader extends StatelessWidget {
             title.toUpperCase(),
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.primary),
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 16),
           ),
-          if (showViewAll)
-            InkWell(
-              onTap: onViewAllProductTap,
-              child: Container(
-                width: 35,
-                height: double.maxFinite,
-                decoration: BoxDecoration(
+          Text(
+            "See All >",
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontWeight: FontWeight.w600,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                child: const Icon(Icons.keyboard_arrow_right),
-              ),
-            ),
+          ),
+          // if (showViewAll)
+          //   InkWell(
+          //     onTap: onViewAllProductTap,
+          //     child: Container(
+          //       width: 35,
+          //       height: double.maxFinite,
+          //       decoration: BoxDecoration(
+          //         color: Theme.of(context).colorScheme.primary,
+          //       ),
+          //       child: const Icon(Icons.keyboard_arrow_right),
+          //     ),
+          //   ),
         ],
       ),
     );

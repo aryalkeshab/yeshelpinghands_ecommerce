@@ -85,7 +85,7 @@ class DashboardScreen extends StatelessWidget {
             elevation: 0,
             items: [
               _bottomNavigationBarItem(
-                icon: CupertinoIcons.home,
+                icon: Icons.home,
                 label: 'Home',
               ),
               _bottomNavigationBarItemWithExternalSvg(
@@ -157,7 +157,7 @@ class DashboardScreen extends StatelessWidget {
 
   _bottomNavigationBarItem({required IconData icon, required String label}) {
     return BottomNavigationBarItem(
-      icon: Icon(icon, size: 20),
+      icon: Icon(icon, size: 25),
       label: label,
     );
   }

@@ -22,47 +22,44 @@ class CategoryTabView extends StatelessWidget {
       return Expanded(
         child: Stack(
           children: [
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: config.appEdgePadding(),
-                vertical: config.appVerticalPaddingLarge(),
-              ),
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: config.appVerticalPaddingMedium()),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(category.subCategories?.length ?? 0,
-                        (index) {
-                      final subCategory = category.subCategories?[index];
-                      if (subCategory != null) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SubCategorySection(subCategory: subCategory),
-                            // config.verticalSpaceMedium(),
-                          ],
-                        );
-                      } else {
-                        return const Text('No subCategory for this product');
-                      }
-                    }),
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.symmetric(
+            //     horizontal: config.appEdgePadding(),
+            //     vertical: config.appVerticalPaddingLarge(),
+            //   ),
+            //   height: MediaQuery.of(context).size.height,
+            //   child: SingleChildScrollView(
+            //     physics: const BouncingScrollPhysics(),
+            //     child: Padding(
+            //       padding: EdgeInsets.symmetric(
+            //           vertical: config.appVerticalPaddingMedium()),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: List.generate(category.subCategories?.length ?? 0,
+            //             (index) {
+            //           final subCategory = category.subCategories?[index];
+            //           if (subCategory != null) {
+            //             return Column(
+            //               crossAxisAlignment: CrossAxisAlignment.start,
+            //               mainAxisSize: MainAxisSize.min,
+            //               children: [
+            //                 SubCategorySection(subCategory: subCategory),
+            //                 // config.verticalSpaceMedium(),
+            //               ],
+            //             );
+            //           } else {
+            //             return const Text('No subCategory for this product');
+            //           }
+            //         }),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Positioned(
                 top: 10,
                 right: 20,
                 child: InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.productListingScreen,
-                        arguments: FilterQueryParams(categoryId: category.id));
-                  },
+                  onTap: () {},
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

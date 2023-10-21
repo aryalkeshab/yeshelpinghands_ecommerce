@@ -82,7 +82,7 @@ class _ProductCard extends StatelessWidget {
                     height: type == _ProductCardType.large ? 140 : 98,
                     child: CustomCachedNetworkImage(
                       isCompleteUrl: false,
-                      productModel.productImage?.image,
+                      productModel.thumbnail,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -102,7 +102,7 @@ class _ProductCard extends StatelessWidget {
                         ),
                         config.verticalSpaceVerySmall(),
                         Text(
-                          "$currency ${NumberParser.twoDecimalDigit(productModel.price)}",
+                          "$currency ${NumberParser.twoDecimalDigit(productModel.price.toString())}",
                           style: theme.textTheme.bodyText1?.copyWith(
                               color: primaryColor2,
                               fontWeight: FontWeight.w600),

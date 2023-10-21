@@ -1,18 +1,15 @@
 class EditProfileParams {
-  String? firstName;
-  String? lastName;
+  String? name;
   String? contactNumber;
 
   EditProfileParams({
-    this.firstName,
-    this.lastName,
+    this.name,
     this.contactNumber,
   });
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['firstname'] = firstName;
-    map['lastname'] = lastName;
+    map['firstname'] = name;
     map['phoneno'] = contactNumber;
     return map;
   }

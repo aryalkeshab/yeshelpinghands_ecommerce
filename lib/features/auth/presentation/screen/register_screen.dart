@@ -113,11 +113,11 @@ class RegisterFormBuilder extends StatelessWidget {
                           Icons.person_outline,
                           theme.primaryColor,
                         ),
-                        label: '${"First Name".tr}',
+                        label: '${"Name".tr}',
                         isRequired: true,
                         validator: (value) => Validator.validateEmpty(value!),
                         onSaved: (value) {
-                          registerParams.firstName = value;
+                          registerParams.name = value;
                         },
                       ),
                       config.verticalSpaceMedium(),
@@ -126,10 +126,10 @@ class RegisterFormBuilder extends StatelessWidget {
                         hintIcon: _buildFormFieldIcon(
                             Icons.person_outline, theme.primaryColor),
                         validator: (value) => Validator.validateEmpty(value!),
-                        label: '${"Last Name".tr} ',
+                        label: '${"Username".tr} ',
                         isRequired: true,
                         onSaved: (value) {
-                          registerParams.lastName = value;
+                          registerParams.username = value;
                         },
                       ),
                       config.verticalSpaceMedium(),
