@@ -1,0 +1,4 @@
+enum AddressBookType {
+  selectable,
+  nonSelectable,
+}

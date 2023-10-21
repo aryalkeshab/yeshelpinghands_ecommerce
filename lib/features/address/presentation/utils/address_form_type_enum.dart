@@ -1,0 +1,4 @@
+enum AddressFormType {
+  create,
+  edit,
+}

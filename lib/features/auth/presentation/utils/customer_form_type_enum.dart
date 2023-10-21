@@ -1,0 +1,4 @@
+enum CustomerFormType {
+  create,
+  edit,
+}
