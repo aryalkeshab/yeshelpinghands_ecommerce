@@ -21,7 +21,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       try {
         final result = await profileRemoteDataSource.getProfileDetails();
 
-        final profileData = User.fromJson(result[0]);
+        final profileData = User.fromJson(result["data"]);
         return ApiResponse(data: profileData);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

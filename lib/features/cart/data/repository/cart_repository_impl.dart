@@ -20,11 +20,15 @@ class CartRepositoryImpl implements CartRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await cartRemoteDataSource.getCartDetails();
-        if (result.isEmpty) {
-          return ApiResponse(data: CartResponse.init());
-        }
+        // final cartItemList = result["data"]
+        //     .map<CartResponse>((e) => CartResponse.fromJson(e))
+        //     .toList();
 
-        final cartResponse = CartResponse.fromJson(result[0]);
+        // if (result.isEmpty) {
+        //   return ApiResponse(data: cartItemList);
+        // }
+
+        final cartResponse = CartResponse.fromJson(result["data"]);
         return ApiResponse(data: cartResponse);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
@@ -34,10 +38,10 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<ApiResponse> removeProductFromCart(int id) async {
+  Future<ApiResponse> removeProductFromCart(String slug) async {
     if (await networkInfo.isConnected) {
       try {
-        final result = await cartRemoteDataSource.removeProductFromCart(id);
+        await cartRemoteDataSource.removeProductFromCart(slug);
 
         return ApiResponse(data: 'Successfully Removed from Cart');
       } catch (e) {
@@ -84,7 +88,7 @@ class CartRepositoryImpl implements CartRepository {
         final response =
             await cartRemoteDataSource.updateCart(updateCartParams);
 
-        return ApiResponse(data: response[0]['message']);
+        return ApiResponse(data: response['message']);
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(

@@ -3,6 +3,7 @@ import 'package:yeshelpinghand/core/utils/constants.dart';
 import 'package:yeshelpinghand/features/cart/data/model/request/cart_request_params.dart';
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
 import 'package:yeshelpinghand/features/shared/layouts/confirm_dialog_view.dart';
+import 'package:yeshelpinghand/features/wishlist/data/model/wishlist.dart';
 import 'package:yeshelpinghand/features/wishlist/presentation/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ import '../../../../home/data/models/response/products_model.dart';
 import '../../../../shared/layouts/remove_button.dart';
 
 class WishlistCard extends StatelessWidget {
-  final ProductModel wishListProduct;
+  final WishListProduct wishListProduct;
 
   const WishlistCard({
     Key? key,
@@ -25,7 +26,7 @@ class WishlistCard extends StatelessWidget {
   }) : super(key: key);
 
   void navigateToProductDetails() {
-    Get.toNamed(Routes.productDetails, arguments: wishListProduct.sku);
+    Get.toNamed(Routes.productDetails, arguments: wishListProduct.slug);
   }
 
   @override
@@ -49,7 +50,7 @@ class WishlistCard extends StatelessWidget {
                   onTap: navigateToProductDetails,
                   child: SizedBox(
                     child: CustomCachedNetworkImage(
-                        isCompleteUrl: false, "${wishListProduct.thumbnail}"),
+                        isCompleteUrl: false, "${wishListProduct.image}"),
                     width: 100,
                   ),
                 ),
@@ -82,8 +83,7 @@ class WishlistCard extends StatelessWidget {
                                       Get.find<WishListController>()
                                           .removeProductFromWishListScreen(
                                         context,
-                                        int.parse(
-                                            wishListProduct.id.toString()),
+                                        wishListProduct.slug.toString(),
                                       );
                                       Get.back();
                                     },
@@ -107,7 +107,7 @@ class WishlistCard extends StatelessWidget {
                                 Get.find<CartController>().addToCart(
                                     context,
                                     CartParams(
-                                        sku: wishListProduct.sku, qty: 1));
+                                        slug: wishListProduct.slug, qty: 1));
                               }
                             : () {},
                       ),

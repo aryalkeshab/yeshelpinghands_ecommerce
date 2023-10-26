@@ -312,7 +312,8 @@ class _ShippingAddressInfo extends StatelessWidget {
           ),
           config.verticalSpaceSmall(),
           Text(
-            "${shippingAddress?.firstName} ${shippingAddress?.lastName}",
+            "${shippingAddress?.city} ",
+            // "${shippingAddress?.firstName} ${shippingAddress?.lastName}",
             style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
           ),
           config.verticalSpaceSmall(),
@@ -329,13 +330,14 @@ class _ShippingAddressInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${shippingAddress?.street}, ${shippingAddress?.city}, ${shippingAddress?.postalCode}, ${shippingAddress?.country?.name}",
+                    "${shippingAddress?.country}, ${shippingAddress?.city}, ${shippingAddress?.postalCode}, ${shippingAddress?.address}",
                     style:
                         theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                   ),
                   config.verticalSpaceSmall(),
                   Text(
-                    "${shippingAddress?.phoneNumber}",
+                    // "${shippingAddress?.phoneNumber}","phon"
+                    "phone_number",
                     style:
                         theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                   )

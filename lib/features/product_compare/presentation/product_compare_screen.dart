@@ -112,44 +112,45 @@ class _ProductCompareScreenState extends State<ProductCompareScreen> {
                                                                 FontWeight.w900,
                                                           )),
                                                       PrimaryOutlinedButton(
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.04,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            0.02,
-                                                        borderColor:
-                                                            compareProductsEntity
-                                                                            .availability[
-                                                                        index] ==
-                                                                    'IN STOCK'
-                                                                ? primaryColor
-                                                                : lightGreen,
-                                                        title: compareProductsEntity
-                                                                        .availability[
-                                                                    index] ==
-                                                                'IN STOCK'
-                                                            ? "Add to Cart"
-                                                            : "Out of Stock",
-                                                        onPressed:
-                                                            compareProductsEntity
-                                                                            .availability[
-                                                                        index] ==
-                                                                    'IN STOCK'
-                                                                ? () {
-                                                                    Get.find<CartController>().addToCart(
-                                                                        context,
-                                                                        CartParams(
-                                                                            sku:
-                                                                                compareProductsEntity.sku[index],
-                                                                            qty: 1));
-                                                                  }
-                                                                : () {},
-                                                      ),
+                                                          height:
+                                                              MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.04,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.02,
+                                                          borderColor:
+                                                              compareProductsEntity
+                                                                              .availability[
+                                                                          index] ==
+                                                                      'IN STOCK'
+                                                                  ? primaryColor
+                                                                  : lightGreen,
+                                                          title: compareProductsEntity
+                                                                          .availability[
+                                                                      index] ==
+                                                                  'IN STOCK'
+                                                              ? "Add to Cart"
+                                                              : "Out of Stock",
+                                                          onPressed: () {}
+                                                          // compareProductsEntity
+                                                          //                 .availability[
+                                                          //             index] ==
+                                                          //         'IN STOCK'
+                                                          //     ? () {
+                                                          //         Get.find<CartController>().addToCart(
+                                                          //             context,
+                                                          //             CartParams(
+                                                          //                 sku:
+                                                          //                     compareProductsEntity.sku[index],
+                                                          //                 qty: 1));
+                                                          //       }
+                                                          //     : () {},
+                                                          ),
                                                     ],
                                                   ),
                                                 ),

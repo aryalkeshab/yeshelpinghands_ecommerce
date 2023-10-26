@@ -38,33 +38,29 @@ class AddressBottomModalSheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (addressType == null ||
-                (addressType == AddressType.billing &&
-                    !Get.find<AddressController>()
-                        .isDefaultShippingAndBillingSame))
-              _BottomModalMenuItem(
-                title: "Set as default shipping address",
-                icon: Icons.home_filled,
-                onTap: () {
-                  Get.back();
-                  Get.find<AddressController>()
-                      .setDefaultShippingAddress(buildContext, "${address.id}");
-                },
-              ),
+            _BottomModalMenuItem(
+              title: "Set as default shipping address",
+              icon: Icons.home_filled,
+              onTap: () {
+                Get.back();
+                // Get.find<AddressController>()
+                //     .setDefaultShippingAddress(buildContext, "${address.id}");
+              },
+            ),
             _menuItemSpacing,
-            if (addressType == null ||
-                (addressType == AddressType.shipping &&
-                    !Get.find<AddressController>()
-                        .isDefaultShippingAndBillingSame))
-              _BottomModalMenuItem(
-                title: "Set as default billing address",
-                icon: Icons.monetization_on,
-                onTap: () {
-                  Get.back();
-                  Get.find<AddressController>()
-                      .setDefaultBillingAddress(buildContext, "${address.id}");
-                },
-              ),
+            // if (addressType == null ||
+            //     (addressType == AddressType.shipping &&
+            //         !Get.find<AddressController>()
+            //             .isDefaultShippingAndBillingSame))
+            //   _BottomModalMenuItem(
+            //     title: "Set as default billing address",
+            //     icon: Icons.monetization_on,
+            //     onTap: () {
+            //       Get.back();
+            //       // Get.find<AddressController>()
+            //       //     .setDefaultBillingAddress(buildContext, "${address.id}");
+            //     },
+            //   ),
             _menuItemSpacing,
             const Divider(),
             _menuItemSpacing,
@@ -92,25 +88,25 @@ class AddressBottomModalSheet extends StatelessWidget {
                 },
               ),
             _menuItemSpacing,
-            _BottomModalMenuItem(
-              title: "Edit address",
-              subTitle: addressType != null &&
-                      Get.find<AddressController>()
-                          .isDefaultShippingAndBillingSame
-                  ? "Default shipping and billing address are same. Updating one shall update the other"
-                  : null,
-              icon: UIAssets.circularEditIcon,
-              onTap: () {
-                Get
-                  ..back()
-                  ..toNamed(Routes.addAddress,
-                      arguments: AddressFormParams(
-                        addressFormType: AddressFormType.edit,
-                        address: address,
-                        addressType: addressType ?? AddressType.others,
-                      ));
-              },
-            ),
+            // _BottomModalMenuItem(
+            //   title: "Edit address",
+            //   subTitle: addressType != null &&
+            //           Get.find<AddressController>()
+            //               .isDefaultShippingAndBillingSame
+            //       ? "Default shipping and billing address are same. Updating one shall update the other"
+            //       : null,
+            //   icon: UIAssets.circularEditIcon,
+            //   onTap: () {
+            //     Get
+            //       ..back()
+            //       ..toNamed(Routes.addAddress,
+            //           arguments: AddressFormParams(
+            //             addressFormType: AddressFormType.edit,
+            //             address: address,
+            //             addressType: addressType ?? AddressType.others,
+            //           ));
+            //   },
+            // ),
           ],
         ),
       );

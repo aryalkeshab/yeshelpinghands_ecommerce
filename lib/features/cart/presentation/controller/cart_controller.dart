@@ -40,7 +40,7 @@ class CartController extends GetxController {
   }
 
   var showCartLoadingIndicator = false.obs;
-  int updateCartItemId = 0;
+  String updateCartItemId = '';
 
   updateCart(BuildContext context, UpdateCartParams updateCartParams) async {
     updateCartItemId = updateCartParams.cartItemId;
@@ -60,8 +60,8 @@ class CartController extends GetxController {
     }
   }
 
-  void removeProductFromCart(BuildContext context, int id) async {
-    final result = await Get.find<CartRepository>().removeProductFromCart(id);
+  void removeProductFromCart(BuildContext context, String slug) async {
+    final result = await Get.find<CartRepository>().removeProductFromCart(slug);
     if (result.hasData) {
       AppSnackbar.showSuccess(context: context, message: result.data);
       getCartDetails();

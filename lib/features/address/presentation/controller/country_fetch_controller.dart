@@ -7,7 +7,7 @@ class CountryFetchController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    getCountryList();
+    // getCountryList();
   }
 
   ApiResponse _countryListResponse = ApiResponse();
@@ -19,7 +19,7 @@ class CountryFetchController extends GetxController {
 
   ApiResponse get countryListResponse => _countryListResponse;
 
-  getCountryList() async {
-    countryListResponse = await Get.find<AddressRepository>().getCountryList();
-  }
+  // getCountryList() async {
+  //   countryListResponse = await Get.find<AddressRepository>().getCountryList();
+  // }
 }

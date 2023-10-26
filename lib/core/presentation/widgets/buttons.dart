@@ -25,7 +25,7 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         primary: color ?? Theme.of(context).primaryColor,
-        minimumSize: Size(width ?? double.maxFinite, height ?? 50),
+        minimumSize: Size(width ?? double.maxFinite, height ?? 40),
       ),
       onPressed: onPressed,
       child: Text(label,

@@ -24,15 +24,17 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Column(
-          children: [
-            SearchBarContainer(
-              onPressed: () {
-                Get.toNamed(Routes.search);
-              },
-            ),
-          ],
-        ),
+        centerTitle: true,
+        title: const Text('Categories', style: TextStyle(fontSize: 16)),
+        // title: Column(
+        //   children: [
+        //     SearchBarContainer(
+        //       onPressed: () {
+        //         Get.toNamed(Routes.search);
+        //       },
+        //     ),
+        //   ],
+        // ),
       ),
       body: const CategoryBody(),
     );
@@ -70,41 +72,38 @@ class CategoryBody extends StatelessWidget {
                   itemCount: categoryList.length,
                   itemBuilder: (context, index) {
                     final category = categoryList[index];
-                    return InkWell(
-                      onTap: () {
-                        Get.toNamed(Routes.productListingScreen,
-                            arguments:
-                                FilterQueryParams(categoryId: category.id));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            // color: theme.primaryColor,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: theme.primaryColor,
-                              width: 2,
-                            )),
-                        child: InkWell(
-                          onTap: () {
-                            // Handle the category item tap here
-                            selectedCategoryId.value = category.id;
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomCachedNetworkImage(
-                                isCompleteUrl: true,
-                                "${APIPathHelper.baseUrlImage + category.image}",
-                              ),
-                              Divider(),
-                              // config.verticalSpaceSmall(),
-                              Text(category.name,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600))
-                            ],
-                          ),
+                    return Container(
+                      decoration: BoxDecoration(
+                          // color: theme.primaryColor,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: theme.primaryColor,
+                            width: 2,
+                          )),
+                      child: InkWell(
+                        onTap: () {
+                          print("here");
+                          // Handle the category item tap here
+                          selectedCategoryId.value = category.id;
+                          Get.toNamed(Routes.productListingScreen,
+                              arguments:
+                                  FilterQueryParams(categoryId: category.id));
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomCachedNetworkImage(
+                              isCompleteUrl: true,
+                              "${APIPathHelper.baseUrlImage + category.image}",
+                            ),
+                            Divider(),
+                            // config.verticalSpaceSmall(),
+                            Text(category.name,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600))
+                          ],
                         ),
                       ),
                     );

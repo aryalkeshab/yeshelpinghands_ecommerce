@@ -95,7 +95,7 @@ class _WishListScreenState extends State<WishListScreen> {
                           Get.find<WishListController>().wishlistResponse;
 
                       if (result.hasData) {
-                        final List<WishList> wishlists = result.data;
+                        final List<WishListProduct> wishlists = result.data;
                         if (wishlists.isEmpty) {
                           return const EmptyWishListScreen();
                         }
@@ -105,7 +105,7 @@ class _WishListScreenState extends State<WishListScreen> {
                           itemBuilder: (context, index) {
                             final wishlist = wishlists[index];
                             return WishlistCard(
-                              wishListProduct: wishlist.product!,
+                              wishListProduct: wishlist,
                             );
                           },
                         );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yeshelpinghand/core/presentation/resources/colors.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/focus_node_disabler.dart';
+import 'package:yeshelpinghand/core/presentation/widgets/toast.dart';
 import 'package:yeshelpinghand/features/cart/data/model/request/cart_request_params.dart';
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
 import 'package:yeshelpinghand/features/product/data/model/response/product_details.dart';
@@ -88,18 +89,22 @@ class ProductDetailsBottomSheet extends StatelessWidget {
             height: 50,
             padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
             child: PrimaryButton(
-              color: productDetails.isProductInStock
-                  ? theme.primaryColor
-                  : lightGreen,
-              label: productDetails.isProductInStock
+              color: productDetails.inStock! ? theme.primaryColor : lightGreen,
+              label: productDetails.inStock!
                   ? "ADD TO CART"
-                  : "OUT OF STOCK",
+                  : productDetails.isCart == false
+                      ? "Already in cart"
+                      : "OUT OF STOCK",
               labelWeight: FontWeight.w600,
               onPressed: isAuthenticated
                   ? () {
-                      if (productDetails.isProductInStock) {
-                        Get.find<CartController>().addToCart(context,
-                            CartParams(sku: productDetails.sku, qty: 1));
+                      if (productDetails.inStock!) {
+                        if (productDetails.isCart == false) {
+                          Get.find<CartController>().addToCart(context,
+                              CartParams(slug: productDetails.slug, qty: 1));
+                        } else {
+                          showFailureToast("Product is already in cart");
+                        }
                       } else {}
                     }
                   : () {

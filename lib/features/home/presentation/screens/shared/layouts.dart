@@ -35,12 +35,15 @@ class SectionHeader extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 16),
           ),
-          Text(
-            "See All >",
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+          InkWell(
+            onTap: onViewAllProductTap,
+            child: Text(
+              "See All >",
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+            ),
           ),
           // if (showViewAll)
           //   InkWell(

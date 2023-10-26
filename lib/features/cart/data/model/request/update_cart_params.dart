@@ -7,18 +7,19 @@
  */
 
 class UpdateCartParams {
-  final int cartItemId;
+  final String cartItemId;
   final int quantity;
-  final String sku;
 
-  const UpdateCartParams(
-      {required this.cartItemId, required this.quantity, required this.sku});
+  const UpdateCartParams({
+    required this.cartItemId,
+    required this.quantity,
+  });
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map['itemId'] = cartItemId;
+    map['product_slug'] = cartItemId;
     map['qty'] = quantity;
-    map['sku'] = sku;
+    // map['sku'] = sku;
     return map;
   }
 }

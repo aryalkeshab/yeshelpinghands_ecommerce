@@ -25,7 +25,7 @@ class OrderCard extends StatelessWidget {
       builder: (context, config, themeData) {
         return InkWell(
           onTap: () {
-            Get.toNamed(Routes.orderHistoryDetail, arguments: order.orderNo);
+            // Get.toNamed(Routes.orderHistoryDetail, arguments: order.orderNo);
           },
           child: Container(
             padding: const EdgeInsets.all(10),
@@ -42,12 +42,12 @@ class OrderCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "Order No: ${order.orderIncrementalId}",
+                          "Order No: ${order.uniqueId}",
                           style: themeData.textTheme.bodyText1,
                         ),
                         config.verticalSpaceSmall(),
                         Text(
-                          "$currency ${NumberParser.twoDecimalDigit(order.amount.toString())}",
+                          "$currency ${order.total}",
                           style: themeData.textTheme.bodyText1
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
@@ -59,11 +59,11 @@ class OrderCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Ordered By  ${order.deliverTo}",
+                          "Ordered By  ${order.firstName} ${order.lastName}",
                           style: themeData.textTheme.caption,
                         ),
                         Text(
-                          "Purchased on  ${DateFormatterUtils.formatDateFromString(order.date)}",
+                          "Purchased on  ${DateFormatterUtils.formatDateFromString(order.createdAt)}",
                           style: themeData.textTheme.caption,
                         ),
                       ],
@@ -75,8 +75,8 @@ class OrderCard extends StatelessWidget {
                   child: Transform.rotate(
                     angle: 0,
                     child: Builder(builder: (context) {
-                      final orderStatus =
-                          OrderStatusExtension.getStatus("${order.status}");
+                      final orderStatus = OrderStatusExtension.getStatus(
+                          "${order.orderStatus}");
                       return Text(
                         "${orderStatus.name}",
                         style: themeData.textTheme.bodyText2

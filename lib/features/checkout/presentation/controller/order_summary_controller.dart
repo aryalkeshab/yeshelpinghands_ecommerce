@@ -45,19 +45,8 @@ class OrderSummaryController extends GetxController {
       Get.find<CartController>().getCartDetails();
       final OrderPlaceResult orderResult = result.data;
 
-      if (confirmOrderParams.paymentMethod?.value == "paystack") {
-        Get.find<PaystackController>().initiateTransaction(
-            context,
-            PaystackInitiateParams(
-              amount: orderResult.data?.amount,
-              reference: orderResult.data?.reference,
-              email: orderResult.data?.email,
-            ));
-      } else {
-        showDialog(
-            context: context, builder: (context) => OrderSuccessDialog());
-        Get.find<CartController>().getCartDetails();
-      }
+      showDialog(context: context, builder: (context) => OrderSuccessDialog());
+      Get.find<CartController>().getCartDetails();
     } else if (result.hasError) {
       AppSnackbar.showError(
           context: context,

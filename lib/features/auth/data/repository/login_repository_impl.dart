@@ -30,9 +30,10 @@ class LoginRepositoryImpl extends LoginRepository {
         final response = await loginRemoteDataSource.login(loginParams);
 
         await secureStorage.write(
-            key: StorageConstants.accessToken, value: response[0]['token']);
+            key: StorageConstants.accessToken,
+            value: response["data"]['token']);
 
-        return ApiResponse(data: response[0]['message']);
+        return ApiResponse(data: response['message']);
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           print(e.response?.data);
@@ -85,10 +86,11 @@ class LoginRepositoryImpl extends LoginRepository {
         final response = await socialLoginDataSource.loginWithFacebook();
 
         await secureStorage.write(
-            key: StorageConstants.accessToken, value: response[0]['token']);
-        await secureStorage.write(
-            key: StorageConstants.socialLoginType, value: "FACEBOOK");
-        return ApiResponse(data: response[0]['message']);
+            key: StorageConstants.accessToken,
+            value: response["data"]['token']);
+        // await secureStorage.write(
+        //     key: StorageConstants.socialLoginType, value: "FACEBOOK");
+        return ApiResponse(data: response['message']);
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(

@@ -6,18 +6,21 @@ import 'package:yeshelpinghand/core/presentation/widgets/buttons.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/focus_node_disabler.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/snackbar.dart';
+import 'package:yeshelpinghand/features/address/presentation/controller/address_controller.dart';
 import 'package:yeshelpinghand/features/address/presentation/utils/address_book_type_enum.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/request/confirm_order_params.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/response/shipping_method_response.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/controller/shipping_address_controller.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/controller/shipping_method_controller.dart';
-import 'package:yeshelpinghand/features/checkout/presentation/screen/checkout_stepper.dart';
+// import 'package:yeshelpinghand/features/checkout/presentation/screen/checkout_stepper.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/screen/widgets/checkout_address_information_layout.dart';
+import 'package:yeshelpinghand/features/checkout/presentation/screen/widgets/checkout_stepper.dart';
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/presentation/widgets/textfields.dart';
 import '../../../address/data/model/response/address.dart';
 import '../../../address/presentation/utils/address_type_enum.dart';
 import 'utils/customer_type_enum.dart';
@@ -59,207 +62,191 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return HookBaseWidget(builder: (context, config, theme) {
-      return FocusNodeDisabler(
-        child: CheckoutStepper(
-          onProceed: () {
-            final formKey = Get.find<ShippingAddressController>().shippingKey;
-            if (formKey.currentState?.validate() == true) {
-              formKey.currentState!.save();
-              if (widget.confirmOrderParams.shippingAddress != null &&
-                  widget.confirmOrderParams.billingAddress != null) {
-                Get.find<ShippingAddressController>().setCheckoutShippingInfo(
-                    context, widget.confirmOrderParams);
-              } else {
-                AppSnackbar.showWarning(
-                  context: context,
-                  message: "Please add shipping and billing address",
-                );
-              }
+      return CheckoutStepper(
+        onProceed: () {
+          final formKey = Get.find<ShippingAddressController>().shippingKey;
+          final controller = Get.find<AddressController>();
+          // Get.toNamed(Routes.paymentScreen,
+          //     arguments: widget.confirmOrderParams);
+          if (formKey.currentState?.validate() == true) {
+            formKey.currentState!.save();
+            if (controller.selectedBillingAddress != null &&
+                controller.selectedShippingAddress != null) {
+              widget.confirmOrderParams.shippingAddress =
+                  controller.selectedShippingAddress!;
+              widget.confirmOrderParams.billingAddress =
+                  controller.selectedBillingAddress!;
+              Get.find<ShippingAddressController>()
+                  .setCheckoutShippingInfo(context, widget.confirmOrderParams);
+            } else {
+              AppSnackbar.showWarning(
+                context: context,
+                message: "Please add shipping and billing address",
+              );
             }
-          },
-          currentStep: 1,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.only(top: config.appVerticalPaddingLarge()),
-              child: Form(
-                key: Get.find<ShippingAddressController>().shippingKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Builder(builder: (context) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GetBuilder<ShippingMethodController>(
-                              builder: (controller) {
-                            final result = controller.shippingMethodsResponse;
-                            if (result.hasData) {
-                              final List<ShippingMethod> shippingMethods =
-                                  result.data;
-                              widget.confirmOrderParams.shippingMethod =
-                                  shippingMethods.first.code;
+          }
+        },
+        currentStep: 1,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.only(top: config.appVerticalPaddingLarge()),
+            child: Form(
+              key: Get.find<ShippingAddressController>().shippingKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Builder(builder: (context) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Builder(builder: (context) {
+                          // final result = controller.shippingMethodsResponse;
 
-                              return HookBaseWidget(
-                                  builder: (context, config, theme) {
-                                final selectedShippingMethod = useState(0);
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Shipping Methods",
-                                        style: theme.textTheme.bodyText1
-                                            ?.copyWith(
-                                                fontWeight: FontWeight.w600)),
-                                    config.verticalSpaceSmall(),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: List.generate(
-                                          shippingMethods.length, (index) {
-                                        final shippingMethod =
-                                            shippingMethods[index];
-                                        return Padding(
-                                          padding: index !=
-                                                  CustomerType.values.length - 1
-                                              ? EdgeInsets.only(
-                                                  bottom: config
-                                                      .appVerticalPaddingSmall())
-                                              : EdgeInsets.zero,
-                                          child: SelectableOption(
-                                            name:
-                                                "${shippingMethod.carrierTitle}",
-                                            value: "${shippingMethod.code}",
-                                            isSelected:
-                                                selectedShippingMethod.value ==
-                                                    index,
-                                            onTap: () {
-                                              selectedShippingMethod.value =
-                                                  index;
-                                              widget.confirmOrderParams
-                                                      .shippingMethod =
-                                                  shippingMethod.code;
-                                            },
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                    config.verticalSpaceMedium(),
-                                    GetBuilder<ShippingAddressController>(
-                                        builder: (controller) {
-                                      if (controller.isFirstLoad) {
-                                        widget.confirmOrderParams
-                                                .shippingAddress =
-                                            controller.defaultShippingAddress;
-                                        widget.confirmOrderParams
-                                                .billingAddress =
-                                            controller.defaultBillingAddress;
-                                        controller.isFirstLoad = false;
+                          return HookBaseWidget(
+                              builder: (context, config, theme) {
+                            final selectedShippingMethod = useState(0);
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GetBuilder<AddressController>(
+                                    init: AddressController(),
+                                    builder: (controller) {
+                                      // if (controller.isFirstLoad) {
+                                      //   widget.confirmOrderParams.shippingAddress =
+                                      //       controller.defaultShippingAddress;
+                                      //   widget.confirmOrderParams.billingAddress =
+                                      //       controller.defaultBillingAddress;
+                                      //   controller.isFirstLoad = false;
+                                      // }
+                                      List<Address> addresses = [];
+                                      if (controller.addressResponse.hasData) {
+                                        addresses =
+                                            controller.addressResponse.data;
                                       }
                                       return Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          widget.confirmOrderParams
-                                                      .shippingAddress !=
-                                                  null
-                                              ? CheckoutAddressInformationLayout(
-                                                  title: "Shipping Address",
-                                                  address: widget
-                                                      .confirmOrderParams
-                                                      .shippingAddress,
-                                                  onChooseAnotherPressed:
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              PrimaryDropDownFormField<Address>(
+                                                key: UniqueKey(),
+                                                isRequired: true,
+                                                label: "Shipping Address",
+                                                itemToString: (value) {
+                                                  return "${value.address} , ${value.city}, ${value.country}";
+                                                },
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    return 'This field is required';
+                                                  }
+                                                  return null;
+                                                },
+                                                items: addresses,
+                                                value: controller
+                                                    .selectedShippingAddress,
+                                                onChanged: (value) {
+                                                  controller
+                                                          .selectedShippingAddress =
+                                                      value;
+                                                },
+                                              ),
+                                              config.verticalSpaceSmall(),
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: PrimaryOutlinedButton(
+                                                  width: 150,
+                                                  onPressed:
                                                       navigateToAddressListPage,
-                                                )
-                                              : Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    config
-                                                        .verticalSpaceMedium(),
-                                                    const Text(
-                                                        "Select shipping address"),
-                                                    config.verticalSpaceSmall(),
-                                                    PrimaryOutlinedButton(
-                                                      width: 150,
-                                                      onPressed:
-                                                          navigateToAddressListPage,
-                                                      title:
-                                                          "+ Add Shipping Address",
-                                                    ),
-                                                  ],
+                                                  title:
+                                                      "+ Add Shipping Address",
                                                 ),
+                                              ),
+                                            ],
+                                          ),
                                           config.verticalSpaceSmall(),
-                                          widget.confirmOrderParams
-                                                      .billingAddress !=
-                                                  null
-                                              ? CheckoutAddressInformationLayout(
-                                                  title: "Billing Address",
-                                                  address: widget
-                                                      .confirmOrderParams
-                                                      .billingAddress,
-                                                  onChooseAnotherPressed: () =>
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              PrimaryDropDownFormField<Address>(
+                                                key: UniqueKey(),
+                                                isRequired: true,
+                                                label: "Billing Address",
+                                                itemToString: (value) {
+                                                  return "${value.address} , ${value.city}, ${value.country}";
+                                                },
+                                                validator: (value) {
+                                                  if (value == null) {
+                                                    return 'This field is required';
+                                                  }
+                                                  return null;
+                                                },
+                                                items: addresses,
+                                                value: controller
+                                                    .selectedBillingAddress,
+                                                onChanged: (value) {
+                                                  controller
+                                                          .selectedBillingAddress =
+                                                      value;
+                                                },
+                                              ),
+                                              config.verticalSpaceSmall(),
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: PrimaryOutlinedButton(
+                                                  width: 150,
+                                                  onPressed: () =>
                                                       navigateToAddressListPage(
                                                           addressType:
                                                               AddressType
                                                                   .billing),
-                                                )
-                                              : Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    config
-                                                        .verticalSpaceMedium(),
-                                                    const Text(
-                                                        "Select billing address"),
-                                                    config.verticalSpaceSmall(),
-                                                    PrimaryOutlinedButton(
-                                                      width: 150,
-                                                      onPressed: () =>
-                                                          navigateToAddressListPage(
-                                                              addressType:
-                                                                  AddressType
-                                                                      .billing),
-                                                      title:
-                                                          "+ Add Billing Address",
-                                                    ),
-                                                  ],
+                                                  title:
+                                                      "+ Add Billing Address",
                                                 ),
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       );
                                     })
-                                  ],
-                                );
-                              });
-                            } else if (result.hasError) {
-                              return ErrorView(
-                                  title: NetworkException.getErrorMessage(
-                                      result.error));
-                            } else {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  config.verticalSpaceCustom(0.05),
-                                  ShimmerWidget.rounded(
-                                      width: config.appWidth(40), height: 30),
-                                  config.verticalSpaceLarge(),
-                                  ShimmerWidget.rounded(
-                                      width: config.appWidth(80), height: 50),
-                                  config.verticalSpaceMedium(),
-                                  ShimmerWidget.rounded(
-                                      width: config.appWidth(80), height: 50),
-                                ],
-                              );
-                            }
-                          }),
-                        ],
-                      );
-                    }),
-                  ],
-                ),
+                              ],
+                            );
+                          });
+                          // } else if (result.hasError) {
+                          //   return ErrorView(
+                          //       title: NetworkException.getErrorMessage(
+                          //           result.error));
+                          // } else {
+                          //   return Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //       config.verticalSpaceCustom(0.05),
+                          //       ShimmerWidget.rounded(
+                          //           width: config.appWidth(40), height: 30),
+                          //       config.verticalSpaceLarge(),
+                          //       ShimmerWidget.rounded(
+                          //           width: config.appWidth(80), height: 50),
+                          //       config.verticalSpaceMedium(),
+                          //       ShimmerWidget.rounded(
+                          //           width: config.appWidth(80), height: 50),
+                          //     ],
+                          //   );
+                          // }
+                        }),
+                      ],
+                    );
+                  }),
+                ],
               ),
             ),
           ),

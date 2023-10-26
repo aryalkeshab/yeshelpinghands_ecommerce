@@ -208,6 +208,7 @@ class PrimaryDropDownFormField<T> extends StatelessWidget {
             items: items.map((item) {
               return DropdownMenuItem<T>(
                 value: item,
+                key: Key(item.toString()),
                 child: SizedBox(
                     width: config.appWidth(65),
                     child: Text(itemToString(item))),

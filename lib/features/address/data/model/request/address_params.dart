@@ -1,39 +1,26 @@
 class AddressParams {
-  String? firstName;
-  String? lastName;
-  String? countryCode;
+  // String? firstName;
+  // String? lastName;
+  String? country;
   String? postalCode;
   String? city;
-  String? phoneNumber;
-  String? company;
-  String? street;
-  String? province;
-  String? provinceId;
+  // String? phoneNumber;
+  // String? company;
+  // String? street;
+  // String? province;
+  // String? provinceId;
+  String? address;
+  String? landmark;
 
-  AddressParams(
-      {this.countryCode,
-      this.postalCode,
-      this.firstName,
-      this.lastName,
-      this.phoneNumber,
-      this.street,
-      this.city,
-      this.company,
-      this.province,
-      this.provinceId});
+  AddressParams({this.postalCode, this.city, this.address, this.landmark});
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['first_name'] = firstName;
-    map['last_name'] = lastName;
-    map['country_code'] = countryCode;
+    map['landmark'] = landmark;
+    map['country'] = country;
+    map['address'] = address;
     map['postal_code'] = postalCode;
     map['city'] = city;
-    map['telephone'] = phoneNumber;
-    map['company'] = company;
-    map['street'] = street;
-    map['province'] = province;
-    map['province_id'] = provinceId;
 
     return map;
   }

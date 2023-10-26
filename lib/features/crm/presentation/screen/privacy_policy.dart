@@ -15,16 +15,15 @@ class PrivacyPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return HookBaseWidget(builder: (context, config, theme) {
       return Scaffold(
-          appBar: AppBar(
-            title: const Text('Privacy and Cookie Policy'),
-          ),
-          body: GetBuilder<PrivacyPolicyController>(builder: (context) {
-            return SingleChildScrollView(
-              child: PrivacyPolicyWidget(),
-            );
+        appBar: AppBar(
+          title: const Text('Privacy and Cookie Policy'),
+        ),
+        body: SingleChildScrollView(
+          child: PrivacyPolicyWidget(),
+        ),
 
-            ///
-          }));
+        ///
+      );
     });
   }
 }

@@ -38,141 +38,121 @@ class AddressListScreen extends StatelessWidget {
               child: Column(
                 children: [
                   GetBuilder<AddressController>(builder: (controller) {
-                    final result = controller.defaultAddressesResponse;
+                    final result = controller.addressResponse;
                     if (result.hasData) {
-                      final DefaultAddresses defaultAddresses = result.data;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Default Shipping Address",
-                              style: theme.textTheme.caption?.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w600)),
-                          config.verticalSpaceSmall(),
-                          defaultAddresses.shippingAddress == null
-                              ? const WarningMessage(
-                                  "Default shipping address not set")
-                              : AddressCard(
-                                  addressType: AddressType.shipping,
-                                  isSelectable: addressBookType ==
-                                      AddressBookType.selectable,
+                      final List<Address> defaultAddresses = result.data;
+                      return defaultAddresses.length == 0
+                          ? Center(
+                              child: const WarningMessage(
+                                  "You have not added any address"),
+                            )
+                          : ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: defaultAddresses.length,
+                              itemBuilder: (context, index) {
+                                final address = defaultAddresses[index];
+                                return AddressCard(
+                                  // addressType: AddressType.shipping,
+                                  address: address,
+                                  // isSelectable: addressBookType ==
+                                  //     AddressBookType.selectable,
                                   onPressed: (selectedAddress) {
                                     selectedAddressId.value =
                                         "${selectedAddress.id}";
                                     Get.back(result: selectedAddress);
                                   },
-                                  address: defaultAddresses.shippingAddress!,
-                                ),
-                          config.verticalSpaceMedium(),
-                          Text("Default Billing Address",
-                              style: theme.textTheme.caption?.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w600)),
-                          config.verticalSpaceSmall(),
-                          defaultAddresses.billingAddress == null
-                              ? const WarningMessage(
-                                  "Default billing address not set")
-                              : AddressCard(
-                                  addressType: AddressType.billing,
-                                  address: defaultAddresses.billingAddress!,
-                                  isSelectable: addressBookType ==
-                                      AddressBookType.selectable,
-                                  onPressed: (selectedAddress) {
-                                    selectedAddressId.value =
-                                        "${selectedAddress.id}";
-                                    Get.back(result: selectedAddress);
-                                  },
-                                ),
-                          config.verticalSpaceMedium(),
-                          const Divider(),
-                        ],
-                      );
+                                );
+                              },
+                            );
                     } else {
                       return const SizedBox.shrink();
                     }
                   }),
-                  GetBuilder<AddressController>(
-                      init: AddressController(),
-                      builder: (controller) {
-                        final result = controller.addressResponse;
-                        return Align(
-                          alignment: Alignment.topLeft,
-                          child: Builder(builder: (context) {
-                            if (result.hasError) {
-                              return const Center(
-                                  child: ErrorView(
-                                title: "Some Error occurred",
-                              ));
-                            } else if (result.hasData) {
-                              final List<Address> addressList = result.data;
-                              if (addressList.isNotEmpty) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (addressBookType ==
-                                        AddressBookType.selectable)
-                                      Text(
-                                        "Select your address from the list below",
-                                        style: theme.textTheme.bodyText1
-                                            ?.copyWith(color: Colors.grey),
-                                      ),
-                                    config.verticalSpaceMedium(),
-                                    Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: List.generate(
-                                          addressList.length,
-                                          (index) {
-                                            final shippingAddress =
-                                                addressList[index];
-                                            return Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                AddressCard(
-                                                  isSelectable:
-                                                      addressBookType ==
-                                                          AddressBookType
-                                                              .selectable,
-                                                  isSelected:
-                                                      selectedAddressId.value ==
-                                                          shippingAddress.id,
-                                                  onPressed: (selectedAddress) {
-                                                    selectedAddressId.value =
-                                                        "${selectedAddress.id}";
-                                                    Get.back(
-                                                        result:
-                                                            selectedAddress);
-                                                  },
-                                                  address: shippingAddress,
-                                                ),
-                                                config.verticalSpaceSmall(),
-                                              ],
-                                            );
-                                          },
-                                        )),
-                                  ],
-                                );
-                              } else {
-                                return SizedBox(
-                                  width: double.maxFinite,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(CupertinoIcons.book,
-                                          size: 80, color: theme.primaryColor),
-                                      config.verticalSpaceMedium(),
-                                      Text("Your address book is empty",
-                                          style: theme.textTheme.bodyText1
-                                              ?.copyWith(
-                                                  fontWeight: FontWeight.w600)),
-                                    ],
-                                  ),
-                                );
-                              }
-                            } else {
-                              return const _LoadingAddressList();
-                            }
-                          }),
-                        );
-                      }),
+                  // GetBuilder<AddressController>(
+                  //     init: AddressController(),
+                  //     builder: (controller) {
+                  //       final result = controller.addressResponse;
+                  //       return Align(
+                  //         alignment: Alignment.topLeft,
+                  //         child: Builder(builder: (context) {
+                  //           if (result.hasError) {
+                  //             return const Center(
+                  //                 child: ErrorView(
+                  //               title: "Some Error occurred",
+                  //             ));
+                  //           } else if (result.hasData) {
+                  //             final List<Address> addressList = result.data;
+                  //             if (addressList.isNotEmpty) {
+                  //               return Column(
+                  //                 crossAxisAlignment: CrossAxisAlignment.start,
+                  //                 mainAxisSize: MainAxisSize.min,
+                  //                 children: [
+                  //                   if (addressBookType ==
+                  //                       AddressBookType.selectable)
+                  //                     Text(
+                  //                       "Select your address from the list below",
+                  //                       style: theme.textTheme.bodyText1
+                  //                           ?.copyWith(color: Colors.grey),
+                  //                     ),
+                  //                   config.verticalSpaceMedium(),
+                  //                   Column(
+                  //                       mainAxisSize: MainAxisSize.min,
+                  //                       children: List.generate(
+                  //                         addressList.length,
+                  //                         (index) {
+                  //                           final shippingAddress =
+                  //                               addressList[index];
+                  //                           return Column(
+                  //                             mainAxisSize: MainAxisSize.min,
+                  //                             children: [
+                  //                               AddressCard(
+                  //                                 isSelectable:
+                  //                                     addressBookType ==
+                  //                                         AddressBookType
+                  //                                             .selectable,
+                  //                                 isSelected:
+                  //                                     selectedAddressId.value ==
+                  //                                         shippingAddress.id,
+                  //                                 onPressed: (selectedAddress) {
+                  //                                   selectedAddressId.value =
+                  //                                       "${selectedAddress.id}";
+                  //                                   Get.back(
+                  //                                       result:
+                  //                                           selectedAddress);
+                  //                                 },
+                  //                                 address: shippingAddress,
+                  //                               ),
+                  //                               config.verticalSpaceSmall(),
+                  //                             ],
+                  //                           );
+                  //                         },
+                  //                       )),
+                  //                 ],
+                  //               );
+                  //             } else {
+                  //               return SizedBox(
+                  //                 width: double.maxFinite,
+                  //                 child: Column(
+                  //                   mainAxisAlignment: MainAxisAlignment.center,
+                  //                   children: [
+                  //                     Icon(CupertinoIcons.book,
+                  //                         size: 80, color: theme.primaryColor),
+                  //                     config.verticalSpaceMedium(),
+                  //                     Text("Your address book is empty",
+                  //                         style: theme.textTheme.bodyText1
+                  //                             ?.copyWith(
+                  //                                 fontWeight: FontWeight.w600)),
+                  //                   ],
+                  //                 ),
+                  //               );
+                  //             }
+                  //           } else {
+                  //             return const _LoadingAddressList();
+                  //           }
+                  //         }),
+                  //       );
+                  //     }),
                 ],
               ),
             ),

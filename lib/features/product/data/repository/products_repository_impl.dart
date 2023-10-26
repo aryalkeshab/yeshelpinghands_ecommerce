@@ -168,7 +168,9 @@ class ProductsRepositoryImpl implements ProductsRepository {
       try {
         final result = await productsRemoteDataSource.getProductDetails(sku);
 
-        final productList = ProductDetails.fromJson(result[0]);
+        // final productList = ProductDetails.fromJson(result["data"]);
+        final productList = ProductDetails.fromJson(result["data"]);
+
         return ApiResponse(data: productList);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

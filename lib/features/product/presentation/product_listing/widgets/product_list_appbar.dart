@@ -123,7 +123,7 @@ class ProductListingAppBar extends StatelessWidget
                       return CircleAvatar(
                         radius: 7,
                         backgroundColor: Colors.red,
-                        child: Text("${cartResponse.cartDetail?.itemsCount}",
+                        child: Text("${cartResponse.carts?.length}",
                             style: Theme.of(context)
                                 .textTheme
                                 .caption

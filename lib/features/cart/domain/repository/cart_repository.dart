@@ -5,7 +5,7 @@ import 'package:yeshelpinghand/features/cart/data/model/request/update_cart_para
 abstract class CartRepository {
   Future<ApiResponse> getCartDetails();
   Future<ApiResponse> updateCart(UpdateCartParams updateCartParams);
-  Future<ApiResponse> removeProductFromCart(int id);
+  Future<ApiResponse> removeProductFromCart(String slug);
   Future<ApiResponse> removeAllProductFromCart();
 
   Future<ApiResponse> addToCartItems(CartParams cartParams);

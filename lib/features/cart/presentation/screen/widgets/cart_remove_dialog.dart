@@ -8,7 +8,7 @@ import '../../../../shared/layouts/confirm_dialog_view.dart';
 
 class CartItemRemoveDialog extends StatelessWidget {
   final BuildContext context;
-  final CartItem cartItem;
+  final Carts cartItem;
 
   const CartItemRemoveDialog(this.context, {Key? key, required this.cartItem})
       : super(key: key);
@@ -19,8 +19,8 @@ class CartItemRemoveDialog extends StatelessWidget {
       primaryText: "Are you sure you want to remove this item from cart?",
       onCancelButtonPressed: Get.back,
       onApproveButtonPressed: () {
-        Get.find<CartController>().removeProductFromCart(
-            context, int.parse(cartItem.itemId.toString()));
+        Get.find<CartController>()
+            .removeProductFromCart(context, cartItem.slug.toString());
         // Navigator.pop(context);
       },
     );

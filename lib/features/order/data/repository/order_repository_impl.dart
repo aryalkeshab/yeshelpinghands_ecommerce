@@ -18,7 +18,8 @@ class OrderRepositoryImpl implements OrderRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await orderRemoteDataSource.getOrderList();
-        final orderList = result.map<Order>((e) => Order.fromJson(e)).toList();
+        final orderList =
+            result["data"].map<Order>((e) => Order.fromJson(e)).toList();
         return ApiResponse(data: orderList);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

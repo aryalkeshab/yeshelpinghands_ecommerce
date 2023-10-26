@@ -73,7 +73,8 @@ class _ProductCard extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.productDetails, arguments: productModel.sku);
+                Get.toNamed(Routes.productDetails,
+                    arguments: productModel.slug);
               },
               child: Column(
                 mainAxisSize: MainAxisSize.min,

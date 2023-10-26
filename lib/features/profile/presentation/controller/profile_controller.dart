@@ -45,6 +45,7 @@ class ProfileController extends GetxController {
         EditProfileParams(
             name: registerParams.name,
             contactNumber: registerParams.contactNumber));
+
     hideLoadingDialog(context);
     if (result.hasData) {
       showToast(result.data);

@@ -216,8 +216,7 @@ class ProductModel {
       brand: json['brand'],
       computedPrice: double.parse(json['computed_price']),
       isWishlist: json['is_wishlist'],
-      isProductInStock: true,
-      // isProductInStock: json["in_stock"] ?? true,
+      isProductInStock: json["in_stock"] == 1 ? true : false,
       avgRating:
           json['avg_rating'] != null ? double.parse(json['avg_rating']) : null,
     );

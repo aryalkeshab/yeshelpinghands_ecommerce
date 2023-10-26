@@ -20,10 +20,11 @@ class WishListRepositoryImpl implements WishListRepository {
       try {
         final result = await wishListRemoteDataSource.getWishList();
         if (result.isEmpty) {
-          return ApiResponse(data: <WishList>[]);
+          return ApiResponse(data: <WishListProduct>[]);
         } else {
-          final wishList =
-              result.map<WishList>((e) => WishList.fromJson(e)).toList();
+          final wishList = result["data"]
+              .map<WishListProduct>((e) => WishListProduct.fromJson(e))
+              .toList();
           return ApiResponse(data: wishList);
         }
       } catch (e) {
@@ -35,7 +36,7 @@ class WishListRepositoryImpl implements WishListRepository {
   }
 
   @override
-  Future<ApiResponse> removeWishList(int id) async {
+  Future<ApiResponse> removeWishList(String id) async {
     if (await networkInfo.isConnected) {
       try {
         await wishListRemoteDataSource.removeWishListItem(id);
@@ -65,17 +66,17 @@ class WishListRepositoryImpl implements WishListRepository {
   }
 
   @override
-  Future<ApiResponse> postWishList(int id) async {
+  Future<ApiResponse> postWishList(String slug) async {
     if (await networkInfo.isConnected) {
       try {
-        await wishListRemoteDataSource.postWishList(id);
+        await wishListRemoteDataSource.postWishList(slug);
 
         return ApiResponse(data: 'Successfully Added to Wishlist');
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
               error: NetworkException.defaultError(
-                  value: e.response?.data[0]['error'] ?? ''));
+                  value: e.response?.data['error'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

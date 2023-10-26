@@ -55,12 +55,12 @@ class _CartScreenState extends State<CartScreen> {
                   final result = controller.cartDetailResponse;
                   if (result.hasData) {
                     final CartResponse cartResponse = result.data;
-                    final cartDetail = cartResponse.cartDetail;
-                    if (cartDetail?.itemsCount == 0) {
+                    final cartDetail = cartResponse.carts;
+                    if (cartDetail?.length == 0) {
                       return const EmptyCartScreen();
                     }
                     return CartItemListView(
-                      cartItems: cartDetail?.items ?? [],
+                      cartItems: cartDetail ?? [],
                     );
                   } else if (result.hasError) {
                     return Center(
@@ -79,9 +79,9 @@ class _CartScreenState extends State<CartScreen> {
         final result = controller.cartDetailResponse;
         if (result.hasData) {
           final CartResponse cartResponse = result.data;
-          final cartDetail = cartResponse.cartDetail;
-          return cartDetail?.itemsCount != 0
-              ? _CartSummaryView(cartDetail: cartDetail)
+          final cartDetail = cartResponse.carts;
+          return cartDetail?.length != 0
+              ? _CartSummaryView(cartDetail: cartResponse)
               : const SizedBox.shrink();
         } else {
           return const SizedBox.shrink();
@@ -97,7 +97,7 @@ class CartItemListView extends StatelessWidget {
     required this.cartItems,
   }) : super(key: key);
 
-  final List<CartItem> cartItems;
+  final List<Carts> cartItems;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +126,7 @@ class _CartSummaryView extends StatelessWidget {
     Key? key,
     required this.cartDetail,
   }) : super(key: key);
-  final CartDetail? cartDetail;
+  final CartResponse? cartDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -141,25 +141,29 @@ class _CartSummaryView extends StatelessWidget {
             children: [
               _CartSummaryItem(
                 title: 'Sub total',
-                value:
-                    "${NumberParser.twoDecimalDigit('${cartDetail?.subtotal}')}",
+                value: cartDetail!.total!.subTotal.toString(),
+                // "${NumberParser.twoDecimalDigit('${cartDetail?.subTotal}')}",
               ),
               config.verticalSpaceSmall(),
-              const _CartSummaryItem(
-                title: 'Shipping Fee',
-                value: "0.00",
-              ),
+              _CartSummaryItem(
+                  title: 'Shipping Fee',
+                  value:
+                      "${NumberParser.twoDecimalDigit('${cartDetail!.total!.shipping}')}"),
               config.verticalSpaceSmall(),
               _CartSummaryItem(
                   isPrimary: true,
                   title: 'Total',
                   value:
-                      "${NumberParser.twoDecimalDigit('${cartDetail?.grandTotal}')}"),
+                      "${NumberParser.twoDecimalDigit('${cartDetail!.total!.grandTotal}')}"),
               PrimaryButton(
                 label: "Checkout",
                 onPressed: () {
-                  final confirmOrderParams =
-                      ConfirmOrderParams(cartDetail: cartDetail);
+                  // final confirmOrderParams =
+                  //     ConfirmOrderParams(cartDetail: cartDetail);
+                  final confirmOrderParams = ConfirmOrderParams();
+                  confirmOrderParams.cartDetail = cartDetail!.carts;
+                  confirmOrderParams.cartResponse = cartDetail;
+                  // confirmOrderParams.shippingAddress = cartDetail!.
                   Get.toNamed(Routes.shipping, arguments: confirmOrderParams);
                 },
               ),
@@ -217,7 +221,7 @@ class _CartSummaryItem extends StatelessWidget {
 }
 
 class CartItemCard extends StatelessWidget {
-  final CartItem cartItem;
+  final Carts cartItem;
 
   const CartItemCard({
     Key? key,
@@ -228,7 +232,7 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.productDetails, arguments: cartItem.sku);
+        Get.toNamed(Routes.productDetails, arguments: cartItem.slug);
       },
       child: BaseWidget(builder: (context, config, theme) {
         return Container(
@@ -245,7 +249,7 @@ class CartItemCard extends StatelessWidget {
             children: [
               SizedBox(
                 child: CustomCachedNetworkImage(
-                  cartItem.image?.image,
+                  cartItem.image,
                   isCompleteUrl: false,
                 ),
                 width: config.appWidth(20),
@@ -291,7 +295,7 @@ class CartItemCard extends StatelessWidget {
                               .showCartLoadingIndicator
                               .value &&
                           Get.find<CartController>().updateCartItemId ==
-                              int.tryParse("${cartItem.itemId}"))
+                              cartItem.slug.toString())
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -313,7 +317,7 @@ class CartItemCard extends StatelessWidget {
 }
 
 class QuantityChangerButtonsView extends StatelessWidget {
-  final CartItem cartItem;
+  final Carts cartItem;
 
   const QuantityChangerButtonsView({
     Key? key,
@@ -333,8 +337,8 @@ class QuantityChangerButtonsView extends StatelessWidget {
                 Get.find<CartController>().updateCart(
                     context,
                     UpdateCartParams(
-                        cartItemId: NumberParser.intFromString(cartItem.itemId),
-                        sku: "${cartItem.sku}",
+                        cartItemId: cartItem.slug.toString(),
+                        // sku: "${cartItem.slug}",
                         quantity:
                             cartItem.qty != null ? cartItem.qty! - 1 : 1));
               }
@@ -351,8 +355,8 @@ class QuantityChangerButtonsView extends StatelessWidget {
               Get.find<CartController>().updateCart(
                   context,
                   UpdateCartParams(
-                      cartItemId: NumberParser.intFromString(cartItem.itemId),
-                      sku: "${cartItem.sku}",
+                      cartItemId: cartItem.slug.toString(),
+                      // sku: "${cartItem.slug}",
                       quantity: cartItem.qty != null ? cartItem.qty! + 1 : 1));
             },
           ),
@@ -408,7 +412,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (result.hasData) {
           final CartResponse cartResponse = result.data;
           return Text(
-            'My Cart (${cartResponse.cartDetail?.itemsCount})',
+            'My Cart (${cartResponse.carts?.length ?? 0})',
             style: Theme.of(context)
                 .textTheme
                 .headline6
@@ -431,9 +435,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: GetBuilder<CartController>(
               builder: (controller) => Visibility(
                 visible: controller.cartDetailResponse.hasData &&
-                    controller
-                            .cartDetailResponse.data?.cartDetail?.itemsCount !=
-                        0,
+                    controller.cartDetailResponse.data?.carts?.length != 0,
                 child: InkWell(
                   child: const Icon(
                     CupertinoIcons.delete,

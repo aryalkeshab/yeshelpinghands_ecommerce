@@ -40,7 +40,8 @@ class CheckoutAddressInformationLayout extends StatelessWidget {
             ),
             config.verticalSpaceSmall(),
             Text(
-              '${address?.firstName} ${address?.lastName}',
+              '${address?.city}',
+              // '${address?.city} ${address?.lastName}',
               style: theme.textTheme.bodyText2
                   ?.copyWith(fontWeight: FontWeight.w600),
             ),
@@ -53,7 +54,7 @@ class CheckoutAddressInformationLayout extends StatelessWidget {
                     color: Theme.of(context).primaryColor, size: 16),
                 config.horizontalSpaceSmall(),
                 Text(
-                  '${address?.street}, ${address?.city}, ${address?.postalCode}, ${address?.country?.name}',
+                  '${address?.country}, ${address?.city}, ${address?.postalCode}, ${address?.address}',
                 ),
               ],
             ),

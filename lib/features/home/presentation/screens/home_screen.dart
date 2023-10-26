@@ -11,6 +11,7 @@ import 'package:yeshelpinghand/core/presentation/widgets/image_slider/image_slid
 import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
 import 'package:yeshelpinghand/core/utils/size_config.dart';
 import 'package:yeshelpinghand/features/brands/presentation/brand_listing_view.dart';
+import 'package:yeshelpinghand/features/dashboard/controllers/dashboard_controller.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/home_controller.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/image_slider_controller.dart';
 import 'package:yeshelpinghand/features/home/presentation/screens/home_banner_view.dart';
@@ -38,124 +39,18 @@ class HomeScreen extends StatelessWidget {
     final config = SizeConfig(context);
 
     return Scaffold(
-      drawer: GetBuilder<ProfileController>(
-          init: ProfileController(),
-          builder: (profileController) {
-            final result = Get.find<ProfileController>().userInfoResponse;
-            final user = result.data;
-            return Drawer(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: config.appEdgePadding(),
-                      right: config.appEdgePadding(),
-                      top: config.appHeight(10),
-                      bottom: config.appHorizontalPaddingLarge(),
-                    ),
-                    color: Theme.of(context).primaryColor,
-                    width: double.maxFinite,
-                    child: Row(
-                      children: [
-                        Image.asset(UIAssets.getImage("user-avatar.png"),
-                            width: 45),
-                        config.horizontalSpaceSmall(),
-                        AuthWidgetBuilder(builder: (context, isAuthenticated) {
-                          if (isAuthenticated) {
-                            return result.hasData
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          "${user?.firstname} ${user?.lastname}",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.copyWith(color: Colors.white)),
-                                      Text('${user.email}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              ?.copyWith(color: Colors.white)),
-                                    ],
-                                  )
-                                : Center(
-                                    child: ErrorView(
-                                      title: NetworkException.getErrorMessage(
-                                          result.error),
-                                    ),
-                                  );
-                          } else {
-                            return PrimaryTextButton(
-                              labelColor: Colors.white,
-                              label: 'Please Login',
-                              onPressed: () {
-                                Get.toNamed(Routes.login);
-                              },
-                            );
-                          }
-                        }),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: config.appEdgePadding()),
-                    child: ListView(
-                      padding: EdgeInsets.only(
-                          top: config.appVerticalPaddingMedium()),
-                      shrinkWrap: true,
-                      children: [
-                        _DrawerMenuItem(
-                            title: "About us",
-                            icon: CupertinoIcons.info,
-                            onPressed: () {
-                              Get.toNamed(Routes.aboutUs);
-                            }),
-                        config.verticalSpaceLarge(),
-                        _DrawerMenuItem(
-                            title: "Privacy and Cookie Policy",
-                            icon: CupertinoIcons.doc_on_doc,
-                            onPressed: () {
-                              Get.toNamed(Routes.privacyPolicy);
-                            }),
-
-                        config.verticalSpaceLarge(),
-                        _DrawerMenuItem(
-                            title: "Contact Us",
-                            icon: CupertinoIcons.phone,
-                            onPressed: () {
-                              Get.toNamed(Routes.contactUs);
-                            }),
-                        config.verticalSpaceLarge(),
-                        // _DrawerMenuItem(
-                        //     title: "Help and FAQs",
-                        //     icon: CupertinoIcons.quote_bubble,
-                        //     onPressed: () {
-                        //       Get.toNamed(Routes.helpFaqs);
-                        //     }),
-                        // config.verticalSpaceLarge(),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
-          }),
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(
-                Icons.menu,
+              icon: Icon(
+                CupertinoIcons.person_alt_circle,
                 color: primaryColor,
-                size: 25,
+                size: 35,
               ),
               onPressed: () {
-                Scaffold.of(context).openDrawer();
+                Get.put(DashboardController()).changeTabIndex(3);
               },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );

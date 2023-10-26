@@ -17,7 +17,7 @@ class ShippingAddressController extends GetxController {
   @override
   void onInit() {
     shippingKey = GlobalKey<FormState>();
-    fetchDefaultAddresses();
+    // fetchDefaultAddresses();
     super.onInit();
   }
 
@@ -26,29 +26,29 @@ class ShippingAddressController extends GetxController {
   Address? defaultBillingAddress;
   bool isFirstLoad = true;
 
-  fetchDefaultAddresses() async {
-    final result = await Get.find<AddressRepository>().getDefaultAddresses();
-    if (result.hasData) {
-      final DefaultAddresses defaultAddresses = result.data;
-      defaultBillingAddress = defaultAddresses.billingAddress;
-      defaultShippingAddress = defaultAddresses.shippingAddress;
-      update();
-    }
-  }
+  // fetchDefaultAddresses() async {
+  //   final result = await Get.find<AddressRepository>().getDefaultAddresses();
+  //   if (result.hasData) {
+  //     final DefaultAddresses defaultAddresses = result.data;
+  //     defaultBillingAddress = defaultAddresses.billingAddress;
+  //     defaultShippingAddress = defaultAddresses.shippingAddress;
+  //     update();
+  //   }
+  // }
 
   setCheckoutShippingInfo(
       BuildContext context, ConfirmOrderParams confirmOrderParams) async {
     showLoadingDialog(context);
-    final result = await Get.find<CheckoutRepository>()
-        .setShippingInfo(confirmOrderParams);
+    // final result = await Get.find<CheckoutRepository>()
+    //     .setShippingInfo(confirmOrderParams);
     hideLoadingDialog(context);
-    if (result.hasData) {
-      AppSnackbar.showSuccess(context: context, message: result.data);
-      Get.toNamed(Routes.paymentScreen, arguments: confirmOrderParams);
-    } else if (result.hasError) {
-      AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
-    }
+    // if (result.hasData) {
+    // AppSnackbar.showSuccess(context: context, message: result.data);
+    Get.toNamed(Routes.paymentScreen, arguments: confirmOrderParams);
+    // } else if (result.hasError) {
+    //   AppSnackbar.showError(
+    //       context: context,
+    //       message: NetworkException.getErrorMessage(result.error));
+    // }
   }
 }

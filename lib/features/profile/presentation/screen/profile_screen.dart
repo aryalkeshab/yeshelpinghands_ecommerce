@@ -74,13 +74,13 @@ class ProfileScreen extends StatelessWidget {
                                   Get.toNamed(Routes.orderHistory);
                                 },
                               ),
-                              _ProfileMenuItem(
-                                title: "Terms and Conditions",
-                                leadingIcon: CupertinoIcons.doc_text,
-                                onTap: () {
-                                  Get.toNamed(Routes.termsAndCondition);
-                                },
-                              ),
+                              // _ProfileMenuItem(
+                              //   title: "Terms and Conditions",
+                              //   leadingIcon: CupertinoIcons.doc_text,
+                              //   onTap: () {
+                              //     Get.toNamed(Routes.termsAndCondition);
+                              //   },
+                              // ),
                               _ProfileMenuItem(
                                 title: "Privacy and Cookie Policy",
                                 leadingIcon: CupertinoIcons.doc_on_doc,
@@ -102,13 +102,13 @@ class ProfileScreen extends StatelessWidget {
                                   Get.toNamed(Routes.contactUs);
                                 },
                               ),
-                              _ProfileMenuItem(
-                                title: "Help & FAQs",
-                                leadingIcon: CupertinoIcons.quote_bubble,
-                                onTap: () {
-                                  Get.toNamed(Routes.helpFaqs);
-                                },
-                              ),
+                              // _ProfileMenuItem(
+                              //   title: "Help & FAQs",
+                              //   leadingIcon: CupertinoIcons.quote_bubble,
+                              //   onTap: () {
+                              //     Get.toNamed(Routes.helpFaqs);
+                              //   },
+                              // ),
                               AuthWidgetBuilder(
                                 builder: (context, isAuthenticated) {
                                   if (isAuthenticated) {
@@ -235,7 +235,7 @@ class _TopSectionView extends StatelessWidget {
                                       color: theme.colorScheme.secondary),
                                 ),
                                 child: Text(
-                                  "${user.firstname?[0].toUpperCase()}",
+                                  "${user.name?[0].toUpperCase()}",
                                   style: theme.textTheme.bodyText1?.copyWith(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600),
@@ -260,7 +260,7 @@ class _TopSectionView extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        "${user.firstname} ${user.lastname}",
+                        "${user.name} ",
                         style: theme.textTheme.bodyText1
                             ?.copyWith(fontWeight: FontWeight.w600),
                       ),
@@ -275,24 +275,24 @@ class _TopSectionView extends StatelessWidget {
                           style: theme.textTheme.bodyText2
                               ?.copyWith(fontWeight: FontWeight.normal),
                         ),
-                      config.verticalSpaceMedium(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                              width: config.appWidth(15), child: Divider()),
-                          config.horizontalSpaceSmall(),
-                          PrimaryTextButton(
-                            label: 'Update Password',
-                            onPressed: () {
-                              Get.toNamed(Routes.passwordUpdate);
-                            },
-                          ),
-                          config.horizontalSpaceSmall(),
-                          SizedBox(
-                              width: config.appWidth(15), child: Divider()),
-                        ],
-                      )
+                      // config.verticalSpaceMedium(),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     SizedBox(
+                      //         width: config.appWidth(15), child: Divider()),
+                      //     config.horizontalSpaceSmall(),
+                      //     PrimaryTextButton(
+                      //       label: 'Update Password',
+                      //       onPressed: () {
+                      //         Get.toNamed(Routes.passwordUpdate);
+                      //       },
+                      //     ),
+                      //     config.horizontalSpaceSmall(),
+                      //     SizedBox(
+                      //         width: config.appWidth(15), child: Divider()),
+                      //   ],
+                      // )
                     ]);
                   } else if (result.hasError) {
                     return ErrorView(

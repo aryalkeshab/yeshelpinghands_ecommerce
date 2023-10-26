@@ -35,9 +35,9 @@ class WishListController extends GetxController {
 
   removeProductFromWishList(
     BuildContext context,
-    int id,
+    String sku,
   ) async {
-    final result = await Get.find<WishListRepository>().removeWishList(id);
+    final result = await Get.find<WishListRepository>().removeWishList(sku);
     if (result.hasData) {
       AppSnackbar.showSnackbarWithActionButton(
           snackbarIcon: Icons.remove_circle_outline_outlined,
@@ -65,7 +65,7 @@ class WishListController extends GetxController {
 
   removeProductFromWishListScreen(
     BuildContext context,
-    int id,
+    String id,
   ) async {
     final result = await Get.find<WishListRepository>().removeWishList(id);
     if (result.hasData) {
@@ -108,21 +108,23 @@ class WishListController extends GetxController {
 
   ApiResponse get addWishListResponse => _addToWishListResponse;
 
-  addProductToWishList(BuildContext context, int id,
+  addProductToWishList(BuildContext context, String slug,
       {required String sku}) async {
-    addWishListResponse = await Get.find<WishListRepository>().postWishList(id);
+    addWishListResponse =
+        await Get.find<WishListRepository>().postWishList(slug);
     if (addWishListResponse.hasError) {
       AppSnackbar.showError(
           context: context,
           message: NetworkException.getErrorMessage(addWishListResponse.error));
     }
     if (addWishListResponse.hasData) {
-      Get.find<ProductDetailsController>().fetchProductDetails(sku);
+      Get.find<ProductDetailsController>().fetchProductDetails(slug);
       AppSnackbar.showSnackbarWithActionButton(
           snackbarIcon: Icons.add_circle_outline_outlined,
           context: context,
           message: addWishListResponse.data);
       getWishList();
+      Get.find<ProductDetailsController>().fetchProductDetails(slug);
     }
   }
 
@@ -136,7 +138,7 @@ class WishListController extends GetxController {
   }
 
   ApiResponse get wishlistResponse => _wishListResponse;
-  final wishList = <WishList>[];
+  final wishList = <WishListProduct>[];
 
   getWishList() async {
     wishlistResponse =

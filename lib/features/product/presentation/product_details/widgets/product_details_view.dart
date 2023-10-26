@@ -196,7 +196,7 @@ class ProductDetailsView extends StatelessWidget {
                           builder: ((controller) {
                             final result = controller.cartDetailResponse;
                             final CartResponse? cartResponse = result.data;
-                            final cartDetail = cartResponse?.cartDetail;
+                            final cartDetail = cartResponse?.carts;
                             return AuthWidgetBuilder(
                                 builder: ((context, isAuthenticated) {
                               return !isAuthenticated
@@ -212,7 +212,7 @@ class ProductDetailsView extends StatelessWidget {
                                         Get.find<DashboardController>()
                                             .changeTabIndex(2);
                                       })
-                                  : cartDetail?.itemsCount == 0
+                                  : cartDetail?.length == 0
                                       ? IconButton(
                                           // focusColor: kTeal400,
                                           icon: const Icon(CupertinoIcons.cart,
@@ -255,7 +255,7 @@ class ProductDetailsView extends StatelessWidget {
                                                 minHeight: 15,
                                               ),
                                               child: Text(
-                                                '${cartDetail?.itemsCount}',
+                                                '${cartDetail?.length}',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 10,
@@ -276,12 +276,9 @@ class ProductDetailsView extends StatelessWidget {
                             ? () {
                                 if (productDetails.isWishlist == false) {
                                   Get.find<WishListController>()
-                                      .addProductToWishList(
-                                          context,
-                                          int.tryParse(
-                                                  "${productDetails.entityId}") ??
-                                              -1,
-                                          sku: '${productDetails.sku}');
+                                      .addProductToWishList(context,
+                                          productDetails.slug.toString(),
+                                          sku: '${productDetails.slug}');
                                 } else {
                                   Get.find<ProductDetailsController>()
                                       .onTapFav(context, productDetails);
@@ -322,13 +319,15 @@ class ProductDetailsView extends StatelessWidget {
                         // animationDuration: const Duration(milliseconds: 700),
                         autoplay: false,
                         showIndicator: false,
-                        images: List.generate(1, (i) {
+                        images: List.generate(
+                            productDetails.additionalImages!.length, (i) {
                           return InkWell(
                               onTap: () => _displayDialog(
-                                  "${productDetails.image?.image}", context),
+                                  "${productDetails.additionalImages?[i].image}",
+                                  context),
                               child: CustomCachedNetworkImage(
                                   isCompleteUrl: false,
-                                  "${productDetails.image?.image}"));
+                                  "${productDetails.additionalImages?[i].image}"));
                         })),
                   )),
               SliverList(
@@ -359,7 +358,8 @@ class ProductDetailsView extends StatelessWidget {
                                     text: "AVAILABILITY: ",
                                     style: theme.textTheme.bodyText2),
                                 TextSpan(
-                                    text: "${productDetails.availability}",
+                                    text:
+                                        "${productDetails.inventory == 0 ? "OUT OF STOCK" : "IN STOCK"}",
                                     style: theme.textTheme.bodyText2
                                         ?.copyWith(color: theme.primaryColor)),
                               ]),
@@ -379,12 +379,11 @@ class ProductDetailsView extends StatelessWidget {
                         ),
                         config.verticalSpaceMedium(),
                         Visibility(
-                          visible:
-                              productDetails.saleableQty! > 0 ? true : false,
+                          visible: productDetails.inventory! > 0 ? true : false,
                           child: Column(
                             children: [
                               Text(
-                                "${productDetails.saleableQty} Qty left in stock",
+                                "${productDetails.inventory} Qty left in stock",
                                 style: theme.textTheme.bodyText2
                                     ?.copyWith(color: theme.primaryColor),
                               ),
@@ -402,8 +401,7 @@ class ProductDetailsView extends StatelessWidget {
                           children: [
                             Icon(Icons.star, color: Color(0xffffc516)),
                             config.horizontalSpaceSmall(),
-                            Text(
-                                "${productDetails.numericNormalizedAvgRating / 5}"),
+                            Text("${productDetails.avgRating ?? 0 / 5}"),
                           ],
                         ),
                         config.verticalSpaceSmall(),
@@ -413,10 +411,10 @@ class ProductDetailsView extends StatelessWidget {
                         config.verticalSpaceSmall(),
                         const Divider(),
                         config.verticalSpaceSmall(),
-                        AuthWidgetWrapper(
-                            child: ReviewFormBuilder(
-                          productId: '${productDetails.entityId}',
-                        )),
+                        // AuthWidgetWrapper(
+                        //     child: ReviewFormBuilder(
+                        //   productId: '${productDetails.sku}',
+                        // )),
                       ],
                     ),
                   ],

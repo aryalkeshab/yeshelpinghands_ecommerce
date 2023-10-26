@@ -37,20 +37,9 @@ class PaymentMethodsController extends GetxController {
   setPaymentMethod(
       BuildContext context, ConfirmOrderParams confirmOrderParams) async {
     showLoadingDialog(context);
+    confirmOrderParams.paymentMethod = "Cash on Delivery";
 
-    final result = await Get.find<CheckoutRepository>()
-        .setPaymentMethod("${confirmOrderParams.paymentMethod?.value}");
-
-    if (result.hasData) {
-      hideLoadingDialog(context);
-      Get.toNamed(Routes.checkoutSummary, arguments: confirmOrderParams);
-
-      showToast(result.data);
-    } else if (result.hasError) {
-      hideLoadingDialog(context);
-      AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
-    }
+    hideLoadingDialog(context);
+    Get.toNamed(Routes.checkoutSummary, arguments: confirmOrderParams);
   }
 }

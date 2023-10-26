@@ -12,7 +12,7 @@ class ReviewsAndRatings extends StatelessWidget {
     required this.reviews,
   }) : super(key: key);
 
-  final List<Review>? reviews;
+  final List<Reviews>? reviews;
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +35,21 @@ class ReviewsAndRatings extends StatelessWidget {
                     RichText(
                         text: TextSpan(children: [
                       TextSpan(
-                          text: "${review.userName}  ",
+                          text: "${review.uName}  ",
                           style: theme.textTheme.caption),
                       TextSpan(
                           text:
-                              "-${DateFormatterUtils.formatDateFromString("${review.createdAt}")}",
+                              "-${DateFormatterUtils.formatDateFromString("${review.created_at}")}",
                           style: theme.textTheme.caption),
                     ])),
                     config.verticalSpaceSmall(),
-                    Text("${review.title}",
+                    Text("${review.review}",
                         style: theme.textTheme.bodyText2
                             ?.copyWith(fontWeight: FontWeight.w500)),
                     config.verticalSpaceSmall(),
-                    Text("${review.details}",
-                        style: theme.textTheme.bodyText2?.copyWith(height: 1.2),
-                        textAlign: TextAlign.justify),
+                    // Text("${review.details}",
+                    //     style: theme.textTheme.bodyText2?.copyWith(height: 1.2),
+                    //     textAlign: TextAlign.justify),
                     config.verticalSpaceSmall(),
                     ProductRatingsView(review: review),
                   ],
@@ -69,7 +69,7 @@ class ProductRatingsView extends StatelessWidget {
     required this.review,
   }) : super(key: key);
 
-  final Review review;
+  final Reviews review;
 
   @override
   Widget build(BuildContext context) {
@@ -77,17 +77,17 @@ class ProductRatingsView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ProductRatingAttribute(
-          title: "Price",
-          value: review.ratings?.price,
+          title: "Ratings",
+          value: review.rating.toString(),
         ),
-        ProductRatingAttribute(
-          title: "Quality",
-          value: review.ratings?.quality,
-        ),
-        ProductRatingAttribute(
-          title: "Value",
-          value: review.ratings?.value,
-        ),
+        // ProductRatingAttribute(
+        //   title: "Quality",
+        //   value: review.ratings?.quality,
+        // ),
+        // ProductRatingAttribute(
+        //   title: "Value",
+        //   value: review.ratings?.value,
+        // ),
       ],
     );
   }

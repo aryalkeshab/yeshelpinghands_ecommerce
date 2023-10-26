@@ -1,212 +1,188 @@
 class ProductDetails {
-  String? entityId;
-  String? attributeSetId;
-  String? typeId;
-  String? sku;
-  String? hasOptions;
-  String? requiredOptions;
-  String? createdAt;
-  String? updatedAt;
-  String? visibility;
-  String? brandId;
-  String? brandName;
-  String? brandDescription;
-  String? brandImage;
-  String? brandThumbnail;
+  int? id;
   String? name;
-  String? metaTitle;
-  String? metaDescription;
-  String? cimCode;
-  String? quantityAndStockStatus;
-  String? taxClassId;
+  String? slug;
+  String? sku;
+  String? thumbnail;
+  int? inventory;
   String? price;
-  String? vatExcludedPrice;
-  String? vatAmount;
-  int? storeId;
-  String? hotOnsale;
-  List<Attributes>? attributes;
-  int? saleableStock;
-  bool? isSaleable;
-  ProductImage? image;
-  String? availability;
-  List<Review>? reviews;
-  String? ratingAgg;
+  String? offerPrice;
+  String? description;
+  String? createdAt;
+  String? category;
+  String? brand;
+  String? computedPrice;
   bool? isWishlist;
-  bool? isCompared;
-  String? navCashbackPoint;
-
-  bool get isProductInStock => availability != 'OUT OF STOCK';
-  int? saleableQty;
-  List<String>? categoryId;
-
-  int get numericNormalizedAvgRating {
-    final normalizedRating = (int.tryParse("$ratingAgg") ?? 20) ~/ 20;
-    return normalizedRating;
-  }
+  bool? isCart;
+  int? avgRating;
+  bool? inStock;
+  List<AdditionalImages>? additionalImages;
+  List<Reviews>? reviews;
 
   ProductDetails(
-      {this.entityId,
-      this.attributeSetId,
-      this.typeId,
-      this.sku,
-      this.hasOptions,
-      this.requiredOptions,
-      this.createdAt,
-      this.updatedAt,
-      this.visibility,
-      this.brandId,
-      this.brandName,
-      this.brandDescription,
-      this.brandImage,
-      this.brandThumbnail,
+      {this.id,
       this.name,
-      this.metaTitle,
-      this.metaDescription,
-      this.cimCode,
-      this.quantityAndStockStatus,
-      this.taxClassId,
+      this.slug,
+      this.sku,
+      this.thumbnail,
+      this.inventory,
       this.price,
-      this.vatExcludedPrice,
-      this.vatAmount,
-      this.storeId,
-      this.hotOnsale,
-      this.attributes,
-      this.saleableStock,
-      this.isSaleable,
-      this.image,
-      this.availability,
-      this.reviews,
-      this.ratingAgg,
+      this.offerPrice,
+      this.description,
+      this.createdAt,
+      this.category,
+      this.brand,
+      this.computedPrice,
       this.isWishlist,
-      this.isCompared,
-      this.navCashbackPoint,
-      this.saleableQty,
-      this.categoryId});
+      this.avgRating,
+      this.inStock,
+      this.additionalImages,
+      this.reviews,
+      this.isCart});
 
   ProductDetails.fromJson(Map<String, dynamic> json) {
-    entityId = json['entity_id'];
-    attributeSetId = json['attribute_set_id'];
-    typeId = json['type_id'];
-    sku = json['sku'];
-    hasOptions = json['has_options'];
-    requiredOptions = json['required_options'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    visibility = json['visibility'];
-    brandId = json['brand_id'];
-    brandName = json['brand_name'];
-    brandDescription = json['brand_description'];
-    brandImage = json['brand_image'];
-    brandThumbnail = json['brand_thumbnail'];
+    id = json['id'];
     name = json['name'];
-    metaTitle = json['meta_title'];
-    metaDescription = json['meta_description'];
-    cimCode = json['cim_code'];
-    quantityAndStockStatus = json['quantity_and_stock_status'];
-    taxClassId = json['tax_class_id'];
+    slug = json['slug'];
+    sku = json['sku'];
+    thumbnail = json['thumbnail'];
+    inventory = json['inventory'];
     price = json['price'];
-    vatExcludedPrice = json['vat_excluded_price'];
-    vatAmount = json['vat_amount'];
-    storeId = json['store_id'];
-    hotOnsale = json['hot-onsale'];
-    if (json['attributes'] != null) {
-      attributes = <Attributes>[];
-      json['attributes'].forEach((v) {
-        attributes!.add(Attributes.fromJson(v));
+    offerPrice = json['offer_price'];
+    description = json['description'];
+    createdAt = json['created_at'];
+    category = json['category'];
+    brand = json['brand'];
+    computedPrice = json['computed_price'];
+    isWishlist = json['is_wishlist'] == 1 ? true : false;
+    avgRating = json['avg_rating'];
+    inStock = json['in_stock'] == 1 ? true : false;
+    isCart = json['in_cart'] == 1 ? true : false;
+    if (json['additional_images'] != null) {
+      additionalImages = <AdditionalImages>[];
+      json['additional_images'].forEach((v) {
+        additionalImages!.add(new AdditionalImages.fromJson(v));
       });
     }
-    saleableStock = json['saleable_stock'];
-    isSaleable = json['is_saleable'];
-    image = json['product_images'] != null
-        ? ProductImage.fromJson(json['product_images'])
-        : null;
-    availability = json['availability'];
     if (json['reviews'] != null) {
-      reviews = <Review>[];
+      reviews = <Reviews>[];
       json['reviews'].forEach((v) {
-        reviews!.add(Review.fromJson(v));
+        reviews!.add(new Reviews.fromJson(v));
       });
     }
-    ratingAgg = json['ratingAgg'];
-    isWishlist = json['is_wishlist'];
-    isCompared = json['is_compared'];
-    navCashbackPoint = json['nav_cashback_point'];
-    saleableQty = json['salebaleQty'];
-    if (json['category_id'] != null) {
-      categoryId = json['category_id'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['slug'] = this.slug;
+    data['sku'] = this.sku;
+    data['thumbnail'] = this.thumbnail;
+    data['inventory'] = this.inventory;
+    data['price'] = this.price;
+    data['offer_price'] = this.offerPrice;
+    data['description'] = this.description;
+    data['created_at'] = this.createdAt;
+    data['category'] = this.category;
+    data['brand'] = this.brand;
+    data['computed_price'] = this.computedPrice;
+    data['is_wishlist'] = this.isWishlist;
+    data['avg_rating'] = this.avgRating;
+    data['in_stock'] = this.inStock;
+    if (this.additionalImages != null) {
+      data['additional_images'] =
+          this.additionalImages!.map((v) => v.toJson()).toList();
     }
-  }
-
-  // int get numericPrice => (double.tryParse("$price") ?? 0).toInt();
-}
-
-class Attributes {
-  String? attributeCode;
-  String? attributeValues;
-
-  Attributes({this.attributeCode, this.attributeValues});
-
-  Attributes.fromJson(Map<String, dynamic> json) {
-    attributeCode = json['attribute_code'];
-    attributeValues = json['attribute_values'];
+    if (this.reviews != null) {
+      data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
-class ProductImage {
+class AdditionalImages {
+  int? id;
   String? image;
   String? thumbnail;
-  String? smallImage;
+  String? altText;
+  int? productId;
 
-  ProductImage({this.image, this.thumbnail, this.smallImage});
+  AdditionalImages({
+    this.id,
+    this.image,
+    this.thumbnail,
+    this.altText,
+    this.productId,
+  });
 
-  ProductImage.fromJson(Map<String, dynamic> json) {
+  AdditionalImages.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     image = json['image'];
     thumbnail = json['thumbnail'];
-    smallImage = json['smallImage'];
+    altText = json['alt_text'];
+    productId = json['product_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['image'] = this.image;
+    data['thumbnail'] = this.thumbnail;
+    data['alt_text'] = this.altText;
+    data['product_id'] = this.productId;
+
+    return data;
   }
 }
 
-class Review {
-  final String? id;
-  final String? title;
-  final String? details;
-  final String? userName;
-  final String? createdAt;
-  final Ratings? ratings;
+class Reviews {
+  int? id;
+  int? userId;
+  int? productId;
+  String? review;
+  String? reviewImage;
+  String? created_at;
 
-  Review(
+  int? rating;
+  String? uName;
+  String? uImage;
+
+  Reviews(
       {this.id,
-      this.title,
-      this.details,
-      this.userName,
-      this.createdAt,
-      this.ratings});
+      this.userId,
+      this.productId,
+      this.review,
+      this.reviewImage,
+      this.rating,
+      this.uName,
+      this.created_at,
+      this.uImage});
 
-  factory Review.fromJson(Map<String, dynamic> json) {
-    return Review(
-      id: json['review_id'],
-      title: json['title'],
-      createdAt: json['created_at'],
-      details: json['detail'],
-      ratings:
-          json['ratings'] != null ? Ratings.fromJson(json['ratings']) : null,
-      userName: json['nickname'],
-    );
+  Reviews.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    productId = json['product_id'];
+    review = json['review'];
+    reviewImage = json['review_image'];
+
+    rating = json['rating'];
+    created_at = json['created_at'];
+    uName = json['u_name'];
+    uImage = json['u_image'];
   }
-}
 
-class Ratings {
-  final String? price;
-  final String? quality;
-  final String? value;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['product_id'] = this.productId;
+    data['review'] = this.review;
+    data['review_image'] = this.reviewImage;
 
-  Ratings({this.price, this.quality, this.value});
-
-  factory Ratings.fromJson(Map<String, dynamic> json) {
-    return Ratings(
-      price: json['Price'],
-      value: json['Value'],
-      quality: json['Quality'],
-    );
+    data['rating'] = this.rating;
+    data['u_name'] = this.uName;
+    data['u_image'] = this.uImage;
+    return data;
   }
 }

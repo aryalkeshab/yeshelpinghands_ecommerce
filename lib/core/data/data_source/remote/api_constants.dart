@@ -32,7 +32,7 @@ enum APIPath {
 
   /* Wishlist*/
   getWishList,
-  removeItem,
+  // removeItem,
   addItem,
   clear,
 
@@ -48,13 +48,13 @@ enum APIPath {
   deleteNonDefaultAddress,
   updateNonDefaultAddress,
   addNonDefaultAddress,
-  updateDefaultBillingAddress,
-  updateDefaultShippingAddress,
-  defaultAddress,
-  setDefaultShippingAddress,
-  setDefaultBillingAddress,
-  countryList,
-  regionList,
+  // updateDefaultBillingAddress,
+  // updateDefaultShippingAddress,
+  // defaultAddress,
+  // setDefaultShippingAddress,
+  // setDefaultBillingAddress,
+  // countryList,
+  // regionList,
 
   /* Category */
   category,
@@ -107,7 +107,7 @@ class APIPathHelper {
         return "/rest/V1/customers/me/password";
 
       case APIPath.logout:
-        return "/rest/V1/customer/logout";
+        return "/api/V1/logout";
 
       case APIPath.loginWithSocialMedia:
         return "/rest/V1/social-auth/social-authenticate";
@@ -163,7 +163,7 @@ class APIPathHelper {
       case APIPath.allProducts:
         return "/api/V1/get-products";
       case APIPath.productDetail:
-        return "/rest/V1/product?sku=$keyword";
+        return "/api/V1/view-product/$keyword";
 
       case APIPath.productCompare:
         return "/rest/V1/comparelist";
@@ -225,16 +225,16 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.getWishList:
-        return "/rest/V1/wishlist/items";
+        return "/api/V1/get-wishlists";
 
       case APIPath.addItem:
-        return "/rest/V1/wishlist/add/$id";
+        return "/api/V1/add-wishlists";
 
-      case APIPath.removeItem:
-        return "/rest/V1/wishlist/remove/$id";
+      // case APIPath.removeItem:
+      //   return "/api/V1/wishlist/remove/$id";
 
       case APIPath.clear:
-        return "/rest/V1/wishlist/clear";
+        return "/api/V1/empty-wishlist";
       default:
         return "";
     }
@@ -247,19 +247,19 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.getCartItems:
-        return "/rest/V1/cart";
+        return "/api/V1/get-carts";
 
       case APIPath.removeCartItem:
         return "/rest/V1/cart/remove/$id";
 
       case APIPath.addToCart:
-        return "/rest/V1/cart/add";
+        return "/api/V1/add-carts";
 
       case APIPath.updateCart:
-        return "/rest/V1/cart/update";
+        return "/api/V1/update-cart";
 
       case APIPath.removeAllCartProducts:
-        return "/rest/V1/cart/delete";
+        return "/api/V1/empty-cart";
 
       default:
         return "";
@@ -273,10 +273,10 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.profileAPis:
-        return "/rest/V1/customer/me";
+        return "/api/V1/get-profile";
 
       case APIPath.editProfile:
-        return "/rest/V1/customer/update";
+        return "/api/V1/customer/update";
 
       default:
         return "";
@@ -313,35 +313,35 @@ class APIPathHelper {
   static String addressAPIs(APIPath path, {String? id}) {
     switch (path) {
       case APIPath.nonDefaultAddressList:
-        return "/rest/V1/customer/ndaddress";
+        return "/api/V1/get-addresses";
       case APIPath.deleteNonDefaultAddress:
-        return "/rest/V1/delete/address/$id";
+        return "/api/V1/delete-addresses";
 
       case APIPath.addNonDefaultAddress:
-        return "/rest/V1/customer/address/add";
+        return "/api/V1/create-addresses";
 
       case APIPath.updateNonDefaultAddress:
         return "/rest/V1/update/address/$id";
 
-      case APIPath.updateDefaultBillingAddress:
-        return "/rest/V1/customer/billingadd/update";
+      // case APIPath.updateDefaultBillingAddress:
+      //   return "/rest/V1/customer/billingadd/update";
 
-      case APIPath.updateDefaultShippingAddress:
-        return "/rest/V1/customer/shippingadd/update";
+      // case APIPath.updateDefaultShippingAddress:
+      //   return "/rest/V1/customer/shippingadd/update";
 
-      case APIPath.defaultAddress:
-        return "/rest/V1/customer/address";
+      // case APIPath.defaultAddress:
+      //   return "/api/V1/get-addresses";
 
-      case APIPath.setDefaultBillingAddress:
-        return "/rest/V1/set/billingAddress/$id";
+      // case APIPath.setDefaultBillingAddress:
+      //   return "/rest/V1/set/billingAddress/$id";
 
-      case APIPath.setDefaultShippingAddress:
-        return "/rest/V1/set/shippingAddress/$id";
+      // case APIPath.setDefaultShippingAddress:
+      //   return "/rest/V1/set/shippingAddress/$id";
 
-      case APIPath.countryList:
-        return "/rest/V1/directory/countries";
-      case APIPath.regionList:
-        return "/rest/V1/regions/$id";
+      // case APIPath.countryList:
+      //   return "/rest/V1/directory/countries";
+      // case APIPath.regionList:
+      //   return "/rest/V1/regions/$id";
       default:
         return "";
     }
@@ -368,7 +368,7 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.orders:
-        return "/rest/V1/customer/order";
+        return "/api/V1/get-orders";
 
       case APIPath.orderDetails:
         return "/rest/V1/customer/order/$id";

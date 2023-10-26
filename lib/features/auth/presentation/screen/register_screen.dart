@@ -108,7 +108,7 @@ class RegisterFormBuilder extends StatelessWidget {
                     children: [
                       config.verticalSpaceMedium(),
                       PrimaryFormField(
-                        initialValue: user?.firstname ?? "",
+                        initialValue: user?.name ?? "",
                         hintIcon: _buildFormFieldIcon(
                           Icons.person_outline,
                           theme.primaryColor,
@@ -122,7 +122,7 @@ class RegisterFormBuilder extends StatelessWidget {
                       ),
                       config.verticalSpaceMedium(),
                       PrimaryFormField(
-                        initialValue: user?.lastname ?? '',
+                        initialValue: user?.userName ?? '',
                         hintIcon: _buildFormFieldIcon(
                             Icons.person_outline, theme.primaryColor),
                         validator: (value) => Validator.validateEmpty(value!),

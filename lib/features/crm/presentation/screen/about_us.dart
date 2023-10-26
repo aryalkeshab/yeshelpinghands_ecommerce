@@ -13,25 +13,23 @@ class AboutUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AboutUsController>(builder: (context) {
-      return HookBaseWidget(builder: (context, config, theme) {
-        // final result = Get.find<AboutUsController>().aboutUsApiResponse;
+    return HookBaseWidget(builder: (context, config, theme) {
+      // final result = Get.find<AboutUsController>().aboutUsApiResponse;
 
-        return Scaffold(
-            appBar: AppBar(
-              title: const Text('About Us'),
-            ),
-            body: Builder(builder: (context) {
-              return Padding(
-                  padding: const EdgeInsets.all(5.0), child: MyTextWidget());
-              // } else if (result.hasError) {
-              //   return ErrorView(
-              //       title: NetworkException.getErrorMessage(result.error));
-              // } else {
-              //   return const Center(child: CircularProgressIndicator());
-              // }
-            }));
-      });
+      return Scaffold(
+          appBar: AppBar(
+            title: const Text('About Us'),
+          ),
+          body: Builder(builder: (context) {
+            return Padding(
+                padding: const EdgeInsets.all(5.0), child: MyTextWidget());
+            // } else if (result.hasError) {
+            //   return ErrorView(
+            //       title: NetworkException.getErrorMessage(result.error));
+            // } else {
+            //   return const Center(child: CircularProgressIndicator());
+            // }
+          }));
     });
   }
 }

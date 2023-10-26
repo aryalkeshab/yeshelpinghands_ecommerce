@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/data/data_source/remote/api_result.dart';
+import '../../../home/data/models/response/products_model.dart';
 import '../../../home/domain/repository/products_repository.dart';
 import '../../../wishlist/presentation/controller/wishlist_controller.dart';
 import '../../data/model/response/product_details.dart';
@@ -34,7 +35,7 @@ class ProductDetailsController extends GetxController {
   onTapFav(BuildContext context, ProductDetails productDetails) async {
     Get.find<WishListController>().removeProductFromWishList(
       context,
-      int.parse(productDetails.entityId!),
+      productDetails.slug.toString(),
     );
     fetchProductDetails(sku);
   }

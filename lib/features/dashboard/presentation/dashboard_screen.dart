@@ -98,12 +98,12 @@ class DashboardScreen extends StatelessWidget {
                   builder: ((controller) {
                     final result = controller.cartDetailResponse;
                     final CartResponse? cartResponse = result.data;
-                    final cartDetail = cartResponse?.cartDetail;
+                    final cartDetail = cartResponse?.carts;
                     return AuthWidgetBuilder(
                         builder: ((context, isAuthenticated) {
                       return !isAuthenticated
                           ? Icon(CupertinoIcons.cart, size: 22)
-                          : cartDetail?.itemsCount == 0
+                          : cartDetail?.length == 0
                               ? Icon(CupertinoIcons.cart, size: 22)
                               : Stack(
                                   children: [
@@ -111,7 +111,7 @@ class DashboardScreen extends StatelessWidget {
                                     Positioned(
                                       left: 12,
                                       bottom: 10,
-                                      child: cartDetail?.itemsCount != null
+                                      child: cartDetail?.length != null
                                           ? Container(
                                               alignment: Alignment.center,
                                               // height: 18,
@@ -127,7 +127,7 @@ class DashboardScreen extends StatelessWidget {
                                                 minHeight: 10,
                                               ),
                                               child: Text(
-                                                '${cartDetail?.itemsCount}',
+                                                '${cartDetail?.length}',
                                                 style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 7,

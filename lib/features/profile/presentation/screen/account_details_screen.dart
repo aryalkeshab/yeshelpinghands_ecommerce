@@ -248,7 +248,7 @@ class _TopProfileSection extends StatelessWidget {
                           width: 3, color: theme.colorScheme.secondary),
                     ),
                     child: Text(
-                      "${user.firstname?[0].toUpperCase()}",
+                      "${user.name?[0].toUpperCase()}",
                       style: theme.textTheme.bodyText1
                           ?.copyWith(fontSize: 22, fontWeight: FontWeight.w600),
                     ),
@@ -276,7 +276,7 @@ class _TopProfileSection extends StatelessWidget {
           ),
         ),
         Text(
-          "${user.firstname} ${user.lastname}",
+          "${user.name} ",
           style:
               theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
         ),

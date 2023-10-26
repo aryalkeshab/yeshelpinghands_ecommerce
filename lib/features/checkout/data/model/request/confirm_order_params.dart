@@ -4,11 +4,12 @@ import 'package:yeshelpinghand/features/checkout/data/model/response/payment_met
 import '../../../../address/data/model/response/address.dart';
 
 class ConfirmOrderParams {
-  CartDetail? cartDetail;
+  List<Carts>? cartDetail;
   Address? shippingAddress;
   Address? billingAddress;
   String? shippingMethod;
-  PaymentMethod? paymentMethod;
+  String? paymentMethod;
+  CartResponse? cartResponse;
   int? grandTotal;
 
   ConfirmOrderParams({
@@ -16,6 +17,7 @@ class ConfirmOrderParams {
     this.shippingAddress,
     this.billingAddress,
     this.shippingMethod,
+    this.cartResponse,
     this.paymentMethod,
   });
 

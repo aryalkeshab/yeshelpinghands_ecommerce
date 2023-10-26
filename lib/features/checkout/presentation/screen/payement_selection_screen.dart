@@ -4,9 +4,9 @@ import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/request/confirm_order_params.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/response/payment_method.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/controller/payment_methods_controller.dart';
-import 'package:yeshelpinghand/features/checkout/presentation/screen/checkout_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:yeshelpinghand/features/checkout/presentation/screen/widgets/checkout_stepper.dart';
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 
 import '../../../../core/presentation/resources/ui_assets.dart';
@@ -24,18 +24,16 @@ class PaymentSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, config, theme) {
-      return FocusNodeDisabler(
-        child: CheckoutStepper(
-          onProceed: () {
-            Get.find<PaymentMethodsController>()
-                .setPaymentMethod(context, confirmOrderParams);
+      return CheckoutStepper(
+        onProceed: () {
+          Get.find<PaymentMethodsController>()
+              .setPaymentMethod(context, confirmOrderParams);
+        },
+        currentStep: 2,
+        child: _PaymentSelectionView(
+          onPaymentSelect: (paymentMethod) {
+            // confirmOrderParams.paymentMethod = paymentMethod;
           },
-          currentStep: 2,
-          child: _PaymentSelectionView(
-            onPaymentSelect: (paymentMethod) {
-              confirmOrderParams.paymentMethod = paymentMethod;
-            },
-          ),
         ),
       );
     });
@@ -52,45 +50,36 @@ class _PaymentSelectionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PaymentMethodsController>(builder: (controller) {
-      final result = controller.paymentMethodsApiResponse;
-      if (result.hasData) {
-        final List<PaymentMethod> paymentMethods = result.data;
-        onPaymentSelect(paymentMethods[0]);
-        return HookBaseWidget(builder: (context, config, theme) {
-          final selectedPaymentType = useState(0);
-          return Column(
-            children: [
-              Text(
-                'Select Payment Type',
-                style: theme.textTheme.bodyText1
-                    ?.copyWith(fontWeight: FontWeight.w600),
-              ),
-              config.verticalSpaceSmall(),
-              Column(
-                children: List.generate(paymentMethods.length, (index) {
-                  final paymentMethod = paymentMethods[index];
-                  return _PaymentCard(
-                    title: "${paymentMethod.label}",
-                    onSelect: () {
-                      selectedPaymentType.value = index;
-                      onPaymentSelect(
-                          paymentMethods[selectedPaymentType.value]);
-                    },
-                    isSelected: selectedPaymentType.value == index,
-                  );
-                }),
-              ),
-            ],
-          );
-        });
-      } else if (result.hasError) {
-        return ErrorView(
-          title: NetworkException.getErrorMessage(result.error),
-        );
-      } else {
-        return const CircularProgressIndicator();
-      }
+    final List<PaymentMethod> paymentMethods = [
+      PaymentMethod(
+        label: 'Cash on delivery',
+      )
+    ];
+    return HookBaseWidget(builder: (context, config, theme) {
+      final selectedPaymentType = useState(0);
+      return Column(
+        children: [
+          Text(
+            'Select Payment Type',
+            style: theme.textTheme.bodyText1
+                ?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          config.verticalSpaceSmall(),
+          Column(
+            children: List.generate(paymentMethods.length, (index) {
+              final paymentMethod = paymentMethods[index];
+              return _PaymentCard(
+                title: "${paymentMethod.label}",
+                onSelect: () {
+                  selectedPaymentType.value = index;
+                  onPaymentSelect(paymentMethods[selectedPaymentType.value]);
+                },
+                isSelected: selectedPaymentType.value == index,
+              );
+            }),
+          ),
+        ],
+      );
     });
   }
 }

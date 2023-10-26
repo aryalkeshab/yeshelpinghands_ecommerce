@@ -1,15 +1,15 @@
 class CartParams {
-  String? sku;
+  String? slug;
   int? qty;
 
   CartParams({
-    this.sku,
+    this.slug,
     this.qty,
   });
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map['sku'] = this.sku;
+    map['slug'] = this.slug;
     map['qty'] = this.qty;
     return map;
   }

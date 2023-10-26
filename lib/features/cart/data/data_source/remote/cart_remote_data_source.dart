@@ -10,7 +10,7 @@ abstract class CartRemoteDataSource {
 
   Future<dynamic> updateCart(UpdateCartParams updateCartParams);
 
-  Future<dynamic> removeProductFromCart(int id);
+  Future<dynamic> removeProductFromCart(String slug);
 
   Future<dynamic> removeAllProductFromCart();
 }
@@ -32,20 +32,29 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
   }
 
   @override
-  Future removeProductFromCart(int id) {
-    return apiClient.authDelete(
-        APIPathHelper.cartAPIs(APIPath.removeCartItem, id: id.toString()));
+  Future removeProductFromCart(String slug) {
+    // List<String> updateCartParamsList = [];
+    // updateCartParamsList.add(slug);
+    return apiClient.authPost(
+        APIPathHelper.cartAPIs(
+          APIPath.updateCart,
+        ),
+        data: {"delete_product_slug": slug});
   }
 
   @override
   Future removeAllProductFromCart() {
     return apiClient
-        .authDelete(APIPathHelper.cartAPIs(APIPath.removeAllCartProducts));
+        .authGet(APIPathHelper.cartAPIs(APIPath.removeAllCartProducts));
   }
 
   @override
   Future updateCart(UpdateCartParams updateCartParams) {
-    return apiClient.authPut(APIPathHelper.cartAPIs(APIPath.updateCart),
+    // List<String> updateCartParamsList = [];
+    // List<int> updateCartParamsQtyInt = [];
+    // updateCartParamsList.add(updateCartParams.cartItemId);
+    // updateCartParamsQtyInt.add(updateCartParams.quantity);
+    return apiClient.authPost(APIPathHelper.cartAPIs(APIPath.updateCart),
         data: updateCartParams.toJson());
   }
 }

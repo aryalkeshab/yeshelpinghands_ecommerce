@@ -8,11 +8,11 @@ abstract class AddressRepository {
   Future<ApiResponse> updateNonDefaultAddress(
       String id, AddressParams addressParams);
   Future<ApiResponse> addNonDefaultAddress(AddressParams addressParams);
-  Future<ApiResponse> getDefaultAddresses();
-  Future<ApiResponse> updateDefaultShippingAddress(AddressParams addressParams);
-  Future<ApiResponse> updateDefaultBillingAddress(AddressParams addressParams);
-  Future<ApiResponse> setDefaultShippingAddress(String id);
-  Future<ApiResponse> setDefaultBillingAddress(String id);
-  Future<ApiResponse> getCountryList();
-  Future<ApiResponse> getRegionByCountryId(String id);
+  // Future<ApiResponse> getDefaultAddresses();
+  // Future<ApiResponse> updateDefaultShippingAddress(AddressParams addressParams);
+  // Future<ApiResponse> updateDefaultBillingAddress(AddressParams addressParams);
+  // Future<ApiResponse> setDefaultShippingAddress(String id);
+  // Future<ApiResponse> setDefaultBillingAddress(String id);
+  // Future<ApiResponse> getCountryList();
+  // Future<ApiResponse> getRegionByCountryId(String id);
 }

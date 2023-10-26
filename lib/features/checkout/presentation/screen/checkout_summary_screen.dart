@@ -7,7 +7,7 @@ import 'package:yeshelpinghand/features/address/data/model/response/address.dart
 import 'package:yeshelpinghand/features/checkout/data/model/request/confirm_order_params.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/response/order_summary.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/controller/order_summary_controller.dart';
-import 'package:yeshelpinghand/features/checkout/presentation/screen/checkout_stepper.dart';
+import 'package:yeshelpinghand/features/checkout/presentation/screen/widgets/checkout_stepper.dart';
 
 import '../../../../core/presentation/widgets/base_widget.dart';
 import '../../../../core/utils/number_parser.dart';
@@ -26,33 +26,21 @@ class CheckoutSummaryScreen extends StatelessWidget {
         Get.find<OrderSummaryController>()
             .placeOrder(context, confirmOrderParams);
       },
-      child: GetBuilder<OrderSummaryController>(
-          init: OrderSummaryController(),
-          builder: (controller) {
-            final result = controller.orderSummaryResponse;
-            if (result.hasData) {
-              final OrderSummary orderSummary = result.data;
-              confirmOrderParams.grandTotal = orderSummary.grandTotal;
-              return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: BaseWidget(builder: (context, config, theme) {
-                  return Column(
-                    children: [
-                      _OrdersSummary(orderSummary: orderSummary),
-                      config.verticalSpaceMedium(),
-                      _AddressSummaryView(
-                          confirmOrderParams: confirmOrderParams),
-                      config.verticalSpaceMedium(),
-                    ],
-                  );
-                }),
-              );
-            } else if (result.hasError) {
-              return SingleChildScrollView();
-            } else {
-              return CircularProgressIndicator();
-            }
+      child: Builder(builder: (context) {
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: BaseWidget(builder: (context, config, theme) {
+            return Column(
+              children: [
+                _OrdersSummary(orderSummary: confirmOrderParams),
+                config.verticalSpaceMedium(),
+                _AddressSummaryView(confirmOrderParams: confirmOrderParams),
+                config.verticalSpaceMedium(),
+              ],
+            );
           }),
+        );
+      }),
     );
   }
 }
@@ -136,10 +124,10 @@ class _AddressSummaryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${address?.street}, ${address?.city}, ${address?.postalCode}, ${address?.country?.name}',
+                    '${address?.country}, ${address?.city}, ${address?.postalCode}, ${address?.address}',
                   ),
                   config.verticalSpaceSmall(),
-                  Text("To: ${address?.firstName} ${address?.lastName}",
+                  Text("To: ${address?.city} ${address?.address}",
                       style: theme.textTheme.caption),
                 ],
               ),
@@ -157,7 +145,7 @@ class _OrdersSummary extends StatelessWidget {
     required this.orderSummary,
   }) : super(key: key);
 
-  final OrderSummary orderSummary;
+  final ConfirmOrderParams orderSummary;
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +165,9 @@ class _OrdersSummary extends StatelessWidget {
             config.verticalSpaceSmall(),
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:
-                    List.generate(orderSummary.items?.length ?? 0, (index) {
-                  final orderItem = orderSummary.items![index];
+                children: List.generate(orderSummary.cartDetail?.length ?? 0,
+                    (index) {
+                  final orderItem = orderSummary.cartDetail![index];
                   return Padding(
                     padding: EdgeInsets.only(
                         bottom: config.appVerticalPaddingMedium()),
@@ -189,8 +177,7 @@ class _OrdersSummary extends StatelessWidget {
                         SizedBox(
                             width: config.appWidth(20),
                             child: CustomCachedNetworkImage(
-                                isCompleteUrl: false,
-                                "${orderItem.image?.image}")),
+                                isCompleteUrl: false, "${orderItem.image}")),
                         config.horizontalSpaceMedium(),
                         Expanded(
                           child: Column(
@@ -236,31 +223,33 @@ class _OrdersSummary extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                    'SubTotal: $currency ${NumberParser.twoDecimalDigit(orderSummary.subtotal.toString())}'),
+                  'SubTotal: $currency ${orderSummary.cartResponse?.total?.subTotal.toString()}',
+                ),
                 config.verticalSpaceSmall(),
                 Text(
-                    'Shipping Fee: $currency ${NumberParser.twoDecimalDigit(orderSummary.shippingAmount.toString())}'),
+                  'Shipping Fee: $currency ${orderSummary.cartResponse?.total?.shipping.toString()}',
+                ),
                 config.verticalSpaceSmall(),
               ],
             ),
             config.verticalSpaceSmall(),
 
             Text(
-                'Total: $currency ${NumberParser.twoDecimalDigit(orderSummary.grandTotal.toString())}',
+                'Total: $currency ${orderSummary.cartResponse?.total?.grandTotal.toString()}',
                 style: theme.textTheme.bodyText1
                     ?.copyWith(fontWeight: FontWeight.w600)),
             config.verticalSpaceSmall(),
-            Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: config.appVerticalPaddingSmall(),
-                  vertical: config.appVerticalPaddingSmall(),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary),
-                ),
-                child: Text('${orderSummary.shippingDescription}')),
-            config.verticalSpaceMedium(),
+            // Container(
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: config.appVerticalPaddingSmall(),
+            //       vertical: config.appVerticalPaddingSmall(),
+            //     ),
+            //     decoration: BoxDecoration(
+            //       border: Border.all(
+            //           color: Theme.of(context).colorScheme.secondary),
+            //     ),
+            //     child: Text('${orderSummary}')),
+            // config.verticalSpaceMedium(),
             RichText(
                 text: TextSpan(children: [
               TextSpan(
