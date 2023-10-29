@@ -124,7 +124,7 @@
 //                                       color: Colors.amber,
 //                                     ),
 //                                     onRatingUpdate: (rating) {
-//                                       print(rating);
+//                                       
 //                                     },
 //                                   ),
 //                                 ],
@@ -182,7 +182,7 @@
 //                       color: Colors.amber,
 //                     ),
 //                     onRatingUpdate: (rating) {
-//                       print(rating);
+//                       
 //                     },
 //                   ),
 //                   Padding(

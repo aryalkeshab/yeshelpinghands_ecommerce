@@ -23,7 +23,7 @@ class CheckoutSummaryScreen extends StatelessWidget {
     return CheckoutStepper(
       currentStep: 3,
       onProceed: () {
-        Get.find<OrderSummaryController>()
+        Get.put(OrderSummaryController())
             .placeOrder(context, confirmOrderParams);
       },
       child: Builder(builder: (context) {

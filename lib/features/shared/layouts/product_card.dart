@@ -106,9 +106,26 @@ class _ProductCard extends StatelessWidget {
                           "$currency ${NumberParser.twoDecimalDigit(productModel.price.toString())}",
                           style: theme.textTheme.bodyText1?.copyWith(
                               color: primaryColor2,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600,
+                              decoration: productModel.offerPrice > 0 &&
+                                      productModel.offerPrice <
+                                          productModel.price
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none),
                         ),
-                        config.verticalSpaceVerySmall(),
+                        if (productModel.offerPrice > 0 &&
+                            productModel.offerPrice < productModel.price)
+                          Text(
+                            "$currency ${NumberParser.twoDecimalDigit(productModel.offerPrice.toString())}",
+                            style: theme.textTheme.bodyText1?.copyWith(
+                              color: primaryColor2,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        if (productModel.offerPrice > 0 &&
+                            productModel.offerPrice < productModel.price)
+                          config.verticalSpaceMedium(),
+                        // config.verticalSpaceVerySmall(),
                         // ProductEmi(
                         //   price: price,
                         // ),
@@ -119,32 +136,6 @@ class _ProductCard extends StatelessWidget {
                 ],
               ),
             ),
-            // (productModel.hotOnSale == null)
-            //     ? config.horizontalSpaceVerySmall()
-            //     : Positioned(
-            //         top: type == _ProductCardType.large ? 9 : 6,
-            //         right: type == _ProductCardType.large ? 12 : 4,
-            //         child: Container(
-            //           height: type == _ProductCardType.large ? 20 : 12,
-            //           padding: type == _ProductCardType.large
-            //               ? const EdgeInsets.symmetric(
-            //                   vertical: 4, horizontal: 4)
-            //               : const EdgeInsets.symmetric(
-            //                   vertical: 2, horizontal: 3),
-            //           decoration: BoxDecoration(
-            //               borderRadius: BorderRadius.circular(3),
-            //               color: theme.primaryColor),
-            //           child: Text(
-            //             productModel.hotOnSale.toString(),
-            //             style: type == _ProductCardType.large
-            //                 ? theme.textTheme.bodySmall
-            //                     ?.copyWith(color: theme.colorScheme.onPrimary)
-            //                 : theme.textTheme.caption?.copyWith(
-            //                     color: theme.colorScheme.onPrimary,
-            //                     fontSize: 8),
-            //           ),
-            //         ),
-            //       ),
           ],
         ),
       );

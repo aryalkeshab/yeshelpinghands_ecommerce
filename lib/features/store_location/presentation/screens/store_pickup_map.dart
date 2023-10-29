@@ -30,7 +30,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     print(widget.pickupStore?.latitude);
+//     
 //     return BaseWidget(builder: (context, config, theme) {
 //       return Scaffold(
 //         body: GetBuilder<StorePickupController>(builder: (controller) {

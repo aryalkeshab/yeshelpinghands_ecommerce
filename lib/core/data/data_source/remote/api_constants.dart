@@ -89,7 +89,6 @@ class APIPathHelper {
   // static const String baseUrl = "https://qmbmart.com";
   static const String baseUrl = "https://yeshelpinghand.com";
 
-  static const String reCaptchaToken = "ybntheqhyl90wx5ogfv8fwii1aisa969";
   static const String baseUrlImage = "https://yeshelpinghand.com/";
 
   static String authAPIs(APIPath path, {String? keyword}) {
@@ -184,16 +183,11 @@ class APIPathHelper {
 
   static String checkoutAPIs(APIPath path) {
     switch (path) {
-      case APIPath.shippingMethods:
-        return "/rest/V1/checkout/shipping-method";
-
-      case APIPath.orderSummary:
-        return "/rest/V1/checkout/order-summary";
       case APIPath.paymentMethods:
         return "/rest/V1/checkout/payment-method";
 
       case APIPath.placeOrder:
-        return "/rest/V1/checkout/place-order";
+        return "/api/V1/create-order";
 
       case APIPath.shippingAndBillingAddress:
         return "/rest/V1/checkout/shipping";
@@ -276,7 +270,7 @@ class APIPathHelper {
         return "/api/V1/get-profile";
 
       case APIPath.editProfile:
-        return "/api/V1/customer/update";
+        return "/api/V1/update-account";
 
       default:
         return "";
@@ -321,7 +315,7 @@ class APIPathHelper {
         return "/api/V1/create-addresses";
 
       case APIPath.updateNonDefaultAddress:
-        return "/rest/V1/update/address/$id";
+        return "/api/V1/update-addresses";
 
       // case APIPath.updateDefaultBillingAddress:
       //   return "/rest/V1/customer/billingadd/update";

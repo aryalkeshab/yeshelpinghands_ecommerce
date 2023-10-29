@@ -15,7 +15,7 @@ abstract class CheckoutRemoteDataSource {
 
   Future<dynamic> setPaymentMethod(String paymentMethod);
 
-  Future<dynamic> placeOrder();
+  Future<dynamic> placeOrder(String billingId, String shippingId);
 
   Future<dynamic> updatePaymentStatus(PaymentStatusUpdateParams params);
 }
@@ -58,9 +58,13 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   }
 
   @override
-  Future placeOrder() {
+  Future placeOrder(String billingId, String shippingId) {
     return apiClient.authPost(
       APIPathHelper.checkoutAPIs(APIPath.placeOrder),
+      data: {
+        "shipping_address_id": shippingId,
+        "billing_address_id": billingId,
+      },
     );
   }
 

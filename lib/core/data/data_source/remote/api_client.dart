@@ -29,7 +29,6 @@ class ApiClient {
         responseHeader: false,
         requestBody: true));
 
-    // handle certificate verification check (for http request)
     (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -104,7 +103,6 @@ class ApiClient {
 
   Future<dynamic> post(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -116,7 +114,7 @@ class ApiClient {
         queryParameters: queryParameters,
         options: options ?? Options(headers: {"requiresToken": false}),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -129,7 +127,6 @@ class ApiClient {
 
   Future<dynamic> authPost(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -141,7 +138,7 @@ class ApiClient {
         queryParameters: queryParameters,
         options: options ?? Options(headers: {"requiresToken": true}),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -154,7 +151,6 @@ class ApiClient {
 
   Future<dynamic> authPut(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -166,7 +162,7 @@ class ApiClient {
         queryParameters: queryParameters,
         options: options ?? Options(headers: {"requiresToken": true}),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -177,10 +173,8 @@ class ApiClient {
     }
   }
 
-  ///ReCaptcha validated POST method
   Future<dynamic> validatedPost(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -197,7 +191,7 @@ class ApiClient {
               'Authorization': 'Bearer $token',
             }),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -208,10 +202,8 @@ class ApiClient {
     }
   }
 
-  ///ReCaptcha validated PUT method
   Future<dynamic> validatedPut(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     String? token,
     Map<String, dynamic>? queryParameters,
@@ -228,7 +220,7 @@ class ApiClient {
               'Authorization': 'Bearer $token',
             }),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -241,7 +233,6 @@ class ApiClient {
 
   Future<dynamic> put(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -253,7 +244,7 @@ class ApiClient {
         queryParameters: queryParameters,
         options: options ?? Options(headers: {"requiresToken": false}),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());
@@ -266,7 +257,6 @@ class ApiClient {
 
   Future<dynamic> authDelete(
     String uri, {
-    // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -278,7 +268,7 @@ class ApiClient {
         queryParameters: queryParameters,
         options: options ?? Options(headers: {"requiresToken": true}),
       );
-      print(response);
+
       return response.data;
     } on SocketException catch (e) {
       throw SocketException(e.toString());

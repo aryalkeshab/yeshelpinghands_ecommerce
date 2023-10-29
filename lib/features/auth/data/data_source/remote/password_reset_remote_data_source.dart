@@ -19,7 +19,6 @@ class PasswordResetRemoteDataSourceImpl
         "email": email,
         "template": "email_reset",
       },
-      token: APIPathHelper.reCaptchaToken,
     );
   }
 }

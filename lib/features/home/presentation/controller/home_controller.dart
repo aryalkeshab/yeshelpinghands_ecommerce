@@ -33,7 +33,7 @@ class HomeController extends GetxController {
     // fetchHomePageTopBanners();
     // final wishlist = Get.find<WishListController>();
     // var wishlistLength = wishlist.wishlistResponse.data;
-    // print("the length is ${wishlistLength}");
+    //
     super.onInit();
   }
 

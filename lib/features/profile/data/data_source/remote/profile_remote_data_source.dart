@@ -20,7 +20,7 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
 
   @override
   Future<dynamic> editProfile(EditProfileParams editProfileParams) async {
-    return apiClient.authPut(APIPathHelper.profileAPIs(APIPath.editProfile),
+    return apiClient.authPost(APIPathHelper.profileAPIs(APIPath.editProfile),
         data: editProfileParams.toJson());
   }
 }

@@ -8,6 +8,6 @@ abstract class CheckoutRepository {
   Future<ApiResponse> fetchOrderSummary();
   Future<ApiResponse> setShippingInfo(ConfirmOrderParams confirmOrderParams);
   Future<ApiResponse> setPaymentMethod(String paymentMethod);
-  Future<ApiResponse> placeOrder();
+  Future<ApiResponse> placeOrder(String billingId, String shippingId);
   Future<ApiResponse> updatePaymentStatus(PaymentStatusUpdateParams params);
 }

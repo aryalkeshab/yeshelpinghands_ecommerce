@@ -66,9 +66,9 @@ class CategoryBody extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: MediaQuery.of(context).size.width / 3,
-                      childAspectRatio: 3.85 / 5,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
+                      childAspectRatio: 3.85 / 4,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20),
                   itemCount: categoryList.length,
                   itemBuilder: (context, index) {
                     final category = categoryList[index];
@@ -78,11 +78,10 @@ class CategoryBody extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             color: theme.primaryColor,
-                            width: 2,
+                            width: 1,
                           )),
                       child: InkWell(
                         onTap: () {
-                          print("here");
                           // Handle the category item tap here
                           selectedCategoryId.value = category.id;
                           Get.toNamed(Routes.productListingScreen,
@@ -95,14 +94,15 @@ class CategoryBody extends StatelessWidget {
                             CustomCachedNetworkImage(
                               isCompleteUrl: true,
                               "${APIPathHelper.baseUrlImage + category.image}",
+                              fit: BoxFit.cover,
                             ),
-                            Divider(),
-                            // config.verticalSpaceSmall(),
-                            Text(category.name,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600))
+                            // Divider(),
+                            // // config.verticalSpaceSmall(),
+                            // Text(category.name,
+                            //     style: TextStyle(
+                            //         color: Colors.black,
+                            //         fontSize: 14,
+                            //         fontWeight: FontWeight.w600))
                           ],
                         ),
                       ),

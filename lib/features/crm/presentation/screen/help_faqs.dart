@@ -18,7 +18,6 @@ class HelpFaqsScreen extends StatelessWidget {
           return BaseWidget(builder: (context, config, theme) {
             final result =
                 Get.find<HelpFaqsController>().helpAndFaqsApiResponse;
-            print(result);
 
             return Scaffold(
                 appBar: AppBar(

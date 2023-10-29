@@ -4,6 +4,7 @@ class AddressParams {
   String? country;
   String? postalCode;
   String? city;
+  String? id;
   // String? phoneNumber;
   // String? company;
   // String? street;
@@ -12,7 +13,8 @@ class AddressParams {
   String? address;
   String? landmark;
 
-  AddressParams({this.postalCode, this.city, this.address, this.landmark});
+  AddressParams(
+      {this.postalCode, this.city, this.address, this.landmark, this.id});
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -21,6 +23,7 @@ class AddressParams {
     map['address'] = address;
     map['postal_code'] = postalCode;
     map['city'] = city;
+    map['id'] = id;
 
     return map;
   }

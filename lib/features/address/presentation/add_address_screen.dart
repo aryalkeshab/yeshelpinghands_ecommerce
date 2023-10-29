@@ -265,13 +265,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                                         "${widget.addressFormParams.address?.id}",
                                         addressParams);
                                 break;
-                              case AddressType.billing:
-                                Get.find<AddressController>()
-                                    .updateNonDefaultAddress(
-                                        context,
-                                        "${widget.addressFormParams.address?.id}",
-                                        addressParams);
-                                break;
 
                               default:
                                 Get.find<AddressController>()

@@ -100,12 +100,13 @@ class CheckoutRepositoryImpl implements CheckoutRepository {
   }
 
   @override
-  Future<ApiResponse> placeOrder() async {
+  Future<ApiResponse> placeOrder(String billingId, String shippingId) async {
     if (await networkInfo.isConnected) {
       try {
-        final result = await checkoutRemoteDataSource.placeOrder();
+        final result =
+            await checkoutRemoteDataSource.placeOrder(billingId, shippingId);
 
-        return ApiResponse(data: OrderPlaceResult.fromJson(result[0]));
+        return ApiResponse(data: result['message']);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
       }

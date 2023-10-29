@@ -126,7 +126,6 @@ class ProfileScreen extends StatelessWidget {
                                                 Get.find<AuthController>()
                                                     .logout();
                                                 Get.until((route) {
-                                                  print(route);
                                                   return route.settings.name ==
                                                       Routes.dashboard;
                                                 });

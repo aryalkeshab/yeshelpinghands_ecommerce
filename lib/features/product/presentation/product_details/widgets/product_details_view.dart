@@ -84,12 +84,8 @@ class ProductDetailsView extends StatelessWidget {
                   isCompleteUrl: false, fit: BoxFit.contain),
               // resetDuration: const Duration(milliseconds: 100),
               maxScale: 2.5,
-              onZoomStart: () {
-                print('Start zooming');
-              },
-              onZoomEnd: () {
-                print('Stop zooming');
-              },
+              onZoomStart: () {},
+              onZoomEnd: () {},
             ),
             Positioned(
               top: 50,

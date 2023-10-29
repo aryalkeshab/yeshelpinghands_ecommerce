@@ -153,7 +153,7 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                                       Text.rich(
                                         TextSpan(children: [
                                           TextSpan(
-                                            text: "Grand Total : ",
+                                            text: "Grand total : ",
                                             style: theme.textTheme.bodyText1
                                                 ?.copyWith(color: Colors.grey),
                                           ),

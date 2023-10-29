@@ -81,7 +81,7 @@ class ProductListingAppBar extends StatelessWidget
                       border: Border.all(
                         color: grey500,
                       ),
-                      borderRadius: BorderRadius.circular(20)),
+                      borderRadius: BorderRadius.circular(5)),
                   child: Row(
                     // ignore: avoid_redundant_argument_values
                     crossAxisAlignment: CrossAxisAlignment.center,

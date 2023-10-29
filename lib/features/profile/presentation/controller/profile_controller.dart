@@ -44,7 +44,8 @@ class ProfileController extends GetxController {
     final result = await Get.find<ProfileRepository>().editProfile(
         EditProfileParams(
             name: registerParams.name,
-            contactNumber: registerParams.contactNumber));
+            contactNumber: registerParams.contactNumber,
+            userName: registerParams.username));
 
     hideLoadingDialog(context);
     if (result.hasData) {

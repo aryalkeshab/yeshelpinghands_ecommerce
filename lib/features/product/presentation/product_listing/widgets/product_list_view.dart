@@ -16,7 +16,6 @@ class ProductListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
     return GridView.builder(
       physics: const BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

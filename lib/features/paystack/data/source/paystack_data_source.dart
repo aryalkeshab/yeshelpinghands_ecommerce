@@ -18,7 +18,7 @@ class PaystackDataSourceImpl extends PaystackDataSource {
   @override
   Future initiateTransaction(PaystackInitiateParams params) async {
     final secret = dotenv.env['PAYSTACK_KEY'];
-    print(secret);
+
     final response = await dio.post(
       APIPathHelper.paymentAPIs(APIPath.paystackTransactionInitiate),
       data: params.toJson(),

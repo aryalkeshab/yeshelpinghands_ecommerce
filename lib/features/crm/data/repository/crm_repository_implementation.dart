@@ -20,7 +20,7 @@ class CRMRepositoryImpl implements CRMRepository {
       try {
         final result = await crmRemoteDataSource.getCRMDescription(id);
         final crmData = CRMModels.fromJson(result);
-        print(crmData);
+
         return ApiResponse(data: crmData);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

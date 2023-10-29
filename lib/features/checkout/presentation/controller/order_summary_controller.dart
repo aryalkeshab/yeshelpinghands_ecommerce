@@ -39,11 +39,15 @@ class OrderSummaryController extends GetxController {
   placeOrder(
       BuildContext context, ConfirmOrderParams confirmOrderParams) async {
     showLoadingDialog(context);
-    final result = await Get.find<CheckoutRepository>().placeOrder();
+    String? shippingAddressId =
+        confirmOrderParams.shippingAddress?.id.toString();
+    String? billingAddressId = confirmOrderParams.billingAddress?.id.toString();
+    final result = await Get.find<CheckoutRepository>()
+        .placeOrder(billingAddressId!, shippingAddressId!);
     hideLoadingDialog(context);
     if (result.hasData) {
       Get.find<CartController>().getCartDetails();
-      final OrderPlaceResult orderResult = result.data;
+      // final OrderPlaceResult orderResult = result.data;
 
       showDialog(context: context, builder: (context) => OrderSuccessDialog());
       Get.find<CartController>().getCartDetails();

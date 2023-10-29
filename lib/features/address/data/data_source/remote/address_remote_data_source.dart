@@ -57,9 +57,12 @@ class AddressRemoteDataSourceImpl extends AddressRemoteDataSource {
 
   @override
   Future updateNonDefaultAddress(String id, AddressParams addressParams) {
+    addressParams.id = id;
     return apiClient.authPut(
-        APIPathHelper.addressAPIs(APIPath.updateNonDefaultAddress, id: id),
-        data: addressParams.toJson());
+        APIPathHelper.addressAPIs(
+          APIPath.updateNonDefaultAddress,
+        ),
+        queryParameters: addressParams.toJson());
   }
 
   @override

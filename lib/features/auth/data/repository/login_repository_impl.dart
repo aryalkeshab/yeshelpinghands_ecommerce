@@ -36,7 +36,6 @@ class LoginRepositoryImpl extends LoginRepository {
         return ApiResponse(data: response['message']);
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
-          print(e.response?.data);
           return ApiResponse(
               error: NetworkException.defaultError(
                   value: e.response?.data['message'] ?? ''));
@@ -62,7 +61,6 @@ class LoginRepositoryImpl extends LoginRepository {
         return ApiResponse(data: response[0]['message']);
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
-          print(e.response?.data);
           return ApiResponse(
               error: NetworkException.defaultError(
                   value: e.response?.data['message'] ?? ''));

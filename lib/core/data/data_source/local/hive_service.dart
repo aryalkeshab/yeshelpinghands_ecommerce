@@ -28,6 +28,5 @@ class HiveService {
   ) async {
     final box = await Hive.openBox(boxName);
     await box.delete(key);
-    print(box.keys);
   }
 }

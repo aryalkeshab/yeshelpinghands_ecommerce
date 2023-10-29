@@ -57,7 +57,7 @@ class HomeBannerController extends GetxController {
   ApiResponse get singleBannerResponse => _singleBannerResponse;
 
   // getSingleBanner() async {
-  //   print("!!!!!!!!!!!!!!!!!!!!!!!");
+  //
   //   singleBannerResponse =
   //       await Get.find<BannerRepository>().fetchSingleBanner();
   // }

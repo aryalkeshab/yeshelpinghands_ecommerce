@@ -32,7 +32,6 @@ class ReviewFormBuilder extends StatelessWidget {
                 SelectableRatingBar(
                   title: "Price",
                   onRatingSelection: (rating) {
-                    print(rating);
                     Get.find<ReviewController>().reviewParams.priceRating =
                         rating.toInt();
                   },

@@ -66,10 +66,17 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
         onProceed: () {
           final formKey = Get.find<ShippingAddressController>().shippingKey;
           final controller = Get.find<AddressController>();
-          // Get.toNamed(Routes.paymentScreen,
-          //     arguments: widget.confirmOrderParams);
+          if (controller.addressResponse.hasData) {
+            controller.selectedShippingAddress =
+                controller.addressResponse.data[0];
+            controller.selectedBillingAddress =
+                controller.addressResponse.data[0];
+            Get.find<ShippingAddressController>()
+                .setCheckoutShippingInfo(context, widget.confirmOrderParams);
+          }
           if (formKey.currentState?.validate() == true) {
             formKey.currentState!.save();
+
             if (controller.selectedBillingAddress != null &&
                 controller.selectedShippingAddress != null) {
               widget.confirmOrderParams.shippingAddress =
@@ -151,7 +158,12 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                                 },
                                                 items: addresses,
                                                 value: controller
-                                                    .selectedShippingAddress,
+                                                                .selectedShippingAddress ==
+                                                            null &&
+                                                        addresses.length > 0
+                                                    ? addresses[0]
+                                                    : controller
+                                                        .selectedShippingAddress,
                                                 onChanged: (value) {
                                                   controller
                                                           .selectedShippingAddress =
@@ -192,7 +204,12 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                                 },
                                                 items: addresses,
                                                 value: controller
-                                                    .selectedBillingAddress,
+                                                                .selectedBillingAddress ==
+                                                            null &&
+                                                        addresses.length > 0
+                                                    ? addresses[0]
+                                                    : controller
+                                                        .selectedBillingAddress,
                                                 onChanged: (value) {
                                                   controller
                                                           .selectedBillingAddress =

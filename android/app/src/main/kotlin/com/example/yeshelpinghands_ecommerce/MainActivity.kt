@@ -1,4 +1,4 @@
-package com.example.yeshelpinghands_ecommerce
+package com.yhh.yeshelpinghands_ecommerce
 
 import io.flutter.embedding.android.FlutterActivity
 

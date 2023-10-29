@@ -103,7 +103,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         selectedIndex: getSelectedIndexOfStockStatus(),
                         availability: filter.availability,
                         onStockUpdate: (isInStockSelected) {
-                          print(isInStockSelected);
                           if (isInStockSelected) {
                             selectedFilterParams
                               ..inStock = true
@@ -124,10 +123,9 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 .filterQueryParams
                                 .categoryId = selectedFilterParams.categoryId;
                           } else {
-                            print("here...");
-                            print(Get.find<FilterDrawerController>()
+                            Get.find<FilterDrawerController>()
                                 .filterQueryParams
-                                .categoryId);
+                                .categoryId;
                           }
                           Get.find<FilterDrawerController>()
                               .filterQueryParams

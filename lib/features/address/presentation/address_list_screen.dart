@@ -3,6 +3,7 @@ import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
 import 'package:yeshelpinghand/features/address/presentation/add_address_screen.dart';
 import 'package:yeshelpinghand/features/address/presentation/controller/address_controller.dart';
 import 'package:yeshelpinghand/features/address/presentation/utils/address_book_type_enum.dart';
+import 'package:yeshelpinghand/features/address/presentation/utils/address_form_type_enum.dart';
 import 'package:yeshelpinghand/features/address/presentation/utils/address_type_enum.dart';
 import 'package:yeshelpinghand/features/address/presentation/widgets/address_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,16 +53,26 @@ class AddressListScreen extends StatelessWidget {
                               itemCount: defaultAddresses.length,
                               itemBuilder: (context, index) {
                                 final address = defaultAddresses[index];
-                                return AddressCard(
-                                  // addressType: AddressType.shipping,
-                                  address: address,
-                                  // isSelectable: addressBookType ==
-                                  //     AddressBookType.selectable,
-                                  onPressed: (selectedAddress) {
-                                    selectedAddressId.value =
-                                        "${selectedAddress.id}";
-                                    Get.back(result: selectedAddress);
+                                return InkWell(
+                                  onTap: () {
+                                    Get.toNamed(Routes.addAddress,
+                                        arguments: AddressFormParams(
+                                            addressType: AddressType.shipping,
+                                            addressFormType:
+                                                AddressFormType.edit,
+                                            address: address));
                                   },
+                                  child: AddressCard(
+                                    // addressType: AddressType.shipping,
+                                    address: address,
+                                    // isSelectable: addressBookType ==
+                                    //     AddressBookType.selectable,
+                                    onPressed: (selectedAddress) {
+                                      selectedAddressId.value =
+                                          "${selectedAddress.id}";
+                                      Get.back(result: selectedAddress);
+                                    },
+                                  ),
                                 );
                               },
                             );
