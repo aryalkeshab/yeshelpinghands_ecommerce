@@ -10,10 +10,6 @@ import 'package:yeshelpinghand/features/checkout/data/model/response/order_place
 import 'package:yeshelpinghand/features/checkout/domain/repository/checkout_repository.dart';
 import 'package:get/get.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/screen/order_success_screen.dart';
-import 'package:yeshelpinghand/features/paystack/data/model/request/paystack_initate_params.dart';
-import 'package:yeshelpinghand/features/paystack/domain/paystack_repository.dart';
-import 'package:yeshelpinghand/features/paystack/presentation/controller/paystack_controller.dart';
-import 'package:yeshelpinghand/features/paystack/presentation/paystack_screen.dart';
 
 class OrderSummaryController extends GetxController {
   @override

@@ -21,5 +21,5 @@ abstract class ProductsRepository {
   Future<ApiResponse> getNewArrivalProducts(
       FilterQueryParams filterQueryParams);
 
-  Future<ApiResponse> getFilterModel(String id);
+  // Future<ApiResponse> getFilterModel(String id);
 }

@@ -5,13 +5,13 @@ class ProductDetails {
   String? sku;
   String? thumbnail;
   int? inventory;
-  String? price;
-  String? offerPrice;
+  double? price;
+  double? offerPrice;
   String? description;
   String? createdAt;
   String? category;
   String? brand;
-  String? computedPrice;
+  double? computedPrice;
   bool? isWishlist;
   bool? isCart;
   int? avgRating;
@@ -47,13 +47,17 @@ class ProductDetails {
     sku = json['sku'];
     thumbnail = json['thumbnail'];
     inventory = json['inventory'];
-    price = json['price'];
-    offerPrice = json['offer_price'];
+    price = json['price'] != null ? double.parse(json['price']) : 0.0;
+    offerPrice =
+        json['offer_price'] != null ? double.parse(json['offer_price']) : 0.0;
     description = json['description'];
     createdAt = json['created_at'];
     category = json['category'];
     brand = json['brand'];
-    computedPrice = json['computed_price'];
+    computedPrice = json['computed_price'] != null
+        ? double.parse(json['computed_price'])
+        : 0.0;
+
     isWishlist = json['is_wishlist'] == 1 ? true : false;
     avgRating = json['avg_rating'];
     inStock = json['in_stock'] == 1 ? true : false;

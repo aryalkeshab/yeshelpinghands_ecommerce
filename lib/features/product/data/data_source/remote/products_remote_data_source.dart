@@ -17,7 +17,7 @@ abstract class ProductRemoteDataSource {
 
   Future<dynamic> getNewArrivalProducts(FilterQueryParams filterQueryParams);
 
-  Future<dynamic> getFilterModel(String id);
+  // Future<dynamic> getFilterModel(String id);
 }
 
 class ProductsRemoteDataSourceImpl implements ProductRemoteDataSource {
@@ -73,13 +73,13 @@ class ProductsRemoteDataSourceImpl implements ProductRemoteDataSource {
     );
   }
 
-  @override
-  Future getFilterModel(String id) {
-    return apiClient.get(
-      APIPathHelper.productAPIs(
-        APIPath.filterModel,
-        id: id,
-      ),
-    );
-  }
+  // @override
+  // Future getFilterModel(String id) {
+  //   return apiClient.get(
+  //     APIPathHelper.productAPIs(
+  //       APIPath.filterModel,
+  //       id: id,
+  //     ),
+  //   );
+  // }
 }

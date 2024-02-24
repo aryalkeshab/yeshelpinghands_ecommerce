@@ -36,8 +36,13 @@ class ProductListingAppBar extends StatelessWidget
                 onSortParamSelect: (sortParam) {
                   onSortUpdate(
                     (FilterQueryParams filterQueryParams) {
-                      filterQueryParams.order ??= SortOrder.asc.value;
+                      // filterQueryParams.order ??= SortOrder.asc.value;
                       filterQueryParams.sort = sortParam.value;
+                      // if (filterQueryParams.order == SortParameter.bestSeller) {
+                      //   filterQueryParams.bestSeller = true;
+                      // } else if {
+
+                      // }
                       return filterQueryParams;
                     },
                   );
@@ -45,8 +50,8 @@ class ProductListingAppBar extends StatelessWidget
                 onSortOrderSelect: (order) {
                   onSortUpdate(
                     (FilterQueryParams filterQueryParams) {
-                      filterQueryParams.sort ??= SortParameter.position.value;
-                      filterQueryParams.order = order.value;
+                      // filterQueryParams.sort ??= SortParameter.position.value;
+                      // filterQueryParams.order = order.value;
                       return filterQueryParams;
                     },
                   );
@@ -166,10 +171,11 @@ class _SortHeading extends StatefulWidget {
 }
 
 class _SortHeadingState extends State<_SortHeading> {
-  SortParameter sortParameter = SortParameter.position;
+  SortParameter sortParameter = SortParameter.values.first;
 
   @override
   Widget build(BuildContext context) {
+    // final selectedValue =widget.filterQueryParams;
     return BaseWidget(builder: (context, config, theme) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
@@ -193,6 +199,7 @@ class _SortHeadingState extends State<_SortHeading> {
                       color: Colors.white,
                     ),
                     elevation: 0,
+                    hint: Text("Sort"),
                     itemHeight: kMinInteractiveDimension,
                     underline: const SizedBox.shrink(),
                     borderRadius: BorderRadius.circular(5),
@@ -209,7 +216,7 @@ class _SortHeadingState extends State<_SortHeading> {
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        sortParameter = value ?? SortParameter.position;
+                        sortParameter = value ?? SortParameter.bestSeller;
                       });
                       widget.onSortParamSelect(sortParameter);
                     },
@@ -280,32 +287,47 @@ extension SortOrderExtension on SortOrder {
   }
 }
 
-enum SortParameter { position, name, price }
+enum SortParameter {
+  latestProduct,
+  bestSeller,
+  priceLowToHigh,
+  priceHighToLow,
+  mostReviewed,
+  // position,
+}
 
 extension SortParametersExt on SortParameter {
   String get name {
     switch (this) {
-      case SortParameter.position:
-        return "Position";
-      case SortParameter.name:
-        return "Name";
-      case SortParameter.price:
-        return "Price";
+      case SortParameter.latestProduct:
+        return "Latest Products";
+      case SortParameter.bestSeller:
+        return "Best Sellers";
+      case SortParameter.priceLowToHigh:
+        return "Price Low to High";
+      case SortParameter.priceHighToLow:
+        return "Price High to Low";
+      case SortParameter.mostReviewed:
+        return "Most Reviewed";
       default:
-        return "Position";
+        return "pricelow";
     }
   }
 
   String get value {
     switch (this) {
-      case SortParameter.position:
-        return "created_at";
-      case SortParameter.name:
-        return "name";
-      case SortParameter.price:
-        return "price";
+      case SortParameter.latestProduct:
+        return "new";
+      case SortParameter.bestSeller:
+        return "trending";
+      case SortParameter.priceLowToHigh:
+        return "pricelow";
+      case SortParameter.priceHighToLow:
+        return "pricehigh";
+      case SortParameter.mostReviewed:
+        return "featured";
       default:
-        return "created_at";
+        return "pricelow";
     }
   }
 }

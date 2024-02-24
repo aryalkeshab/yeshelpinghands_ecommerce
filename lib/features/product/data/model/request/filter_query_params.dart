@@ -36,17 +36,15 @@ class FilterQueryParams {
     if (searchQuery != null && searchQuery!.isNotEmpty) {
       map['search'] = searchQuery.toString();
     }
-    // map["page"] = pageSize.toString();
-    // map["current_page"] = currentPage.toString();
-    if (categoryId != null) map['categoryId'] = categoryId.toString();
 
     if (brandId != null) map['brandId'] = brandId.toString();
     if (categoryId != null) map['category_id'] = categoryId.toString();
-    // if (topRated != null) map['featured'] = 1;
-    // if (bestSeller != null) map['trending'] = 1;
-    // if (topDeals != null) map['new'] = 1;
-    if (sort != null) map['sort'] = sort;
-    if (order != null) map['order'] = order;
+
+    if (topRated != null && sort != null) map['featured'] = 1;
+    if (bestSeller != null && sort != null) map['trending'] = 1;
+    if (topDeals != null && sort != null) map['new'] = 1;
+    if (sort != null) map[sort.toString()] = 1;
+
     if (minPrice != null) map['min_price'] = minPrice;
     if (maxPrice != null) map['max_price'] = maxPrice;
     if (inStock != null) map['instock'] = true;

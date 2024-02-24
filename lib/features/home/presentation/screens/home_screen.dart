@@ -40,7 +40,9 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Color.fromARGB(255, 198, 184, 184),
+        backgroundColor: Colors.transparent,
+        elevation: 2,
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -124,9 +126,12 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        bottom: HomeAppBarBottomSection(onSearchBarPressed: () {
-          Get.toNamed(Routes.search);
-        }),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50.0), // Adjust the height as needed
+          child: HomeAppBarBottomSection(onSearchBarPressed: () {
+            Get.toNamed(Routes.search);
+          }),
+        ),
       ),
       body: GetBuilder<HomeController>(builder: (controller) {
         return BaseWidget(builder: (context, config, theme) {
@@ -147,15 +152,15 @@ class HomeScreen extends StatelessWidget {
                   HomeCarousal(),
                   // config.verticalSpaceLarge(),
                   // const FeaturedCategorySection(),
-                  config.verticalSpaceLarge(),
+                  config.verticalSpaceSmall(),
                   const TopRatedProductsSection(),
-                  config.verticalSpaceLarge(),
+                  config.verticalSpaceSmall(),
                   const MultiBannerView(),
-                  config.verticalSpaceLarge(),
+                  config.verticalSpaceSmall(),
                   const BestSellerSection(),
-                  config.verticalSpaceLarge(),
+                  config.verticalSpaceSmall(),
                   const TopDealProductsSection(),
-                  config.verticalSpaceMedium(),
+                  // config.verticalSpaceMedium(),
                   // const SingleBannerView(),
                   // config.verticalSpaceLarge(),
                   // const HomeBrandSection(),

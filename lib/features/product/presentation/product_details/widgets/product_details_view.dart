@@ -7,7 +7,6 @@ import 'package:yeshelpinghand/features/cart/data/model/response/cart_details.da
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
 import 'package:yeshelpinghand/features/dashboard/controllers/dashboard_controller.dart';
 import 'package:yeshelpinghand/features/product/presentation/controller/product_details_controller.dart';
-import 'package:yeshelpinghand/features/product_compare/presentation/controller/compare_products_controller.dart';
 import 'package:yeshelpinghand/features/reviews/presentation/screens/widgets/review_form_builder.dart';
 import 'package:yeshelpinghand/features/shared/layouts/auth_widget_wrapper.dart';
 import 'package:yeshelpinghand/features/shared/layouts/product_card.dart';
@@ -25,7 +24,6 @@ import '../../../../../core/utils/number_parser.dart';
 import '../../../../../core/utils/string_capitalize.dart';
 import '../../../../cart/presentation/screen/cart_screen.dart';
 import '../../../../cart/presentation/screen/empty_cart_screen.dart';
-import '../../../../product_compare/data/model/compare_product_local_params.dart';
 import '../../../../reviews/presentation/screens/widgets/product_reviews_ratings.dart';
 import '../../../data/model/response/product_details.dart';
 
@@ -101,43 +99,6 @@ class ProductDetailsView extends StatelessWidget {
                   )),
             )
           ],
-        );
-        var boxsized = MediaQuery.of(context).size;
-        return SafeArea(
-          child: Container(
-            width: boxsized.width,
-            height: boxsized.height,
-            padding: const EdgeInsets.all(20),
-            // color: backgroundDark,
-            //Colors.white,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 300),
-                  child: SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        // _transformationController.hasListeners == false
-                        //     ? Navigator.of(context).pop()
-                        //     : _handleDoubleTap();
-
-                        Navigator.of(context).pop();
-                        _transformationController.value = Matrix4.identity();
-                      },
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
         );
       },
     );
@@ -318,9 +279,9 @@ class ProductDetailsView extends StatelessWidget {
                         images: List.generate(
                             productDetails.additionalImages!.length, (i) {
                           return InkWell(
-                              onTap: () => _displayDialog(
-                                  "${productDetails.additionalImages?[i].image}",
-                                  context),
+                              // onTap: () => _displayDialog(
+                              //     "${productDetails.additionalImages?[i].image}",
+                              //     context),
                               child: CustomCachedNetworkImage(
                                   isCompleteUrl: false,
                                   "${productDetails.additionalImages?[i].image}"));
@@ -343,6 +304,15 @@ class ProductDetailsView extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.headline6
                               ?.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        config.verticalSpaceSmall(),
+
+                        Text(
+                          "${productDetails.description}",
+                          // maxLines: 2,
+                          textAlign: TextAlign.justify,
+                          style: theme.textTheme.headline6
+                              ?.copyWith(fontWeight: FontWeight.w200),
                         ),
                         config.verticalSpaceMedium(),
                         Row(
@@ -375,7 +345,8 @@ class ProductDetailsView extends StatelessWidget {
                         ),
                         config.verticalSpaceMedium(),
                         Visibility(
-                          visible: productDetails.inventory! > 0 ? true : false,
+                          visible:
+                              productDetails.inventory! > 10 ? true : false,
                           child: Column(
                             children: [
                               Text(
@@ -387,11 +358,43 @@ class ProductDetailsView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Text(
-                          "$currency ${NumberParser.twoDecimalDigit(productDetails.price)}",
-                          style: theme.textTheme.headline6
-                              ?.copyWith(fontWeight: FontWeight.w900),
+                        Row(
+                          children: [
+                            if (productDetails.offerPrice! > 0 &&
+                                productDetails.offerPrice! <
+                                    productDetails.price!)
+                              Text(
+                                "$currency ${NumberParser.twoDecimalDigit(productDetails.offerPrice.toString())}",
+                                style: theme.textTheme.bodyText1?.copyWith(
+                                  color: primaryColor2,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            config.horizontalSpaceSmall(),
+                            Text(
+                              "$currency ${NumberParser.twoDecimalDigit(productDetails.price.toString())}",
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.bodyText1?.copyWith(
+                                  color: productDetails.offerPrice! > 0 &&
+                                          productDetails.offerPrice! <
+                                              productDetails.price!
+                                      ? Colors.black54
+                                      : primaryColor2,
+                                  fontSize: productDetails.offerPrice! > 0 &&
+                                          productDetails.offerPrice! <
+                                              productDetails.price!
+                                      ? 12
+                                      : 14,
+                                  fontWeight: FontWeight.w600,
+                                  decoration: productDetails.offerPrice! > 0 &&
+                                          productDetails.offerPrice! <
+                                              productDetails.price!
+                                      ? TextDecoration.lineThrough
+                                      : TextDecoration.none),
+                            ),
+                          ],
                         ),
+
                         config.verticalSpaceMedium(),
                         Row(
                           children: [

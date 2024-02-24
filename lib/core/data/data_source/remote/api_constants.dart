@@ -15,10 +15,10 @@ enum APIPath {
   products,
   productDetail,
   allProducts,
-  productCompare,
-  deleteCompareProduct,
-  addCompareProduct,
-  filterModel,
+  // productCompare,
+  // deleteCompareProduct,
+  // addCompareProduct,
+  // filterModel,
 
   /* Checkout */
   shippingMethods,
@@ -143,7 +143,7 @@ class APIPathHelper {
   }) {
     switch (path) {
       case APIPath.brands:
-        return "/rest/V1/brands";
+        return "/api/V1/brands";
 
       default:
         return "";
@@ -164,17 +164,17 @@ class APIPathHelper {
       case APIPath.productDetail:
         return "/api/V1/view-product/$keyword";
 
-      case APIPath.productCompare:
-        return "/rest/V1/comparelist";
+      // case APIPath.productCompare:
+      //   return "/rest/V1/comparelist";
 
-      case APIPath.deleteCompareProduct:
-        return "/rest/V1/compare/remove/$id";
+      // case APIPath.deleteCompareProduct:
+      //   return "/rest/V1/compare/remove/$id";
 
-      case APIPath.addCompareProduct:
-        return "/rest/V1/compare/add/$id";
+      // case APIPath.addCompareProduct:
+      //   return "/rest/V1/compare/add/$id";
 
-      case APIPath.filterModel:
-        return "/rest/V1/categories/$id/subcategories";
+      // case APIPath.filterModel:
+      //   return "/rest/V1/categories/$id/subcategories";
 
       default:
         return "";
@@ -380,9 +380,6 @@ class APIPathHelper {
     switch (path) {
       case APIPath.category:
         return "/api/V1/get-categories";
-
-      case APIPath.register:
-        return "/products/$id";
 
       default:
         return "";

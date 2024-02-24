@@ -62,12 +62,13 @@ class _ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, config, theme) {
       return Container(
+        alignment: Alignment.topCenter,
         width: type == _ProductCardType.large ? 150 : 115,
         decoration: BoxDecoration(
           border: Border.all(
               color: decorationColor ?? Colors.grey.withOpacity(0.0)),
           borderRadius: BorderRadius.circular(4),
-          color: Colors.white,
+          // color: Colors.white,
         ),
         child: Stack(
           children: [
@@ -80,7 +81,10 @@ class _ProductCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    height: type == _ProductCardType.large ? 140 : 98,
+                    height: (productModel.offerPrice! > 0 &&
+                            productModel.offerPrice! < productModel.price!)
+                        ? (type == _ProductCardType.large ? 140 : 98)
+                        : (type == _ProductCardType.large ? 140 : 115),
                     child: CustomCachedNetworkImage(
                       isCompleteUrl: false,
                       productModel.thumbnail,
@@ -101,20 +105,8 @@ class _ProductCard extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        config.verticalSpaceVerySmall(),
-                        Text(
-                          "$currency ${NumberParser.twoDecimalDigit(productModel.price.toString())}",
-                          style: theme.textTheme.bodyText1?.copyWith(
-                              color: primaryColor2,
-                              fontWeight: FontWeight.w600,
-                              decoration: productModel.offerPrice > 0 &&
-                                      productModel.offerPrice <
-                                          productModel.price
-                                  ? TextDecoration.lineThrough
-                                  : TextDecoration.none),
-                        ),
-                        if (productModel.offerPrice > 0 &&
-                            productModel.offerPrice < productModel.price)
+                        if (productModel.offerPrice! > 0 &&
+                            productModel.offerPrice! < productModel.price!)
                           Text(
                             "$currency ${NumberParser.twoDecimalDigit(productModel.offerPrice.toString())}",
                             style: theme.textTheme.bodyText1?.copyWith(
@@ -122,14 +114,32 @@ class _ProductCard extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                        if (productModel.offerPrice > 0 &&
-                            productModel.offerPrice < productModel.price)
-                          config.verticalSpaceMedium(),
+                        config.verticalSpaceVerySmall(),
+                        Text(
+                          "$currency ${NumberParser.twoDecimalDigit(productModel.price.toString())}",
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodyText1?.copyWith(
+                              color: productModel.offerPrice! > 0 &&
+                                      productModel.offerPrice! <
+                                          productModel.price!
+                                  ? Colors.black54
+                                  : primaryColor2,
+                              fontSize: productModel.offerPrice! > 0 &&
+                                      productModel.offerPrice! <
+                                          productModel.price!
+                                  ? 12
+                                  : 14,
+                              fontWeight: FontWeight.w600,
+                              decoration: productModel.offerPrice! > 0 &&
+                                      productModel.offerPrice! <
+                                          productModel.price!
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none),
+                        ),
+
                         // config.verticalSpaceVerySmall(),
-                        // ProductEmi(
-                        //   price: price,
-                        // ),
-                        // config.verticalSpaceVerySmall(),
+
+                        // // config.verticalSpaceVerySmall(),
                       ],
                     ),
                   ),

@@ -28,8 +28,8 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
   @override
   void initState() {
     super.initState();
-    Get.put(FilterDrawerController())
-        .fetchFilterModel(widget.filterQueryParams);
+    // Get.put(FilterDrawerController())
+    //     .fetchFilterModel(widget.filterQueryParams);
   }
 
   @override
@@ -38,22 +38,16 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
       // endDrawerEnableOpenDragGesture: false,
       endDrawer: FilterDrawer(
         onClearFilter: () {
-          final filterController = Get.find<FilterDrawerController>();
-          filterController.clearFilter();
-          widget.filterQueryParams = filterController.filterQueryParams;
-          Get.find<ProductListingController>()
-              .onProductsFilter(context, widget.filterQueryParams);
+          Get.find<ProductListingController>().minPrice = null;
+          Get.find<ProductListingController>().maxPrice = null;
         },
-        () {
-          widget.filterQueryParams =
-              Get.find<FilterDrawerController>().filterQueryParams;
-          Get.find<ProductListingController>()
-              .onProductsFilter(context, widget.filterQueryParams);
-        },
+        () {},
+        filterQueryParams: widget.filterQueryParams,
       ),
       appBar: ProductListingAppBar(
         onSortUpdate: (onUpdateParams) {
           widget.filterQueryParams = onUpdateParams(widget.filterQueryParams);
+
           Get.find<ProductListingController>()
               .onProductsFilter(context, widget.filterQueryParams);
         },

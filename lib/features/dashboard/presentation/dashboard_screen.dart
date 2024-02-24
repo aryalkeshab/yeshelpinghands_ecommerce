@@ -77,11 +77,13 @@ class DashboardScreen extends StatelessWidget {
             selectedItemColor: const Color(0xFFff8201),
             onTap: Get.find<DashboardController>().changeTabIndex,
             currentIndex: Get.find<DashboardController>().tabIndex,
-            showSelectedLabels: false,
+            showSelectedLabels: true,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,
-            // selectedLabelStyle: TextStyle(color: Colors.black),
+            selectedLabelStyle: TextStyle(
+              color: const Color(0xFFff8201),
+            ),
             elevation: 0,
             items: [
               _bottomNavigationBarItem(

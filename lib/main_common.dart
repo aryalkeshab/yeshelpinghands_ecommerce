@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:yeshelpinghand/core/presentation/resources/app_theme.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/core/presentation/translation/language.dart';
-import 'package:yeshelpinghand/features/product_compare/data/model/compare_product_local_params.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,16 +11,12 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'core/utils/constants.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> mainCommon() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
-  Hive.registerAdapter(CompareProductLocalParamsAdapter());
-
-  await dotenv.load(fileName: "assets/.env", mergeWith: Platform.environment);
 }
 
 class Application extends StatelessWidget {

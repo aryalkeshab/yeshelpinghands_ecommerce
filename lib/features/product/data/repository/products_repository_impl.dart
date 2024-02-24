@@ -180,19 +180,19 @@ class ProductsRepositoryImpl implements ProductsRepository {
     }
   }
 
-  @override
-  Future<ApiResponse> getFilterModel(String id) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await productsRemoteDataSource.getFilterModel(id);
+  // @override
+  // Future<ApiResponse> getFilterModel(String id) async {
+  //   if (await networkInfo.isConnected) {
+  //     try {
+  //       final result = await productsRemoteDataSource.getFilterModel(id);
 
-        final filterModel = FilterDrawerModel.fromJson(result[0]);
-        return ApiResponse(data: filterModel);
-      } catch (e) {
-        return ApiResponse(data: FilterDrawerModel.init());
-      }
-    } else {
-      return ApiResponse(error: NetworkException.noInternetConnection());
-    }
-  }
+  //       final filterModel = FilterDrawerModel.fromJson(result[0]);
+  //       return ApiResponse(data: filterModel);
+  //     } catch (e) {
+  //       return ApiResponse(data: FilterDrawerModel.init());
+  //     }
+  //   } else {
+  //     return ApiResponse(error: NetworkException.noInternetConnection());
+  //   }
+  // }
 }

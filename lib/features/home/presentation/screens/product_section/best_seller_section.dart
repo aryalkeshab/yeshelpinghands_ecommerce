@@ -78,7 +78,7 @@ class BestSellerSection extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(5.0),
               child: ShimmerWidget.rounded(
-                  height: 150, width: 130, borderRadius: 5),
+                  height: 150, width: 120, borderRadius: 5),
             );
           }),
         );

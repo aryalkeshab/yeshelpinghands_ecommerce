@@ -59,11 +59,13 @@ class MyTextWidget extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           Text(
+            textAlign: TextAlign.justify,
             'Bringing you the pure and authentic collections of natural and classic cashmere product, made with love from differently-abled people of Nepal!',
             style: TextStyle(fontSize: 16.0),
           ),
           SizedBox(height: 16.0),
           Text(
+            textAlign: TextAlign.justify,
             'Pokhara is lovely, a beautiful place, and a visit to Yes Helping Hands (YHH) Handicrafts should be a part of a visit. YHH for over 8 years has supported, trained and employed deaf, blind and disabled people. Money raised also goes to Deaf and Blind schools, and the relevant associations in Nepal.',
             style: TextStyle(fontSize: 16.0),
           ),

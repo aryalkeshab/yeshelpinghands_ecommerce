@@ -32,11 +32,8 @@ import 'package:yeshelpinghand/features/on_boarding/presentation/intro/language_
 import 'package:yeshelpinghand/features/order/di/order_binding.dart';
 import 'package:yeshelpinghand/features/order/presentation/order_history_details_screen.dart';
 import 'package:yeshelpinghand/features/order/presentation/order_history_screen.dart';
-import 'package:yeshelpinghand/features/paystack/di/paystack_bindings.dart';
-import 'package:yeshelpinghand/features/paystack/presentation/paystack_screen.dart';
 import 'package:yeshelpinghand/features/product/di/product_binding.dart';
 import 'package:yeshelpinghand/features/product/presentation/product_listing/product_listing_screen.dart';
-import 'package:yeshelpinghand/features/product_compare/di/compare_product_bindings.dart';
 import 'package:yeshelpinghand/features/profile/di/profile_bindings.dart';
 import 'package:yeshelpinghand/features/profile/presentation/screen/account_details_screen.dart';
 import 'package:yeshelpinghand/features/profile/presentation/screen/profile_screen.dart';
@@ -55,7 +52,6 @@ import '../../../features/checkout/presentation/screen/payement_selection_screen
 import '../../../features/on_boarding/presentation/intro/intro_screen.dart';
 import '../../../features/on_boarding/presentation/splash/splash_screen.dart';
 import '../../../features/product/presentation/product_details/product_details_screen.dart';
-import '../../../features/product_compare/presentation/product_compare_screen.dart';
 import '../../../features/store_location/presentation/screens/store_pickup_map.dart';
 import '../../../features/wishlist/di/wishlist_binding.dart';
 import '../../di/core_bindings.dart';
@@ -76,7 +72,6 @@ class AppPages {
         CoreBindings(),
         AuthBindings(),
         WishListBinding(),
-        CompareProductBindings(),
         HomeBindings(),
         CartBinding(),
         CategoryBindings(),
@@ -114,7 +109,6 @@ class AppPages {
         CoreBindings(),
         AuthBindings(),
         WishListBinding(),
-        CompareProductBindings(),
         HomeBindings(),
         CartBinding(),
         CategoryBindings(),
@@ -126,7 +120,10 @@ class AppPages {
     GetPage(
         name: _Paths.shipping,
         page: () => ShippingAddressScreen(confirmOrderParams: Get.arguments),
-        bindings: [AddressBinding(), CheckoutBindings(), PaystackBindings()]),
+        bindings: [
+          AddressBinding(),
+          CheckoutBindings(),
+        ]),
     GetPage(
       name: _Paths.checkoutSummary,
       page: () => CheckoutSummaryScreen(confirmOrderParams: Get.arguments),
@@ -238,10 +235,7 @@ class AppPages {
       page: () => const ProfileScreen(),
       binding: ProfileBinding(),
     ),
-    GetPage(
-      name: _Paths.productCompare,
-      page: () => const ProductCompareScreen(),
-    ),
+
     GetPage(
       name: _Paths.helpFaqs,
       page: HelpFaqsScreen.new,

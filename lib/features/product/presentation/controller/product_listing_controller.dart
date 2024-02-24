@@ -21,6 +21,9 @@ class ProductListingController extends GetxController {
     fetchProductList(filterQueryParams);
   }
 
+  double? minPrice;
+  double? maxPrice;
+
   late ApiResponse _productListResponse = ApiResponse();
 
   set productListResponse(ApiResponse response) {
@@ -50,14 +53,19 @@ class ProductListingController extends GetxController {
 
   void onProductsFilter(
       BuildContext context, FilterQueryParams filterQueryParams,
-      {bool filterData = true}) {
-    showLoadingDialog(context);
+      {bool filterData = true}) async {
+    // showLoadingDialog(context);
     currentPage = 1;
     filterQueryParams.currentPage = currentPage;
 
-    fetchProductList(filterQueryParams, filterData: filterData).then((value) {
-      hideLoadingDialog(context);
-    });
+    await fetchProductList(filterQueryParams, filterData: filterData);
+    // hideLoadingDialog(context);
+  }
+
+  @override
+  void dispose() {
+    refreshController.dispose();
+    super.dispose();
   }
 
   int currentPage = 1;
