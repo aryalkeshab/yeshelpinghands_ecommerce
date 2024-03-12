@@ -3,7 +3,6 @@ import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -18,8 +17,7 @@ class IntroScreen extends StatelessWidget {
         PageViewModel(
           title: "Choose Your Needs",
           body: dummyIntroBody,
-          image:
-              "https://i.pinimg.com/originals/f8/19/0f/f8190f263b8257fb1939f62a648e2403.jpg",
+          image: "https://i.pinimg.com/originals/f8/19/0f/f8190f263b8257fb1939f62a648e2403.jpg",
         ),
         PageViewModel(
             image:
@@ -36,16 +34,10 @@ class IntroScreen extends StatelessWidget {
       onDone: () {
         Get.toNamed(Routes.chooseLanguage);
       },
-      next: Text('Next',
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2
-              ?.copyWith(color: Colors.white)),
+      next:
+          Text('Next', style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.white)),
       done: Text('Start',
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2
-              ?.copyWith(color: Colors.white)),
+          style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.white)),
       showSkipButton: true,
       onSkip: () {
         Get.toNamed(Routes.chooseLanguage);
@@ -148,9 +140,7 @@ class IntroductionScreen extends HookWidget {
                           width: 10,
                           height: 10,
                           decoration: BoxDecoration(
-                            color: pageIndex.value == index
-                                ? Colors.red
-                                : Colors.grey,
+                            color: pageIndex.value == index ? Colors.red : Colors.grey,
                             shape: BoxShape.circle,
                           ),
                         );
@@ -166,8 +156,7 @@ class IntroductionScreen extends HookWidget {
                     onPressed: isLastPage(pages.length, pageIndex.value)
                         ? () => onDone()
                         : () {
-                            pageController.nextPage(
-                                duration: 300.milliseconds, curve: Curves.ease);
+                            pageController.nextPage(duration: 300.milliseconds, curve: Curves.ease);
                           },
                     label: pages.length - 1 == pageIndex.value
                         ? InkWell(
@@ -185,8 +174,7 @@ class IntroductionScreen extends HookWidget {
                       child: Text(
                         'Skip',
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                              color:
-                                  skipColor ?? Theme.of(context).primaryColor,
+                              color: skipColor ?? Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w600,
                             ),
                       ),

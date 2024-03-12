@@ -1,9 +1,5 @@
 import 'package:get/get.dart';
 import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
-import 'package:yeshelpinghand/features/product/presentation/controller/product_listing_controller.dart';
-
-import '../../../../core/data/data_source/remote/api_result.dart';
-import '../../../home/domain/repository/products_repository.dart';
 
 class FilterDrawerController extends GetxController {
   @override

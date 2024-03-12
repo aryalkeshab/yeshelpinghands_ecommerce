@@ -3,8 +3,6 @@ import 'package:yeshelpinghand/core/data/data_source/remote/api_result.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/loading_dialog.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/snackbar.dart';
-import 'package:yeshelpinghand/core/presentation/widgets/toast.dart';
-
 import 'package:yeshelpinghand/features/cart/data/model/request/cart_request_params.dart';
 import 'package:yeshelpinghand/features/cart/data/model/request/update_cart_params.dart';
 import 'package:yeshelpinghand/features/cart/domain/repository/cart_repository.dart';
@@ -27,14 +25,11 @@ class CartController extends GetxController {
     final result = await Get.find<CartRepository>().addToCartItems(cartParams);
     if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     if (result.hasData) {
       AppSnackbar.showSnackbarWithActionButton(
-          context: context,
-          snackbarIcon: Icons.add_shopping_cart_sharp,
-          message: result.data);
+          context: context, snackbarIcon: Icons.add_shopping_cart_sharp, message: result.data);
       getCartDetails();
     }
   }
@@ -46,14 +41,12 @@ class CartController extends GetxController {
     updateCartItemId = updateCartParams.cartItemId;
     showCartLoadingIndicator.value = true;
 
-    final result =
-        await Get.find<CartRepository>().updateCart(updateCartParams);
+    final result = await Get.find<CartRepository>().updateCart(updateCartParams);
     showCartLoadingIndicator.value = false;
 
     if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     if (result.hasData) {
       getCartDetails();
@@ -67,8 +60,7 @@ class CartController extends GetxController {
       getCartDetails();
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     hideLoadingDialog(context);
   }
@@ -83,8 +75,7 @@ class CartController extends GetxController {
       getCartDetails();
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     hideLoadingDialog(context);
   }

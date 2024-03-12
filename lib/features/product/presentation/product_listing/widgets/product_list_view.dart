@@ -2,7 +2,6 @@ import 'package:yeshelpinghand/features/home/data/models/response/products_model
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../../shared/layouts/product_card.dart';
 
@@ -26,25 +25,12 @@ class ProductListViewBuilder extends StatelessWidget {
       itemCount: productList.length,
       itemBuilder: (context, index) {
         final product = productList[index];
-        return ProductCard.large(
+        return ProductCard.small(
           productModel: product,
           onWishlistButtonClick: () {},
           onCartButtonClick: () {},
         );
       },
     );
-    // return StaggeredGrid.count(
-    //   crossAxisCount: 2,
-    //   mainAxisSpacing: 10,
-    //   crossAxisSpacing: 10,
-    //   children: List.generate(productList.length, (index) {
-    //     final product = productList[index];
-    //     return ProductCard.large(
-    //       productModel: product,
-    //       onWishlistButtonClick: () {},
-    //       onCartButtonClick: () {},
-    //     );
-    //   }),
-    // );
   }
 }

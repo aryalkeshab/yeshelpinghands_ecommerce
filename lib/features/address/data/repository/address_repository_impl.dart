@@ -3,18 +3,14 @@ import 'package:yeshelpinghand/features/address/data/data_source/remote/address_
 import 'package:yeshelpinghand/features/address/data/model/request/address_params.dart';
 import 'package:yeshelpinghand/features/address/data/model/response/address.dart';
 import 'package:yeshelpinghand/features/address/domain/repository/address_repository.dart';
-import 'package:yeshelpinghand/features/address/presentation/utils/address_type_enum.dart';
 import '../../../../core/data/data_source/remote/api_result.dart';
 import '../../../../core/data/data_source/remote/network_exception.dart';
-import '../model/response/country.dart';
-import '../model/response/country_region.dart';
 
 class AddressRepositoryImpl extends AddressRepository {
   final AddressRemoteDataSource addressRemoteDataSource;
   final NetworkInfo networkInfo;
 
-  AddressRepositoryImpl(
-      {required this.addressRemoteDataSource, required this.networkInfo});
+  AddressRepositoryImpl({required this.addressRemoteDataSource, required this.networkInfo});
 
   @override
   Future<ApiResponse> getNonDefaultAddresses() async {
@@ -22,10 +18,7 @@ class AddressRepositoryImpl extends AddressRepository {
       try {
         final result = await addressRemoteDataSource.getNonDefaultAddresses();
 
-        final addressList =
-            result["data"].map<Address>((e) => Address.fromJson(e)).toList();
-
-        // 
+        final addressList = result["data"].map<Address>((e) => Address.fromJson(e)).toList();
 
         return ApiResponse(data: addressList);
       } catch (e) {
@@ -39,8 +32,7 @@ class AddressRepositoryImpl extends AddressRepository {
   Future<ApiResponse> deleteNonDefaultAddress(String id) async {
     if (await networkInfo.isConnected) {
       try {
-        final result =
-            await addressRemoteDataSource.deleteNonDefaultAddress(id);
+        final result = await addressRemoteDataSource.deleteNonDefaultAddress(id);
         return ApiResponse(data: result["message"]);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
@@ -51,12 +43,10 @@ class AddressRepositoryImpl extends AddressRepository {
   }
 
   @override
-  Future<ApiResponse> updateNonDefaultAddress(
-      String id, AddressParams addressParams) async {
+  Future<ApiResponse> updateNonDefaultAddress(String id, AddressParams addressParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final result = await addressRemoteDataSource.updateNonDefaultAddress(
-            id, addressParams);
+        final result = await addressRemoteDataSource.updateNonDefaultAddress(id, addressParams);
         return ApiResponse(data: result["message"]);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
@@ -70,8 +60,7 @@ class AddressRepositoryImpl extends AddressRepository {
   Future<ApiResponse> addNonDefaultAddress(AddressParams addressParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final result =
-            await addressRemoteDataSource.addNonDefaultAddress(addressParams);
+        final result = await addressRemoteDataSource.addNonDefaultAddress(addressParams);
         return ApiResponse(data: result["message"]);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

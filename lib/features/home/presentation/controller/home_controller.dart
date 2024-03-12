@@ -2,7 +2,6 @@ import 'package:yeshelpinghand/core/data/data_source/remote/api_result.dart';
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
 import 'package:yeshelpinghand/features/categories/presentation/controller/category_controller.dart';
 import 'package:yeshelpinghand/features/home/data/models/response/products_model.dart';
-import 'package:yeshelpinghand/features/home/domain/repository/featured_category_repository.dart';
 import 'package:yeshelpinghand/features/home/domain/repository/image_slider_repository.dart';
 import 'package:yeshelpinghand/features/home/domain/repository/products_repository.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/best_seller_controller.dart';
@@ -15,7 +14,6 @@ import 'package:yeshelpinghand/features/product/data/model/request/filter_query_
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yeshelpinghand/features/wishlist/presentation/controller/wishlist_controller.dart';
-
 import '../../../brands/presentation/controller/brands_controller.dart';
 import '../../../product/presentation/controller/product_listing_controller.dart';
 import '../../../profile/presentation/controller/profile_controller.dart';
@@ -49,8 +47,7 @@ class HomeController extends GetxController {
   List<ProductModel> productList = [];
 
   homeProductsList(FilterQueryParams filterQueryParams) async {
-    allProductApiResponse =
-        await Get.find<ProductsRepository>().getAllProducts(filterQueryParams);
+    allProductApiResponse = await Get.find<ProductsRepository>().getAllProducts(filterQueryParams);
 
     if (allProductApiResponse.hasData) {
       allowScroll = allProductApiResponse.data.isNextPageAvailable;
@@ -98,8 +95,7 @@ class HomeController extends GetxController {
     await Get.find<BrandsController>().fetchBrandsList();
     await Get.find<CartController>().getCartDetails();
     await Get.find<CategoryController>().fetchCategoryList();
-    await Get.find<ProductListingController>()
-        .fetchProductList(filterQueryParams);
+    await Get.find<ProductListingController>().fetchProductList(filterQueryParams);
     await Get.find<ProfileController>().getUserInfoResponse();
     await Get.find<WishListController>().getWishList();
 

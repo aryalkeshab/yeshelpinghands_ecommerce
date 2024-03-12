@@ -1,6 +1,5 @@
 import 'package:yeshelpinghand/features/cart/data/model/response/cart_details.dart';
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
-import 'package:yeshelpinghand/features/cart/presentation/screen/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +9,7 @@ class CartItemRemoveDialog extends StatelessWidget {
   final BuildContext context;
   final Carts cartItem;
 
-  const CartItemRemoveDialog(this.context, {Key? key, required this.cartItem})
-      : super(key: key);
+  const CartItemRemoveDialog(this.context, {Key? key, required this.cartItem}) : super(key: key);
 
   @override
   Widget build(BuildContext ctx) {
@@ -19,8 +17,7 @@ class CartItemRemoveDialog extends StatelessWidget {
       primaryText: "Are you sure you want to remove this item from cart?",
       onCancelButtonPressed: Get.back,
       onApproveButtonPressed: () {
-        Get.find<CartController>()
-            .removeProductFromCart(context, cartItem.slug.toString());
+        Get.find<CartController>().removeProductFromCart(context, cartItem.slug.toString());
         // Navigator.pop(context);
       },
     );

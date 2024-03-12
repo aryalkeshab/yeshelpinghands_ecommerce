@@ -5,7 +5,6 @@ import 'package:yeshelpinghand/features/product/data/model/request/filter_query_
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../core/data/data_source/remote/api_result.dart';
-import '../../../../core/presentation/widgets/loading_dialog.dart';
 
 class ProductListingController extends GetxController {
   final FilterQueryParams filterQueryParams;
@@ -35,10 +34,8 @@ class ProductListingController extends GetxController {
 
   List<ProductModel> productList = [];
 
-  fetchProductList(FilterQueryParams filterQueryParams,
-      {bool filterData = true}) async {
-    productListResponse =
-        await Get.find<ProductsRepository>().getAllProducts(filterQueryParams);
+  fetchProductList(FilterQueryParams filterQueryParams, {bool filterData = true}) async {
+    productListResponse = await Get.find<ProductsRepository>().getAllProducts(filterQueryParams);
 
     if (productListResponse.hasData) {
       if (filterData == true) productList.clear();
@@ -51,8 +48,7 @@ class ProductListingController extends GetxController {
     refreshController.refreshCompleted();
   }
 
-  void onProductsFilter(
-      BuildContext context, FilterQueryParams filterQueryParams,
+  void onProductsFilter(BuildContext context, FilterQueryParams filterQueryParams,
       {bool filterData = true}) async {
     // showLoadingDialog(context);
     currentPage = 1;

@@ -1,17 +1,4 @@
-import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
-import 'package:yeshelpinghand/features/cart/di/cart_binding.dart';
-import 'package:yeshelpinghand/features/cart/presentation/screen/cart_screen.dart';
-import 'package:yeshelpinghand/features/categories/di/category_bindings.dart';
-import 'package:yeshelpinghand/features/home/di/home_bindings.dart';
-import 'package:yeshelpinghand/features/home/presentation/screens/home_screen.dart';
-import 'package:yeshelpinghand/features/product/di/product_binding.dart';
-import 'package:yeshelpinghand/features/profile/di/profile_bindings.dart';
-import 'package:yeshelpinghand/features/profile/presentation/screen/profile_screen.dart';
-import 'package:yeshelpinghand/features/shared/layouts/auth_interceptor_screen.dart';
-import 'package:yeshelpinghand/features/shared/layouts/auth_widget_wrapper.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../categories/presentation/screen/category_screen.dart';
 
 class DashboardController extends GetxController {
   var tabIndex = 0;

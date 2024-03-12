@@ -1,4 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yeshelpinghand/core/presentation/resources/ui_assets.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/buttons.dart';
@@ -20,8 +19,7 @@ class EmptyCartScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
+                padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -32,9 +30,8 @@ class EmptyCartScreen extends StatelessWidget {
                     config.verticalSpaceLarge(),
                     Text(
                       'Your cart is empty',
-                      style: theme.textTheme.bodyText1?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: theme.primaryColor),
+                      style: theme.textTheme.bodyText1
+                          ?.copyWith(fontWeight: FontWeight.w600, color: theme.primaryColor),
                     ),
                     config.verticalSpaceMedium(),
                     PrimaryButton(

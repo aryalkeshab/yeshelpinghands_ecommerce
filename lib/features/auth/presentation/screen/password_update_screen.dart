@@ -4,7 +4,6 @@ import 'package:yeshelpinghand/core/presentation/widgets/textfields.dart';
 import 'package:yeshelpinghand/core/utils/custom_validators.dart';
 import 'package:yeshelpinghand/features/auth/data/models/request/update_password_params.dart';
 import 'package:yeshelpinghand/features/auth/presentation/controller/password_update_controller.dart';
-import 'package:yeshelpinghand/features/shared/layouts/circular_app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
@@ -26,7 +25,7 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: pasminaColor,
+        backgroundColor: scaffoldBackgroundColor,
         leading: IconButton(
           onPressed: Get.back,
           icon: const Icon(
@@ -40,21 +39,36 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
           final passwordChangeFormKey = useMemoized(GlobalKey<FormState>.new);
           return Column(
             children: [
-              ClipPath(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width,
-                  color: pasminaColor,
-                  child: Image.asset(
-                    UIAssets.app_Icon,
-                    width: config.appWidth(50),
+              Stack(
+                children: [
+                  ClipPath(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        gradient: pasminaColor,
+                      ),
+                      child: Image.asset(
+                        UIAssets.app_Icon,
+                        width: config.appWidth(50),
+                      ),
+                    ),
+                    clipper: Clipper(),
                   ),
-                ),
-                clipper: Clipper(),
+                  Positioned(
+                    top: 30,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                      onPressed: Get.back,
+                    ),
+                  )
+                ],
               ),
               Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
+                padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
                 child: Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -67,11 +81,9 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             PrimaryFormField(
-                              hintIcon:
-                                  Icon(Icons.lock, color: theme.primaryColor),
+                              hintIcon: Icon(Icons.lock, color: theme.primaryColor),
                               isPassword: true,
-                              validator: (value) =>
-                                  Validator.validateEmpty(value!),
+                              validator: (value) => Validator.validateEmpty(value!),
                               label: '${" Current password".tr}',
                               isRequired: true,
                               onSaved: (value) {
@@ -80,11 +92,9 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                             ),
                             config.verticalSpaceMedium(),
                             PrimaryFormField(
-                              hintIcon:
-                                  Icon(Icons.lock, color: theme.primaryColor),
+                              hintIcon: Icon(Icons.lock, color: theme.primaryColor),
                               isPassword: true,
-                              validator: (value) =>
-                                  Validator.validatePassword(value!),
+                              validator: (value) => Validator.validatePassword(value!),
                               label: '${" New password".tr}',
                               isRequired: true,
                               onChanged: (value) {
@@ -97,16 +107,14 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                             config.verticalSpaceMedium(),
                             PrimaryFormField(
                               onSaved: (value) {},
-                              hintIcon:
-                                  Icon(Icons.lock, color: theme.primaryColor),
+                              hintIcon: Icon(Icons.lock, color: theme.primaryColor),
                               isPassword: true,
                               label: '${"Confirm password".tr}',
                               isRequired: true,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "Confirm password is required";
-                                } else if (value !=
-                                    updatePasswordParams.newPassword) {
+                                } else if (value != updatePasswordParams.newPassword) {
                                   return "Password and confirm password didn't match";
                                 }
                                 return null;
@@ -117,12 +125,9 @@ class _PasswordUpdateScreenState extends State<PasswordUpdateScreen> {
                                 label: "Update",
                                 onPressed: () {
                                   passwordChangeFormKey.currentState!.save();
-                                  if (passwordChangeFormKey.currentState
-                                          ?.validate() ==
-                                      true) {
+                                  if (passwordChangeFormKey.currentState?.validate() == true) {
                                     Get.find<PasswordUpdateController>()
-                                        .updatePassword(
-                                            context, updatePasswordParams);
+                                        .updatePassword(context, updatePasswordParams);
                                   }
                                 }),
                           ],

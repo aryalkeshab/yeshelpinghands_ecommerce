@@ -6,12 +6,10 @@ import 'package:yeshelpinghand/features/address/presentation/utils/address_book_
 import 'package:yeshelpinghand/features/address/presentation/utils/address_form_type_enum.dart';
 import 'package:yeshelpinghand/features/address/presentation/utils/address_type_enum.dart';
 import 'package:yeshelpinghand/features/address/presentation/widgets/address_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import '../../../core/presentation/widgets/base_widget.dart';
-import '../../shared/layouts/error_view.dart';
 import '../data/model/response/address.dart';
 import 'widgets/warning_message.dart';
 
@@ -33,8 +31,7 @@ class AddressListScreen extends StatelessWidget {
           appBar: AppBar(title: const Text("Address Book")),
           body: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: config.appEdgePadding(),
-                vertical: config.appVerticalPaddingLarge()),
+                horizontal: config.appEdgePadding(), vertical: config.appVerticalPaddingLarge()),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -44,8 +41,7 @@ class AddressListScreen extends StatelessWidget {
                       final List<Address> defaultAddresses = result.data;
                       return defaultAddresses.length == 0
                           ? Center(
-                              child: const WarningMessage(
-                                  "You have not added any address"),
+                              child: const WarningMessage("You have not added any address"),
                             )
                           : ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
@@ -58,8 +54,7 @@ class AddressListScreen extends StatelessWidget {
                                     Get.toNamed(Routes.addAddress,
                                         arguments: AddressFormParams(
                                             addressType: AddressType.shipping,
-                                            addressFormType:
-                                                AddressFormType.edit,
+                                            addressFormType: AddressFormType.edit,
                                             address: address));
                                   },
                                   child: AddressCard(
@@ -68,8 +63,7 @@ class AddressListScreen extends StatelessWidget {
                                     // isSelectable: addressBookType ==
                                     //     AddressBookType.selectable,
                                     onPressed: (selectedAddress) {
-                                      selectedAddressId.value =
-                                          "${selectedAddress.id}";
+                                      selectedAddressId.value = "${selectedAddress.id}";
                                       Get.back(result: selectedAddress);
                                     },
                                   ),
@@ -204,15 +198,9 @@ class _LoadingAddressList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ShimmerWidget.rounded(
-                        width: config.appWidth(35),
-                        height: 15,
-                        borderRadius: 3),
+                    ShimmerWidget.rounded(width: config.appWidth(35), height: 15, borderRadius: 3),
                     config.verticalSpaceSmall(),
-                    ShimmerWidget.rounded(
-                        width: config.appWidth(65),
-                        height: 15,
-                        borderRadius: 3),
+                    ShimmerWidget.rounded(width: config.appWidth(65), height: 15, borderRadius: 3),
                   ],
                 ),
               ),

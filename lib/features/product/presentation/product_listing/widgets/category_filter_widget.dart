@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
-import 'package:yeshelpinghand/features/product/presentation/controller/filter_drawer_controller.dart';
-
 import '../../../../../core/presentation/widgets/base_widget.dart';
 import '../../../data/model/response/filter_drawer_model.dart';
 
@@ -24,8 +20,8 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget> {
   void initState() {
     super.initState();
 
-    selectedValue = widget.subCategoryList?.indexWhere(
-        (element) => element.id == widget.initialCategory.toString());
+    selectedValue = widget.subCategoryList
+        ?.indexWhere((element) => element.id == widget.initialCategory.toString());
   }
 
   int? selectedValue;
@@ -42,8 +38,7 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget> {
                 children: [
                   Text(
                     "Category",
-                    style: theme.textTheme.headline6
-                        ?.copyWith(color: theme.primaryColor),
+                    style: theme.textTheme.headline6?.copyWith(color: theme.primaryColor),
                   ),
                   ListView.builder(
                       shrinkWrap: true,
@@ -60,8 +55,7 @@ class _CategoryFilterWidgetState extends State<CategoryFilterWidget> {
                             setState(() {
                               selectedValue = index;
                             });
-                            widget.onCategorySelect(
-                                subCategoryList[selectedValue ?? -1]);
+                            widget.onCategorySelect(subCategoryList[selectedValue ?? -1]);
                           },
                           value: selectedValue == index,
                         );

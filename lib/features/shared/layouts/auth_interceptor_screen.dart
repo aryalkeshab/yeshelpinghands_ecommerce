@@ -24,7 +24,9 @@ class AuthInterceptorScreen extends StatelessWidget {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.width,
-                  color: pasminaColor,
+                  decoration: BoxDecoration(
+                    gradient: pasminaColor,
+                  ),
                   child: Image.asset(
                     UIAssets.app_Icon,
                     width: config.appWidth(50),
@@ -34,8 +36,7 @@ class AuthInterceptorScreen extends StatelessWidget {
               ),
               config.verticalSpaceCustom(0.20),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
+                padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

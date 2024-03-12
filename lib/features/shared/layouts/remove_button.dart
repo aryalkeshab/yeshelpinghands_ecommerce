@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/presentation/widgets/base_widget.dart';
-import '../../cart/data/model/response/cart_details.dart';
 
 class RemoveButton extends StatelessWidget {
   final VoidCallback onRemove;
@@ -19,8 +18,7 @@ class RemoveButton extends StatelessWidget {
         child: Row(
           children: [
             Container(
-                child: Icon(Icons.delete_outline,
-                    color: Colors.black.withOpacity(0.3), size: 18),
+                child: Icon(Icons.delete_outline, color: Colors.black.withOpacity(0.3), size: 18),
                 decoration: BoxDecoration(
                   color: Theme.of(context).disabledColor.withOpacity(0.25),
                   borderRadius: BorderRadius.circular(3),

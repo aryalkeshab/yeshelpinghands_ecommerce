@@ -1,12 +1,9 @@
 import 'package:get/get.dart';
-import 'package:yeshelpinghand/features/address/presentation/utils/address_type_enum.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/presentation/widgets/base_widget.dart';
-import '../../../../core/presentation/widgets/buttons.dart';
 import '../../../shared/layouts/confirm_dialog_view.dart';
 import '../../data/model/response/address.dart';
 import '../controller/address_controller.dart';
-import 'address_bottom_modal_sheet.dart';
 
 class AddressCard extends StatelessWidget {
   final bool isSelected;
@@ -41,9 +38,8 @@ class AddressCard extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: config.appEdgePadding(),
                     vertical: config.appVerticalPaddingMedium()),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration:
+                    BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
                 width: double.maxFinite,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,8 +50,7 @@ class AddressCard extends StatelessWidget {
                       children: [
                         Text(
                           '${address.address}',
-                          style: theme.textTheme.bodyText2
-                              ?.copyWith(fontWeight: FontWeight.w600),
+                          style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.w600),
                         ),
                         config.verticalSpaceSmall(),
                         Row(
@@ -63,8 +58,7 @@ class AddressCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(Icons.location_on_outlined,
-                                color: Theme.of(context).primaryColor,
-                                size: 16),
+                                color: Theme.of(context).primaryColor, size: 16),
                             config.horizontalSpaceSmall(),
                             Text(
                               '${address.country}, ${address.city},\n${address.postalCode},',
@@ -79,8 +73,7 @@ class AddressCard extends StatelessWidget {
                             context: context,
                             builder: (ctx) {
                               return ConfirmDialogView(
-                                primaryText:
-                                    "Are you sure you want to delete this address?",
+                                primaryText: "Are you sure you want to delete this address?",
                                 onApproveButtonPressed: () {
                                   Get.back();
                                   Get.find<AddressController>()

@@ -1,4 +1,3 @@
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
@@ -15,9 +14,6 @@ import 'package:yeshelpinghand/features/shared/layouts/remove_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import '../../../../core/presentation/resources/colors.dart';
 import '../../../checkout/data/model/request/confirm_order_params.dart';
 import '../../../shared/layouts/loading_pulse.dart';
 import '../../data/model/response/cart_details.dart';
@@ -134,8 +130,7 @@ class _CartSummaryView extends StatelessWidget {
       return Container(
         child: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: config.appVerticalPaddingSmall(),
-              horizontal: config.appEdgePadding()),
+              vertical: config.appVerticalPaddingSmall(), horizontal: config.appEdgePadding()),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -147,14 +142,12 @@ class _CartSummaryView extends StatelessWidget {
               config.verticalSpaceSmall(),
               _CartSummaryItem(
                   title: 'Shipping Fee',
-                  value:
-                      "${NumberParser.twoDecimalDigit('${cartDetail!.total!.shipping}')}"),
+                  value: "${NumberParser.twoDecimalDigit('${cartDetail!.total!.shipping}')}"),
               config.verticalSpaceSmall(),
               _CartSummaryItem(
                   isPrimary: true,
                   title: 'Total',
-                  value:
-                      "${NumberParser.twoDecimalDigit('${cartDetail!.total!.grandTotal}')}"),
+                  value: "${NumberParser.twoDecimalDigit('${cartDetail!.total!.grandTotal}')}"),
               PrimaryButton(
                 label: "Checkout",
                 onPressed: () {
@@ -198,20 +191,16 @@ class _CartSummaryItem extends StatelessWidget {
             Text(
               title,
               style: isPrimary
-                  ? theme.textTheme.bodyText1
-                      ?.copyWith(fontWeight: FontWeight.w600)
+                  ? theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600)
                   : theme.textTheme.bodyText2?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: theme.textTheme.caption?.color),
+                      fontWeight: FontWeight.w600, color: theme.textTheme.caption?.color),
             ),
             Text(
               "$currency $value",
               style: isPrimary
-                  ? theme.textTheme.bodyText1
-                      ?.copyWith(fontWeight: FontWeight.w600)
+                  ? theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600)
                   : theme.textTheme.bodyText2?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: theme.textTheme.caption?.color),
+                      fontWeight: FontWeight.w600, color: theme.textTheme.caption?.color),
             ),
           ],
         );
@@ -235,77 +224,73 @@ class CartItemCard extends StatelessWidget {
         Get.toNamed(Routes.productDetails, arguments: cartItem.slug);
       },
       child: BaseWidget(builder: (context, config, theme) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            // border: Border.all(),
-          ),
-          padding: EdgeInsets.symmetric(
-              vertical: config.appHeight(1),
-              horizontal: config.appEdgePadding()),
+        return Card(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                child: CustomCachedNetworkImage(
-                  cartItem.image,
-                  isCompleteUrl: false,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: 80,
+                  child: CustomCachedNetworkImage(
+                    isCompleteUrl: false,
+                    "${cartItem.image}",
+                    fit: BoxFit.fill,
+                  ),
+                  width: config.appWidth(20),
                 ),
-                width: config.appWidth(20),
               ),
               config.horizontalSpaceMedium(),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "${cartItem.name}",
-                      style: theme.textTheme.bodyText2,
-                    ),
-                    config.verticalSpaceSmall(),
-                    Text(
-                      "$currency ${NumberParser.twoDecimalDigit(cartItem.price.toString())}",
-                      style: theme.textTheme.bodyText1
-                          ?.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    config.verticalSpaceSmall(),
-                    Row(
-                      // mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RemoveButton(onRemove: () {
-                          showDialog(
-                            context: context,
-                            builder: (ctx) {
-                              return CartItemRemoveDialog(ctx,
-                                  cartItem: cartItem);
-                            },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "${cartItem.name}",
+                        style: theme.textTheme.bodyText2,
+                      ),
+                      config.verticalSpaceSmall(),
+                      Text(
+                        "$currency ${NumberParser.twoDecimalDigit(cartItem.price.toString())}",
+                        style: theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      config.verticalSpaceSmall(),
+                      Row(
+                        // mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RemoveButton(onRemove: () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) {
+                                return CartItemRemoveDialog(ctx, cartItem: cartItem);
+                              },
+                            );
+                          }),
+                          QuantityChangerButtonsView(
+                            cartItem: cartItem,
+                          ),
+                        ],
+                      ),
+                      config.verticalSpaceMedium(),
+                      Obx(() {
+                        if (Get.find<CartController>().showCartLoadingIndicator.value &&
+                            Get.find<CartController>().updateCartItemId == cartItem.slug.toString())
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              LoadingPulse(),
+                            ],
                           );
-                        }),
-                        QuantityChangerButtonsView(
-                          cartItem: cartItem,
-                        ),
-                      ],
-                    ),
-                    config.verticalSpaceMedium(),
-                    Obx(() {
-                      if (Get.find<CartController>()
-                              .showCartLoadingIndicator
-                              .value &&
-                          Get.find<CartController>().updateCartItemId ==
-                              cartItem.slug.toString())
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            LoadingPulse(),
-                          ],
-                        );
-                      else
-                        return const SizedBox.shrink();
-                    }),
-                  ],
+                        else
+                          return const SizedBox.shrink();
+                      }),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -339,8 +324,7 @@ class QuantityChangerButtonsView extends StatelessWidget {
                     UpdateCartParams(
                         cartItemId: cartItem.slug.toString(),
                         // sku: "${cartItem.slug}",
-                        quantity:
-                            cartItem.qty != null ? cartItem.qty! - 1 : 1));
+                        quantity: cartItem.qty != null ? cartItem.qty! - 1 : 1));
               }
             },
           ),
@@ -413,18 +397,12 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
           final CartResponse cartResponse = result.data;
           return Text(
             'My Cart (${cartResponse.carts?.length ?? 0})',
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
           );
         } else {
           return Text(
             'My Cart (0)',
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: Colors.white),
+            style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
           );
         }
       }),
