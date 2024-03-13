@@ -49,7 +49,7 @@ class AddressListScreen extends StatelessWidget {
                               itemCount: defaultAddresses.length,
                               itemBuilder: (context, index) {
                                 final address = defaultAddresses[index];
-                                return InkWell(
+                                return GestureDetector(
                                   onTap: () {
                                     Get.toNamed(Routes.addAddress,
                                         arguments: AddressFormParams(
@@ -58,10 +58,7 @@ class AddressListScreen extends StatelessWidget {
                                             address: address));
                                   },
                                   child: AddressCard(
-                                    // addressType: AddressType.shipping,
                                     address: address,
-                                    // isSelectable: addressBookType ==
-                                    //     AddressBookType.selectable,
                                     onPressed: (selectedAddress) {
                                       selectedAddressId.value = "${selectedAddress.id}";
                                       Get.back(result: selectedAddress);

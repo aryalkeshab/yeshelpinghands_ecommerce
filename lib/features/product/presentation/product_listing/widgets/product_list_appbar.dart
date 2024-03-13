@@ -13,8 +13,9 @@ import '../../../../../core/utils/size_config.dart';
 
 class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(FilterQueryParams Function(FilterQueryParams)) onSortUpdate;
+  final bool? isDash;
 
-  ProductListingAppBar({required this.onSortUpdate});
+  ProductListingAppBar({required this.onSortUpdate, this.isDash = false});
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +55,17 @@ class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidge
               )),
           preferredSize: const Size(double.maxFinite, 45)),
       actions: <Widget>[
-        InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-            // size: 20,
+        if (isDash == false)
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              // size: 20,
+            ),
           ),
-        ),
         config.horizontalSpaceSmall(),
         Expanded(
           child: InkWell(

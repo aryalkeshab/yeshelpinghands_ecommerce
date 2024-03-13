@@ -23,6 +23,7 @@ import 'package:yeshelpinghand/features/crm/presentation/screen/terms_and_condit
 import 'package:yeshelpinghand/features/dashboard/di/dashboard_bindings.dart';
 import 'package:yeshelpinghand/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:yeshelpinghand/features/home/di/home_bindings.dart';
+import 'package:yeshelpinghand/features/home/domain/repository/products_repository.dart';
 import 'package:yeshelpinghand/features/on_boarding/presentation/intro/language_selection_screen.dart';
 import 'package:yeshelpinghand/features/order/di/order_binding.dart';
 import 'package:yeshelpinghand/features/order/presentation/order_history_details_screen.dart';
@@ -140,6 +141,10 @@ class AppPages {
       page: () => ProductListingScreen(
         filterQueryParams: Get.arguments,
       ),
+      bindings: [
+        ProductBindings(),
+        CoreBindings(),
+      ],
     ),
     GetPage(
         name: _Paths.productDetails,

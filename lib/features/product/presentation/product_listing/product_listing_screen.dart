@@ -15,8 +15,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ProductListingScreen extends StatefulWidget {
   FilterQueryParams filterQueryParams;
+  final bool? isDash;
 
-  ProductListingScreen({Key? key, required this.filterQueryParams}) : super(key: key);
+  ProductListingScreen({Key? key, required this.filterQueryParams, this.isDash = false})
+      : super(key: key);
 
   @override
   State<ProductListingScreen> createState() => _ProductListingScreenState();
@@ -25,15 +27,13 @@ class ProductListingScreen extends StatefulWidget {
 class _ProductListingScreenState extends State<ProductListingScreen> {
   @override
   void initState() {
+    Get.put(ProductListingController(widget.filterQueryParams));
     super.initState();
-    // Get.put(FilterDrawerController())
-    //     .fetchFilterModel(widget.filterQueryParams);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // endDrawerEnableOpenDragGesture: false,
       endDrawer: FilterDrawer(
         onClearFilter: () {
           Get.find<ProductListingController>().minPrice = null;
@@ -43,6 +43,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
         filterQueryParams: widget.filterQueryParams,
       ),
       appBar: ProductListingAppBar(
+        isDash: widget.isDash,
         onSortUpdate: (onUpdateParams) {
           widget.filterQueryParams = onUpdateParams(widget.filterQueryParams);
 
@@ -50,53 +51,52 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
         },
       ),
       body: GetBuilder<ProductListingController>(
-          init: ProductListingController(widget.filterQueryParams),
+          // init: ,
           builder: (controller) {
-            return BaseWidget(builder: (context, config, theme) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: config.appEdgePadding(),
-                  right: config.appEdgePadding(),
-                ),
-                child: SmartRefresher(
-                  physics: BouncingScrollPhysics(),
-                  controller: controller.refreshController,
-                  enablePullUp: false,
-                  enablePullDown: true,
-                  onRefresh: () => controller.fetchProductList(widget.filterQueryParams),
-                  child: GetBuilder<ProductListingController>(builder: (controller) {
-                    final result = Get.find<ProductListingController>().productListResponse;
+        return BaseWidget(builder: (context, config, theme) {
+          return Padding(
+            padding: EdgeInsets.only(
+              left: config.appEdgePadding(),
+              right: config.appEdgePadding(),
+            ),
+            child: SmartRefresher(
+              physics: BouncingScrollPhysics(),
+              controller: controller.refreshController,
+              enablePullUp: false,
+              enablePullDown: true,
+              onRefresh: () => controller.fetchProductList(widget.filterQueryParams),
+              child: GetBuilder<ProductListingController>(builder: (controller) {
+                final result = Get.find<ProductListingController>().productListResponse;
 
-                    if (result.hasData) {
-                      final productsList = controller.productList;
-                      return productsList.isEmpty
-                          ? SizedBox(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  config.verticalSpaceExtraLarge(),
-                                  const EmptyListView(
-                                    title: 'We can\'t find products matching the selection.',
-                                  ),
-                                ],
+                if (result.hasData) {
+                  final productsList = controller.productList;
+                  return productsList.isEmpty
+                      ? SizedBox(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              config.verticalSpaceExtraLarge(),
+                              const EmptyListView(
+                                title: 'We can\'t find products matching the selection.',
                               ),
-                            )
-                          : ProductListViewBuilder(
-                              productList: controller.productList,
-                            );
-                    } else if (result.hasError) {
-                      return Center(
-                        child:
-                            ErrorView(title: "${NetworkException.getErrorMessage(result.error)}"),
-                      );
-                    } else {
-                      return const LoadingProductListView();
-                    }
-                  }),
-                ),
-              );
-            });
-          }),
+                            ],
+                          ),
+                        )
+                      : ProductListViewBuilder(
+                          productList: controller.productList,
+                        );
+                } else if (result.hasError) {
+                  return Center(
+                    child: ErrorView(title: "${NetworkException.getErrorMessage(result.error)}"),
+                  );
+                } else {
+                  return const LoadingProductListView();
+                }
+              }),
+            ),
+          );
+        });
+      }),
     );
   }
 }

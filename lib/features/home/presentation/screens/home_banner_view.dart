@@ -60,6 +60,7 @@ class MultiBannerView extends StatelessWidget {
                       child: CircularCachedNetworkImageBuilder(
                           borderRadius: 5,
                           isBorderEnabled: false,
+                          // fit: BoxFit.fill,
                           imageUrl: APIPathHelper.baseUrlImage + bannerResponseList[index].image),
                     )),
           );

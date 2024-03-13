@@ -29,7 +29,6 @@ class ProductDetailsView extends StatelessWidget {
 // This ctr and function are for image zoom
   final _transformationController = TransformationController();
 
-// End of Image Zoom
 // diaglog box for image zoom
   _displayDialog(String imageUrl, BuildContext context) {
     showGeneralDialog(
@@ -179,7 +178,8 @@ class ProductDetailsView extends StatelessWidget {
                               }
                             }
                           : () {
-                              Get.toNamed(Routes.login, arguments: true);
+                              Get.until((route) => route.settings.name == Routes.dashboard);
+                              Get.find<DashboardController>().changeTabIndex(3);
                             },
                       icon: CircleAvatar(
                           backgroundColor: scaffoldBackgroundColor,
@@ -277,7 +277,7 @@ class ProductDetailsView extends StatelessWidget {
                                       ? Row(
                                           children: [
                                             Text(
-                                              "$currency ${NumberParser.twoDecimalDigit(productDetails.price.toString())}",
+                                              "$currency ${NumberParser.twoDecimalDigit(productDetails.offerPrice.toString())}",
                                               style: theme.textTheme.bodyText1?.copyWith(
                                                   color: primaryColor2,
                                                   fontWeight: FontWeight.w600,

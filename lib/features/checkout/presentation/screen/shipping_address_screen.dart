@@ -13,6 +13,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/presentation/widgets/textfields.dart';
+import '../../../../core/utils/string_capitalize.dart';
 import '../../../address/data/model/response/address.dart';
 import '../../../address/presentation/utils/address_type_enum.dart';
 
@@ -129,7 +130,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                                 isRequired: true,
                                                 label: "Shipping Address",
                                                 itemToString: (value) {
-                                                  return "${value.address} , ${value.city}, ${value.country}";
+                                                  return "${StringCapitalize.capitalizeSentence(value.address ?? 'address')} , ${StringCapitalize.capitalizeSentence(value.city ?? 'city')}, ${StringCapitalize.capitalizeSentence(value.country ?? 'country')}";
                                                 },
                                                 validator: (value) {
                                                   if (value == null) {
@@ -166,7 +167,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                                 isRequired: true,
                                                 label: "Billing Address",
                                                 itemToString: (value) {
-                                                  return "${value.address} , ${value.city}, ${value.country}";
+                                                  return "${StringCapitalize.capitalizeSentence(value.address ?? 'address')} , ${StringCapitalize.capitalizeSentence(value.city ?? 'city')}, ${StringCapitalize.capitalizeSentence(value.country ?? 'country')}";
                                                 },
                                                 validator: (value) {
                                                   if (value == null) {

@@ -29,8 +29,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final config = SizeConfig(context);
-    print(MediaQuery.of(context).size.height);
-    print(MediaQuery.of(context).size.width);
 
     return SafeArea(
       child: Scaffold(
@@ -77,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                             child: Icon(
                               CupertinoIcons.person_alt_circle,
                               color: primaryColor,
-                              size: 40,
+                              size: 35,
                             ),
                           ),
                         ),

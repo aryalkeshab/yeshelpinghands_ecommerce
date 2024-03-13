@@ -164,6 +164,7 @@ class _TopSectionView extends StatelessWidget {
           horizontal: config.appHorizontalPaddingMedium(),
         ),
         child: Card(
+          color: theme.scaffoldBackgroundColor,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: config.appEdgePadding(),
