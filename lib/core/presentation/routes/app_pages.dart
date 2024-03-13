@@ -30,7 +30,6 @@ import 'package:yeshelpinghand/features/order/presentation/order_history_screen.
 import 'package:yeshelpinghand/features/product/di/product_binding.dart';
 import 'package:yeshelpinghand/features/product/presentation/product_listing/product_listing_screen.dart';
 import 'package:yeshelpinghand/features/profile/di/profile_bindings.dart';
-import 'package:yeshelpinghand/features/profile/presentation/screen/account_details_screen.dart';
 import 'package:yeshelpinghand/features/profile/presentation/screen/profile_screen.dart';
 import 'package:yeshelpinghand/features/reviews/di/review_bindings.dart';
 import 'package:yeshelpinghand/features/search/presentation/screen/search_screen.dart';
@@ -212,10 +211,6 @@ class AppPages {
       page: () => PasswordResetScreen(),
       binding: PasswordResetBindings(),
     ),
-    GetPage(
-        name: _Paths.accountDetails,
-        page: () => const AccountDetailScreen(),
-        middlewares: [AuthGuard()]),
     GetPage(
       name: _Paths.profile,
       page: () => const ProfileScreen(),
