@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
@@ -63,19 +64,18 @@ class _ProductCard extends StatelessWidget {
     return BaseWidget(builder: (context, config, theme) {
       return Container(
         alignment: Alignment.topCenter,
-        width: type == _ProductCardType.large ? 150 : 115,
+        width: type == _ProductCardType.large ? 150 : 120,
         decoration: BoxDecoration(
-          border: Border.all(
-              color: decorationColor ?? Colors.grey.withOpacity(0.0)),
-          borderRadius: BorderRadius.circular(4),
-          // color: Colors.white,
+          border: Border.all(color: decorationColor ?? Colors.grey.withOpacity(0.0)),
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.grey.withOpacity(0.04),
         ),
+        padding: EdgeInsets.all(8),
         child: Stack(
           children: [
             InkWell(
               onTap: () {
-                Get.toNamed(Routes.productDetails,
-                    arguments: productModel.slug);
+                Get.toNamed(Routes.productDetails, arguments: productModel.slug);
               },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -88,20 +88,21 @@ class _ProductCard extends StatelessWidget {
                     child: CustomCachedNetworkImage(
                       isCompleteUrl: false,
                       productModel.thumbnail,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   config.verticalSpaceSmall(),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: config.appHorizontalPaddingSmall()),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '${productModel.name?.capitalize}',
-                          style: theme.textTheme.bodyText2
-                              ?.copyWith(fontWeight: FontWeight.w600),
+                          style: theme.textTheme.bodyText2?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -110,36 +111,39 @@ class _ProductCard extends StatelessWidget {
                           Text(
                             "$currency ${NumberParser.twoDecimalDigit(productModel.offerPrice.toString())}",
                             style: theme.textTheme.bodyText1?.copyWith(
-                              color: primaryColor2,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                color: primaryColor2, fontWeight: FontWeight.w600, fontSize: 12),
                           ),
                         config.verticalSpaceVerySmall(),
-                        Text(
-                          "$currency ${NumberParser.twoDecimalDigit(productModel.price.toString())}",
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.bodyText1?.copyWith(
-                              color: productModel.offerPrice! > 0 &&
-                                      productModel.offerPrice! <
-                                          productModel.price!
-                                  ? Colors.black54
-                                  : primaryColor2,
-                              fontSize: productModel.offerPrice! > 0 &&
-                                      productModel.offerPrice! <
-                                          productModel.price!
-                                  ? 12
-                                  : 14,
-                              fontWeight: FontWeight.w600,
-                              decoration: productModel.offerPrice! > 0 &&
-                                      productModel.offerPrice! <
-                                          productModel.price!
-                                  ? TextDecoration.lineThrough
-                                  : TextDecoration.none),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "$currency ${NumberParser.twoDecimalDigit(productModel.price.toString())}",
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.bodyText1?.copyWith(
+                                  color: productModel.offerPrice! > 0 &&
+                                          productModel.offerPrice! < productModel.price!
+                                      ? Colors.red
+                                      : primaryColor2,
+                                  fontSize: productModel.offerPrice! > 0 &&
+                                          productModel.offerPrice! < productModel.price!
+                                      ? 10
+                                      : 12,
+                                  fontWeight: FontWeight.w600,
+                                  decorationColor: Colors.red,
+                                  decoration: productModel.offerPrice! > 0 &&
+                                          productModel.offerPrice! < productModel.price!
+                                      ? TextDecoration.lineThrough
+                                      : TextDecoration.none),
+                            ),
+                            Icon(
+                              CupertinoIcons.cart,
+                              size: 15,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ],
                         ),
-
-                        // config.verticalSpaceVerySmall(),
-
-                        // // config.verticalSpaceVerySmall(),
                       ],
                     ),
                   ),
@@ -159,10 +163,7 @@ class ProductEmi extends StatelessWidget {
   final String price;
   final ProductEmiType productEmiType;
 
-  const ProductEmi(
-      {Key? key,
-      required this.price,
-      this.productEmiType = ProductEmiType.small})
+  const ProductEmi({Key? key, required this.price, this.productEmiType = ProductEmiType.small})
       : super(key: key);
 
   @override
@@ -176,14 +177,12 @@ class ProductEmi extends StatelessWidget {
               "${calculateEmi(principle: double.tryParse(price) ?? 0, timeInMonths: int.tryParse(selectedItem.value) ?? 0)}",
               style: productEmiType == ProductEmiType.small
                   ? theme.textTheme.caption?.copyWith(color: theme.primaryColor)
-                  : theme.textTheme.bodyText2
-                      ?.copyWith(color: theme.primaryColor)),
+                  : theme.textTheme.bodyText2?.copyWith(color: theme.primaryColor)),
           config.horizontalSpaceSmall(),
           Text("x",
               style: productEmiType == ProductEmiType.small
                   ? theme.textTheme.caption?.copyWith(color: theme.primaryColor)
-                  : theme.textTheme.bodyText2
-                      ?.copyWith(color: theme.primaryColor)),
+                  : theme.textTheme.bodyText2?.copyWith(color: theme.primaryColor)),
           config.horizontalSpaceSmall(),
           Container(
               padding: EdgeInsets.zero,
@@ -203,10 +202,8 @@ class ProductEmi extends StatelessWidget {
                         value: e,
                         child: Text("$e",
                             style: productEmiType == ProductEmiType.small
-                                ? theme.textTheme.caption
-                                    ?.copyWith(color: theme.primaryColor)
-                                : theme.textTheme.bodyText2
-                                    ?.copyWith(color: theme.primaryColor))))
+                                ? theme.textTheme.caption?.copyWith(color: theme.primaryColor)
+                                : theme.textTheme.bodyText2?.copyWith(color: theme.primaryColor))))
                     .toList(),
                 onChanged: (value) {
                   selectedItem.value = value.toString();
@@ -216,10 +213,7 @@ class ProductEmi extends StatelessWidget {
           Text(" months*",
               style: productEmiType == ProductEmiType.small
                   ? theme.textTheme.caption?.copyWith(color: theme.primaryColor)
-                  : theme.textTheme.bodyText2
-                      ?.copyWith(color: theme.primaryColor)),
-          // Text("months*",style: theme.textTheme.caption?.copyWith(color: theme.primaryColor)),
-          // DropdownButtonExample(),
+                  : theme.textTheme.bodyText2?.copyWith(color: theme.primaryColor)),
         ],
       );
     });

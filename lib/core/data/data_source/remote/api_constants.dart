@@ -15,10 +15,6 @@ enum APIPath {
   products,
   productDetail,
   allProducts,
-  // productCompare,
-  // deleteCompareProduct,
-  // addCompareProduct,
-  // filterModel,
 
   /* Checkout */
   shippingMethods,
@@ -48,13 +44,6 @@ enum APIPath {
   deleteNonDefaultAddress,
   updateNonDefaultAddress,
   addNonDefaultAddress,
-  // updateDefaultBillingAddress,
-  // updateDefaultShippingAddress,
-  // defaultAddress,
-  // setDefaultShippingAddress,
-  // setDefaultBillingAddress,
-  // countryList,
-  // regionList,
 
   /* Category */
   category,
@@ -163,19 +152,6 @@ class APIPathHelper {
         return "/api/V1/get-products";
       case APIPath.productDetail:
         return "/api/V1/view-product/$keyword";
-
-      // case APIPath.productCompare:
-      //   return "/rest/V1/comparelist";
-
-      // case APIPath.deleteCompareProduct:
-      //   return "/rest/V1/compare/remove/$id";
-
-      // case APIPath.addCompareProduct:
-      //   return "/rest/V1/compare/add/$id";
-
-      // case APIPath.filterModel:
-      //   return "/rest/V1/categories/$id/subcategories";
-
       default:
         return "";
     }
@@ -223,10 +199,6 @@ class APIPathHelper {
 
       case APIPath.addItem:
         return "/api/V1/add-wishlists";
-
-      // case APIPath.removeItem:
-      //   return "/api/V1/wishlist/remove/$id";
-
       case APIPath.clear:
         return "/api/V1/empty-wishlist";
       default:
@@ -316,26 +288,6 @@ class APIPathHelper {
 
       case APIPath.updateNonDefaultAddress:
         return "/api/V1/update-addresses";
-
-      // case APIPath.updateDefaultBillingAddress:
-      //   return "/rest/V1/customer/billingadd/update";
-
-      // case APIPath.updateDefaultShippingAddress:
-      //   return "/rest/V1/customer/shippingadd/update";
-
-      // case APIPath.defaultAddress:
-      //   return "/api/V1/get-addresses";
-
-      // case APIPath.setDefaultBillingAddress:
-      //   return "/rest/V1/set/billingAddress/$id";
-
-      // case APIPath.setDefaultShippingAddress:
-      //   return "/rest/V1/set/shippingAddress/$id";
-
-      // case APIPath.countryList:
-      //   return "/rest/V1/directory/countries";
-      // case APIPath.regionList:
-      //   return "/rest/V1/regions/$id";
       default:
         return "";
     }

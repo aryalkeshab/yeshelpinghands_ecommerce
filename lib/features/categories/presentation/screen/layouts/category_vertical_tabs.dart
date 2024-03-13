@@ -2,7 +2,6 @@ import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/features/categories/data/models/response/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
 import '../../../../../core/utils/string_capitalize.dart';
 
 class CategoryVerticalTabs extends StatelessWidget {
@@ -21,8 +20,7 @@ class CategoryVerticalTabs extends StatelessWidget {
     return HookBaseWidget(builder: (context, config, theme) {
       final selectedTab = useState(0);
       return Container(
-        margin:
-            EdgeInsets.symmetric(vertical: config.appVerticalPaddingSmall()),
+        margin: EdgeInsets.symmetric(vertical: config.appVerticalPaddingSmall()),
         color: Colors.grey.withOpacity(0.2),
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
@@ -46,8 +44,7 @@ class CategoryVerticalTabs extends StatelessWidget {
                       color: selectedTab.value == index
                           ? theme.scaffoldBackgroundColor
                           : Colors.transparent,
-                      margin: EdgeInsets.only(
-                          bottom: config.appVerticalPaddingMedium()),
+                      margin: EdgeInsets.only(bottom: config.appVerticalPaddingMedium()),
                       padding: EdgeInsets.only(
                         top: config.appVerticalPaddingSmall(),
                         left: config.appEdgePadding(),
@@ -59,9 +56,8 @@ class CategoryVerticalTabs extends StatelessWidget {
                           color: selectedTab.value == index
                               ? theme.primaryColor
                               : theme.textTheme.bodyText2?.color,
-                          fontWeight: selectedTab.value == index
-                              ? FontWeight.w600
-                              : FontWeight.normal,
+                          fontWeight:
+                              selectedTab.value == index ? FontWeight.w600 : FontWeight.normal,
                         ),
                       ),
                     ),

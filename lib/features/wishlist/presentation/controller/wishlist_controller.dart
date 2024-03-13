@@ -38,19 +38,20 @@ class WishListController extends GetxController {
     String sku,
   ) async {
     final result = await Get.find<WishListRepository>().removeWishList(sku);
+    print('My data' + result.data);
+    print('My data' + removeWishListResponse.data);
     if (result.hasData) {
       AppSnackbar.showSnackbarWithActionButton(
           snackbarIcon: Icons.remove_circle_outline_outlined,
           context: context,
-          message: result.data);
+          message: removeWishListResponse.data);
       getWishList();
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     if (removeWishListResponse.hasData) {
-      showToast(addWishListResponse.data);
+      showToast(removeWishListResponse.data);
     }
   }
 
@@ -73,11 +74,10 @@ class WishListController extends GetxController {
       getWishList();
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     if (removeFromWishListResponse.hasData) {
-      showToast(addWishListResponse.data);
+      showToast(removeFromWishListResponse.data);
     }
   }
 
@@ -92,8 +92,7 @@ class WishListController extends GetxController {
       getWishList();
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
     hideLoadingDialog(context);
   }
@@ -108,14 +107,11 @@ class WishListController extends GetxController {
 
   ApiResponse get addWishListResponse => _addToWishListResponse;
 
-  addProductToWishList(BuildContext context, String slug,
-      {required String sku}) async {
-    addWishListResponse =
-        await Get.find<WishListRepository>().postWishList(slug);
+  addProductToWishList(BuildContext context, String slug, {required String sku}) async {
+    addWishListResponse = await Get.find<WishListRepository>().postWishList(slug);
     if (addWishListResponse.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(addWishListResponse.error));
+          context: context, message: NetworkException.getErrorMessage(addWishListResponse.error));
     }
     if (addWishListResponse.hasData) {
       Get.find<ProductDetailsController>().fetchProductDetails(slug);
@@ -129,7 +125,6 @@ class WishListController extends GetxController {
   }
 
   //getWishList
-
   ApiResponse _wishListResponse = ApiResponse();
 
   set wishlistResponse(ApiResponse response) {
@@ -141,8 +136,7 @@ class WishListController extends GetxController {
   final wishList = <WishListProduct>[];
 
   getWishList() async {
-    wishlistResponse =
-        await Get.find<WishListRepository>().getAllWishListProducts();
+    wishlistResponse = await Get.find<WishListRepository>().getAllWishListProducts();
     wishList.clear();
     if (wishlistResponse.hasData) {
       wishList.addAll(wishlistResponse.data);

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void showToast(String message, {Color? color,isCenter=false}) {
+void showToast(String message, {Color? color, isCenter = false}) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_LONG,
-      gravity:isCenter?ToastGravity.CENTER: ToastGravity.BOTTOM,
+      gravity: isCenter ? ToastGravity.CENTER : ToastGravity.BOTTOM,
       backgroundColor: color ?? Colors.green,
       textColor: Colors.white,
       fontSize: 16.0);

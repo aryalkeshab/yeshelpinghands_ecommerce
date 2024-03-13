@@ -23,7 +23,6 @@ import 'package:yeshelpinghand/features/home/presentation/controller/home_contro
 import 'package:yeshelpinghand/features/home/presentation/controller/image_slider_controller.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/top_deals_controller.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/top_rated_controller.dart';
-
 import '../../brands/data/repository/brands_repository_impl.dart';
 import '../data/repository/image_slider_repository_impl.dart';
 import '../domain/repository/banner_repository.dart';
@@ -32,8 +31,7 @@ class HomeBindings extends Bindings {
   @override
   void dependencies() {
     Get
-      ..put<BannerRemoteDataSource>(
-          BannerRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
+      ..put<BannerRemoteDataSource>(BannerRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<ImageSliderRepository>(ImageSliderRepositoryImpl(
           imageSliderRemoteDataSource: Get.find<BannerRemoteDataSource>(),
           networkInfo: Get.find<NetworkInfo>()))
@@ -42,26 +40,21 @@ class HomeBindings extends Bindings {
       ..put<HomeBannerRepository>(HomeBannerRepositoryImpl(
           homeBannerRemoteDataSource: Get.find<HomeBannerRemoteDataSource>(),
           networkInfo: Get.find<NetworkInfo>()))
-      ..put<ProductRemoteDataSource>(
-          ProductsRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
+      ..put<ProductRemoteDataSource>(ProductsRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<ProductsRepository>(ProductsRepositoryImpl(
           networkInfo: Get.find<NetworkInfo>(),
           productsRemoteDataSource: Get.find<ProductRemoteDataSource>()))
-      ..put<BrandsRemoteDataSource>(
-          BrandsRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
+      ..put<BrandsRemoteDataSource>(BrandsRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<BrandsRepository>(BrandsRepositoryImpl(
           networkInfo: Get.find<NetworkInfo>(),
           brandsRemoteDataSource: Get.find<BrandsRemoteDataSource>()))
       ..put<FeaturedCategoryRemoteDataSource>(
-          FeaturedCategoryRemoteDataSourceImpl(
-              apiClient: Get.find<ApiClient>()))
+          FeaturedCategoryRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<FeaturedCategoryRepository>(FeaturedCategoryRepositoryImpl(
-          featuredCategoryRemoteDataSource:
-              Get.find<FeaturedCategoryRemoteDataSource>(),
+          featuredCategoryRemoteDataSource: Get.find<FeaturedCategoryRemoteDataSource>(),
           networkInfo: Get.find<NetworkInfo>()))
       ..put(HomeController())
-      ..put<BannerRemoteDataSource>(
-          BannerRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
+      ..put<BannerRemoteDataSource>(BannerRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<BannerRepository>(BannerRepositoryImpl(
           bannerRemoteDataSource: Get.find<BannerRemoteDataSource>(),
           networkInfo: Get.find<NetworkInfo>()))

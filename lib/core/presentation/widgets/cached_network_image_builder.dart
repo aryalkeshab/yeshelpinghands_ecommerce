@@ -10,6 +10,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final BoxFit? fit;
   final double? aspectRatio;
   final bool isCompleteUrl;
+  final bool isDetailPage;
 
   const CustomCachedNetworkImage(
     this.imageUrl, {
@@ -18,18 +19,19 @@ class CustomCachedNetworkImage extends StatelessWidget {
     this.fit,
     this.aspectRatio,
     this.isCompleteUrl = true,
+    this.isDetailPage = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: isCompleteUrl
-          ? "$imageUrl"
-          : "${APIPathHelper.baseUrlImage}$imageUrl",
+      imageUrl: isCompleteUrl ? "$imageUrl" : "${APIPathHelper.baseUrlImage}$imageUrl",
       imageBuilder: (context, imageProvider) => AspectRatio(
         aspectRatio: aspectRatio ?? 1,
         child: Container(
           decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: isDetailPage ? BorderRadius.circular(0) : BorderRadius.circular(10),
             image: DecorationImage(
               image: imageProvider,
               fit: fit ?? BoxFit.cover,

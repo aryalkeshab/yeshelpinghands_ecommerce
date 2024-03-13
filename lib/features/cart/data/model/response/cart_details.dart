@@ -33,16 +33,10 @@ class Carts {
   String? price;
   String? offerPrice;
   int? id;
-  // int? productId;
   int? qty;
   String? actualPrice;
   String? priceUsed;
   String? totalPrice;
-  // int? variantId;
-  // String? variantValue;
-  // int? userId;
-  // String? createdAt;
-  // String? updatedAt;
 
   Carts({
     this.name,
@@ -51,16 +45,10 @@ class Carts {
     this.price,
     this.offerPrice,
     this.id,
-    // this.productId,
     this.qty,
     this.actualPrice,
     this.priceUsed,
     this.totalPrice,
-    // this.variantId,
-    // this.variantValue,
-    // this.userId,
-    // this.createdAt,
-    // this.updatedAt,
   });
 
   Carts.fromJson(Map<String, dynamic> json) {
@@ -70,16 +58,10 @@ class Carts {
     price = json['price'];
     offerPrice = json['offer_price'];
     id = json['id'];
-    // productId = json['product_id'];
     qty = json['qty'];
     actualPrice = json['actual_price'];
     priceUsed = json['price_used'];
     totalPrice = json['total_price'];
-    // variantId = json['variant_id'];
-    // variantValue = json['variant_value'];
-    // userId = json['user_id'];
-    // createdAt = json['created_at'];
-    // updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -90,16 +72,10 @@ class Carts {
     data['price'] = this.price;
     data['offer_price'] = this.offerPrice;
     data['id'] = this.id;
-    // data['product_id'] = this.productId;
     data['qty'] = this.qty;
     data['actual_price'] = this.actualPrice;
     data['price_used'] = this.priceUsed;
     data['total_price'] = this.totalPrice;
-    // data['variant_id'] = this.variantId;
-    // data['variant_value'] = this.variantValue;
-    // data['user_id'] = this.userId;
-    // data['created_at'] = this.createdAt;
-    // data['updated_at'] = this.updatedAt;
     return data;
   }
 }

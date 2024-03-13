@@ -19,13 +19,10 @@ class CheckoutAddressInformationLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, config, theme) {
-      final _addressItemSpacing = config.verticalSpaceSmall();
       return Container(
         padding: EdgeInsets.symmetric(
-            horizontal: config.appEdgePadding(),
-            vertical: config.appVerticalPaddingMedium()),
-        decoration: BoxDecoration(
-            color: kWhite400, borderRadius: BorderRadius.circular(10)),
+            horizontal: config.appEdgePadding(), vertical: config.appVerticalPaddingMedium()),
+        decoration: BoxDecoration(color: kWhite400, borderRadius: BorderRadius.circular(10)),
         width: double.maxFinite,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,24 +31,20 @@ class CheckoutAddressInformationLayout extends StatelessWidget {
             Row(
               children: [
                 Text(title,
-                    style: theme.textTheme.bodyText1
-                        ?.copyWith(fontWeight: FontWeight.w600)),
+                    style: theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600)),
               ],
             ),
             config.verticalSpaceSmall(),
             Text(
               '${address?.city}',
-              // '${address?.city} ${address?.lastName}',
-              style: theme.textTheme.bodyText2
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.w600),
             ),
             config.verticalSpaceSmall(),
             Row(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.location_on_outlined,
-                    color: Theme.of(context).primaryColor, size: 16),
+                Icon(Icons.location_on_outlined, color: Theme.of(context).primaryColor, size: 16),
                 config.horizontalSpaceSmall(),
                 Text(
                   '${address?.country}, ${address?.city}, ${address?.postalCode}, ${address?.address}',
@@ -61,8 +54,7 @@ class CheckoutAddressInformationLayout extends StatelessWidget {
             config.verticalSpaceMedium(),
             Align(
               alignment: Alignment.centerRight,
-              child: PrimaryTextButton(
-                  onPressed: onChooseAnotherPressed, label: "Change"),
+              child: PrimaryTextButton(onPressed: onChooseAnotherPressed, label: "Change"),
             ),
           ],
         ),

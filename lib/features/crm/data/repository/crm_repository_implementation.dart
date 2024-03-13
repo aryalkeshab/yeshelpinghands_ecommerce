@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:yeshelpinghand/core/data/data_source/remote/api_result.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_info.dart';
@@ -12,8 +10,7 @@ class CRMRepositoryImpl implements CRMRepository {
   final NetworkInfo networkInfo;
   final CRMRemoteDataSource crmRemoteDataSource;
 
-  CRMRepositoryImpl(
-      {required this.networkInfo, required this.crmRemoteDataSource});
+  CRMRepositoryImpl({required this.networkInfo, required this.crmRemoteDataSource});
   @override
   Future<ApiResponse> fetchCrmDetails(int id) async {
     if (await networkInfo.isConnected) {

@@ -13,14 +13,12 @@ class LanguageSelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LanguageController languageController = Get.put(LanguageController());
     return Scaffold(
       body: BaseWidget(builder: (context, config, theme) {
         return SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: config.appEdgePadding(),
-                vertical: config.appVerticalPadding(15)),
+                horizontal: config.appEdgePadding(), vertical: config.appVerticalPadding(15)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,19 +67,12 @@ class LanguageSelectionView extends StatelessWidget {
           Text(
             'cLanguage'.tr,
             textAlign: TextAlign.start,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.w600),
           ),
           config.verticalSpaceSmall(),
           Text(
             'tLanguage'.tr,
             textAlign: TextAlign.start,
-
-            // style: TextStyle(
-            //   fontSize: 17.sp,
-            // ),
           ),
           config.verticalSpaceLarge(),
           GetBuilder<LanguageController>(builder: (context) {
@@ -96,12 +87,9 @@ class LanguageSelectionView extends StatelessWidget {
                     children: [
                       LanguageTile(
                         onSelect: (languageId) {
-                          Get.find<LanguageController>().selectedLanguageId =
-                              languageId;
+                          Get.find<LanguageController>().selectedLanguageId = languageId;
                         },
-                        isSelected:
-                            Get.find<LanguageController>().selectedLanguageId ==
-                                index,
+                        isSelected: Get.find<LanguageController>().selectedLanguageId == index,
                         language: language,
                       ),
                       config.verticalSpaceMedium(),
@@ -137,10 +125,8 @@ class LanguageTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isSelected = useState(false);
     return ListTile(
       onTap: () {
-        // isSelected.value= true;
         onSelect(language.id);
       },
       contentPadding: EdgeInsets.zero,

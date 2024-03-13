@@ -8,13 +8,9 @@ class HomeBannerController extends GetxController {
 
   @override
   void onInit() {
-    // getBanner1("qmb-col-banners");
-    // getBanner2("banner_mid2_home1");
-
     super.onInit();
     _homeBannerRepository = Get.find<HomeBannerRepository>();
     getBannerList();
-    // getSingleBanner();
   }
 
   //home banner 1
@@ -28,8 +24,7 @@ class HomeBannerController extends GetxController {
   ApiResponse get homeBanner1ApiResponse => _homeBanner1ApiResponse;
 
   getBanner1(String identifier) async {
-    homeBanner1ApiResponse =
-        await _homeBannerRepository.getBannerList(identifier);
+    homeBanner1ApiResponse = await _homeBannerRepository.getBannerList(identifier);
   }
 
 // home banner 2
@@ -43,8 +38,7 @@ class HomeBannerController extends GetxController {
   ApiResponse get homeBanner2ApiResponse => _homeBanner2ApiResponse;
 
   getBanner2(String identifier) async {
-    homeBanner2ApiResponse =
-        await _homeBannerRepository.getBannerList(identifier);
+    homeBanner2ApiResponse = await _homeBannerRepository.getBannerList(identifier);
   }
 
   ApiResponse _singleBannerResponse = ApiResponse();
@@ -55,12 +49,6 @@ class HomeBannerController extends GetxController {
   }
 
   ApiResponse get singleBannerResponse => _singleBannerResponse;
-
-  // getSingleBanner() async {
-  //
-  //   singleBannerResponse =
-  //       await Get.find<BannerRepository>().fetchSingleBanner();
-  // }
 
   ApiResponse _bannerListResponse = ApiResponse();
 
@@ -77,6 +65,5 @@ class HomeBannerController extends GetxController {
 
   getBothBanner() async {
     await getBannerList();
-    // await getSingleBanner();
   }
 }

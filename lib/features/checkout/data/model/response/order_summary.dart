@@ -38,8 +38,7 @@ class OrderSummary {
     shippingMethod = json['shipping_method'];
     shippingDescription = json['shipping_description'];
     shippingAmount = NumberParser.intFromDoubleString(json['shipping_amount']);
-    zenithubMemberpointPaymentAmount =
-        json["zenithub_memberpointpayment_amount"];
+    zenithubMemberpointPaymentAmount = json["zenithub_memberpointpayment_amount"];
     if (json['items'] != null) {
       items = <Items>[];
       json['items'].forEach((v) {
@@ -58,14 +57,7 @@ class Items {
   int? price;
   ProductImage? image;
 
-  Items(
-      {this.itemId,
-      this.productId,
-      this.sku,
-      this.name,
-      this.qty,
-      this.price,
-      this.image});
+  Items({this.itemId, this.productId, this.sku, this.name, this.qty, this.price, this.image});
 
   Items.fromJson(Map<String, dynamic> json) {
     itemId = json['item_id'];
@@ -77,20 +69,3 @@ class Items {
     image = json['image'] != null ? ProductImage.fromJson(json['image']) : null;
   }
 }
-
-/*
- {
-                "item_id": "167",
-                "product_id": "253",
-                "sku": "ITM001006",
-                "name": "HOLLANDIA YOGHURT STRAWBERRY 1LTR",
-                "qty": "1.0000",
-                "price": "8380.0000",
-                "image": {
-                    "image": "/g/r/groceries_-_hollandia_yoghurt_strawberry_1ltr_itm001006_.jpeg",
-                    "thumbnail": "/g/r/groceries_-_hollandia_yoghurt_strawberry_1ltr_itm001006_.jpeg",
-                    "small_image": "/g/r/groceries_-_hollandia_yoghurt_strawberry_1ltr_itm001006_.jpeg"
-                }
-            }
- */
-

@@ -1,4 +1,3 @@
-import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,8 +10,7 @@ class AuthWidgetBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-        () => builder(context, Get.find<AuthController>().isLoggedIn.value));
+    return Obx(() => builder(context, Get.find<AuthController>().isLoggedIn.value));
   }
 }
 
@@ -23,8 +21,6 @@ class AuthWidgetWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Get.find<AuthController>().isLoggedIn.value
-        ? child
-        : const SizedBox.shrink());
+    return Obx(() => Get.find<AuthController>().isLoggedIn.value ? child : const SizedBox.shrink());
   }
 }

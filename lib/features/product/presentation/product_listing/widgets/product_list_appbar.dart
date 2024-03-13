@@ -2,7 +2,6 @@ import 'package:yeshelpinghand/core/presentation/resources/colors.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yeshelpinghand/features/cart/data/model/response/cart_details.dart';
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
@@ -11,38 +10,29 @@ import 'package:yeshelpinghand/features/product/data/model/request/filter_query_
 import 'package:yeshelpinghand/features/product/presentation/product_listing/product_listing_screen.dart';
 import '../../../../../core/presentation/widgets/base_widget.dart';
 import '../../../../../core/utils/size_config.dart';
-import '../../../../cart/presentation/screen/cart_screen.dart';
-import '../../../../cart/presentation/screen/empty_cart_screen.dart';
-import '../../../../shared/layouts/auth_widget_wrapper.dart';
 
-class ProductListingAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(FilterQueryParams Function(FilterQueryParams)) onSortUpdate;
+  final bool? isDash;
 
-  ProductListingAppBar({required this.onSortUpdate});
+  ProductListingAppBar({required this.onSortUpdate, this.isDash = false});
 
   @override
   Widget build(BuildContext context) {
     final config = SizeConfig(context);
     final themeData = Theme.of(context);
     return AppBar(
-      elevation: 1,
+      backgroundColor: themeData.primaryColor,
+      elevation: 0,
       automaticallyImplyLeading: false,
       bottom: PreferredSize(
           child: Padding(
-              padding:
-                  EdgeInsets.only(bottom: config.appVerticalPaddingMedium()),
+              padding: EdgeInsets.only(bottom: config.appVerticalPaddingSmall()),
               child: _SortHeading(
                 onSortParamSelect: (sortParam) {
                   onSortUpdate(
                     (FilterQueryParams filterQueryParams) {
-                      // filterQueryParams.order ??= SortOrder.asc.value;
                       filterQueryParams.sort = sortParam.value;
-                      // if (filterQueryParams.order == SortParameter.bestSeller) {
-                      //   filterQueryParams.bestSeller = true;
-                      // } else if {
-
-                      // }
                       return filterQueryParams;
                     },
                   );
@@ -50,8 +40,6 @@ class ProductListingAppBar extends StatelessWidget
                 onSortOrderSelect: (order) {
                   onSortUpdate(
                     (FilterQueryParams filterQueryParams) {
-                      // filterQueryParams.sort ??= SortParameter.position.value;
-                      // filterQueryParams.order = order.value;
                       return filterQueryParams;
                     },
                   );
@@ -59,19 +47,16 @@ class ProductListingAppBar extends StatelessWidget
               )),
           preferredSize: const Size(double.maxFinite, 45)),
       actions: <Widget>[
-        InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: EdgeInsets.only(left: config.appEdgePadding()),
+        if (isDash == false)
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: const Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_rounded,
               color: Colors.white,
-              // size: 20,
             ),
           ),
-        ),
         config.horizontalSpaceSmall(),
         Expanded(
           child: InkWell(
@@ -81,14 +66,15 @@ class ProductListingAppBar extends StatelessWidget
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
               child: Container(
+                  height: config.appHeight(5),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: grey500,
+                        width: 1,
+                        color: Colors.black38.withOpacity(0.2),
                       ),
-                      borderRadius: BorderRadius.circular(5)),
+                      color: const Color(0xfff2f2f2)),
                   child: Row(
-                    // ignore: avoid_redundant_argument_values
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -101,8 +87,7 @@ class ProductListingAppBar extends StatelessWidget
                       config.horizontalSpaceSmall(),
                       Text(
                         'You are looking for...',
-                        style: themeData.textTheme.bodyText2
-                            ?.copyWith(color: grey500),
+                        style: themeData.textTheme.bodyText2?.copyWith(color: grey500),
                         textAlign: TextAlign.left,
                       ),
                       const Spacer(),
@@ -112,9 +97,8 @@ class ProductListingAppBar extends StatelessWidget
             ),
           ),
         ),
-        config.horizontalSpaceMedium(),
         Padding(
-          padding: EdgeInsets.only(right: config.appHorizontalPaddingSmall()),
+          padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
           child: IconButton(
             icon: Stack(
               children: [
@@ -129,10 +113,8 @@ class ProductListingAppBar extends StatelessWidget
                         radius: 7,
                         backgroundColor: Colors.red,
                         child: Text("${cartResponse.carts?.length}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .caption
-                                ?.copyWith(color: Colors.white)),
+                            style:
+                                Theme.of(context).textTheme.caption?.copyWith(color: Colors.white)),
                       );
                     } else {
                       return const SizedBox.shrink();
@@ -147,7 +129,6 @@ class ProductListingAppBar extends StatelessWidget
             },
           ),
         ),
-        config.horizontalSpaceMedium(),
       ],
     );
   }
@@ -175,10 +156,9 @@ class _SortHeadingState extends State<_SortHeading> {
 
   @override
   Widget build(BuildContext context) {
-    // final selectedValue =widget.filterQueryParams;
     return BaseWidget(builder: (context, config, theme) {
       return Padding(
-        padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
+        padding: EdgeInsets.symmetric(horizontal: config.appHorizontalPaddingSmall()),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -188,9 +168,8 @@ class _SortHeadingState extends State<_SortHeading> {
                 UpDownSort(
                   onSortTap: widget.onSortOrderSelect,
                 ),
-                config.horizontalSpaceSmall(),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.359,
                   child: DropdownButton<SortParameter>(
                     dropdownColor: theme.primaryColor,
                     isExpanded: true,
@@ -263,9 +242,7 @@ class _UpDownSortState extends State<UpDownSort> {
         widget.onSortTap(sortOrder);
       },
       icon: Icon(
-        sortOrder == SortOrder.asc
-            ? CupertinoIcons.sort_down
-            : CupertinoIcons.sort_up,
+        sortOrder == SortOrder.asc ? CupertinoIcons.sort_down : CupertinoIcons.sort_up,
         color: Colors.white,
       ),
     );
@@ -293,7 +270,6 @@ enum SortParameter {
   priceLowToHigh,
   priceHighToLow,
   mostReviewed,
-  // position,
 }
 
 extension SortParametersExt on SortParameter {

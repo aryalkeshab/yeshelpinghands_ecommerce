@@ -18,13 +18,8 @@ class CircularCachedNetworkImageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: isBorderEnabled == true
-            ? BoxDecoration(
-                border: Border.all(color: Colors.black12),
-                borderRadius: BorderRadius.circular(borderRadius ?? 100),
-              )
-            : null,
+    return Card(
+        elevation: 2,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(borderRadius ?? 100),
             child: AspectRatio(

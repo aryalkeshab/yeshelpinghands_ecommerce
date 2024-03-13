@@ -4,7 +4,6 @@ import 'package:yeshelpinghand/core/presentation/widgets/buttons.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/textfields.dart';
 import 'package:yeshelpinghand/core/utils/custom_validators.dart';
 import 'package:yeshelpinghand/features/auth/presentation/controller/password_reset_controller.dart';
-import 'package:yeshelpinghand/features/shared/layouts/circular_app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
@@ -19,34 +18,41 @@ class PasswordResetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: pasminaColor,
-        leading: IconButton(
-            onPressed: Get.back,
-            icon: const Icon(Icons.arrow_back),
-            color: Colors.white),
-      ),
       body: SingleChildScrollView(
         child: HookBaseWidget(builder: (context, config, theme) {
-          final resetPasswordFormKey =
-              useMemoized(() => GlobalKey<FormState>());
+          final resetPasswordFormKey = useMemoized(() => GlobalKey<FormState>());
           return Column(
             children: [
-              ClipPath(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width,
-                  color: pasminaColor,
-                  child: Image.asset(
-                    UIAssets.app_Icon,
-                    width: config.appWidth(50),
+              Stack(
+                children: [
+                  ClipPath(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        gradient: pasminaColor,
+                      ),
+                      child: Image.asset(
+                        UIAssets.app_Icon,
+                        width: config.appWidth(50),
+                      ),
+                    ),
+                    clipper: Clipper(),
                   ),
-                ),
-                clipper: Clipper(),
+                  Positioned(
+                    top: 30,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                      onPressed: Get.back,
+                    ),
+                  )
+                ],
               ),
               Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
+                padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
                 child: Center(
                   child: Form(
                     key: resetPasswordFormKey,
@@ -54,13 +60,10 @@ class PasswordResetScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // const Circularapp_Icon(),
                         config.verticalSpaceMedium(),
-                        Text("Forgot your password?",
-                            style: theme.textTheme.headline6),
+                        Text("Forgot your password?", style: theme.textTheme.headline6),
                         config.verticalSpaceSmall(),
-                        const Text("Please enter your email address.",
-                            textAlign: TextAlign.center),
+                        const Text("Please enter your email address.", textAlign: TextAlign.center),
                         config.verticalSpaceLarge(),
                         PrimaryFormField(
                           hintIcon: Icon(
@@ -78,12 +81,9 @@ class PasswordResetScreen extends StatelessWidget {
                         PrimaryButton(
                             label: "RESET MY PASSWORD",
                             onPressed: () {
-                              if (resetPasswordFormKey.currentState
-                                      ?.validate() ==
-                                  true) {
+                              if (resetPasswordFormKey.currentState?.validate() == true) {
                                 resetPasswordFormKey.currentState?.save();
-                                Get.find<PasswordResetController>()
-                                    .resetPassword(context, email);
+                                Get.find<PasswordResetController>().resetPassword(context, email);
                               }
                             }),
                       ],

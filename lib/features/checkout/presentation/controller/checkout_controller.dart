@@ -4,7 +4,6 @@ import 'package:yeshelpinghand/features/checkout/domain/repository/checkout_repo
 
 class CheckoutController extends GetxController {
   updatePaymentStatus(PaymentStatusUpdateParams params) async {
-    final result =
-        await Get.find<CheckoutRepository>().updatePaymentStatus(params);
+    final result = await Get.find<CheckoutRepository>().updatePaymentStatus(params);
   }
 }

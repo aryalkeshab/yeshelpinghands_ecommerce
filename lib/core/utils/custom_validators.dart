@@ -13,14 +13,14 @@ class Validator {
   }
 
   static String? validatePassword(String value) {
-    const pattern =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    const pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     final regExp = RegExp(pattern);
     if (value.isEmpty) {
       return "This field is required";
     } else if (!regExp.hasMatch(value)) {
       return "Password must have at least 8 characters,an uppercase, a special symbol and a number";
     }
+    return null;
   }
 
   static String? validateName(String value) {
@@ -55,7 +55,7 @@ class Validator {
   }
 
   static String? validateEmpty(String? value) {
-    if (value==null || value.isEmpty) {
+    if (value == null || value.isEmpty) {
       return "This field is required";
     }
     return null;

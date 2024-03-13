@@ -7,15 +7,10 @@ import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/features/categories/data/models/response/category.dart';
 import 'package:yeshelpinghand/features/categories/presentation/controller/category_controller.dart';
 import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_loading_view.dart';
-import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_tab_view.dart';
-import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_vertical_tabs.dart';
 import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
-
 import '../../../../core/data/data_source/remote/api_constants.dart';
-import '../../../../core/presentation/resources/colors.dart';
 import '../../../../core/presentation/widgets/cached_network_image_builder.dart';
-import '../../../shared/layouts/appbar_home.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -27,15 +22,6 @@ class CategoryScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text('Categories', style: TextStyle(fontSize: 16)),
-        // title: Column(
-        //   children: [
-        //     SearchBarContainer(
-        //       onPressed: () {
-        //         Get.toNamed(Routes.search);
-        //       },
-        //     ),
-        //   ],
-        // ),
       ),
       body: const CategoryBody(),
     );
@@ -68,9 +54,6 @@ class CategoryBody extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: MediaQuery.of(context).size.width / 2,
                       childAspectRatio: 1.0,
-                      //   childAspectRatio: 3.85 / 4,
-                      // crossAxisSpacing: 20,
-                      // mainAxisSpacing: 20
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10),
                   itemCount: categoryList.length,
@@ -81,8 +64,7 @@ class CategoryBody extends StatelessWidget {
                       onTap: () {
                         selectedCategoryId.value = category.id;
                         Get.toNamed(Routes.productListingScreen,
-                            arguments:
-                                FilterQueryParams(categoryId: category.id));
+                            arguments: FilterQueryParams(categoryId: category.id));
                       },
                     );
                   },
@@ -102,16 +84,6 @@ class CategoryBody extends StatelessWidget {
   }
 }
 
-/*
-
-SmartRefresher(
-            controller: controller.refreshController,
-            header: const WaterDropHeader(),
-            enablePullDown: true,
-            enablePullUp: false,
-            onRefresh: () => controller.fetchCategoryList(),
-            child:
- */
 class CategoryCard extends StatelessWidget {
   final Category category;
   final VoidCallback onTap;
@@ -126,11 +98,9 @@ class CategoryCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        color: pasminaColor,
         elevation: 4.0,
         child: Container(
-          constraints: BoxConstraints(
-              maxHeight: 200), // Adjust the maximum height as needed
+          constraints: BoxConstraints(maxHeight: 200), // Adjust the maximum height as needed
           child: ListView(
             physics: NeverScrollableScrollPhysics(),
             children: [
@@ -163,53 +133,3 @@ class CategoryCard extends StatelessWidget {
     );
   }
 }
-
-// class CategoryCard extends StatelessWidget {
-//   final Category category;
-//   final VoidCallback onTap;
-
-//   CategoryCard({required this.category, required this.onTap});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: onTap,
-//       child: Card(
-//         elevation: 4.0,
-//         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(16.0),
-//         ),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             Expanded(
-//               child: AspectRatio(
-//                 aspectRatio: 4.0 / 3.0,
-//                 child: ClipRRect(
-//                   borderRadius: BorderRadius.only(
-//                     topLeft: Radius.circular(16.0),
-//                     topRight: Radius.circular(16.0),
-//                   ),
-//                   child: Image.network(
-//                     "${APIPathHelper.baseUrlImage + category.image}",
-//                     fit: BoxFit.cover,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: EdgeInsets.all(16.0),
-//               child: Text(
-//                 category.name,
-//                 style: TextStyle(
-//                   fontSize: 16,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

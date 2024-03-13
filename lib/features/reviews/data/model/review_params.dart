@@ -1,5 +1,3 @@
-import 'package:flutter/rendering.dart';
-
 class ReviewParams {
   int priceRating;
   int qualityRating;

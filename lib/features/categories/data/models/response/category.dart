@@ -1,22 +1,3 @@
-// class Category {
-//   int? id;
-//   String? image;
-//   String? name;
-//   List<SubCategory>? subCategories;
-
-//   Category({this.id, this.image, this.name, this.subCategories});
-
-//   factory Category.fromJson(Map<String, dynamic> json) {
-//     return Category(
-//       id: json['id'],
-//       name: json["name"],
-//       subCategories: json['children_data']
-//           ?.map<SubCategory>((e) => SubCategory.fromJson(e))
-//           .toList(),
-//     );
-//   }
-// }
-
 class SubCategory {
   int? id;
   String? image;

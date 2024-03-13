@@ -1,5 +1,4 @@
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
-import 'package:yeshelpinghand/features/crm/presentation/controllers/contact_us_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +15,7 @@ class HelpFaqsScreen extends StatelessWidget {
         init: HelpFaqsController(),
         builder: (context) {
           return BaseWidget(builder: (context, config, theme) {
-            final result =
-                Get.find<HelpFaqsController>().helpAndFaqsApiResponse;
+            final result = Get.find<HelpFaqsController>().helpAndFaqsApiResponse;
 
             return Scaffold(
                 appBar: AppBar(
@@ -28,11 +26,9 @@ class HelpFaqsScreen extends StatelessWidget {
                     return SingleChildScrollView(
                         child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      // child: Html(data: result.data.content),
                     ));
                   } else if (result.hasError) {
-                    return ErrorView(
-                        title: NetworkException.getErrorMessage(result.error));
+                    return ErrorView(title: NetworkException.getErrorMessage(result.error));
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }

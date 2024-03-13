@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/resources/colors.dart';
 import '../../../../../core/presentation/widgets/base_widget.dart';
 import '../../../data/model/response/filter_drawer_model.dart';
 
@@ -41,8 +39,7 @@ class _StockFilterState extends State<StockFilter> {
         children: [
           Text(
             "Stock Status",
-            style:
-                theme.textTheme.headline6?.copyWith(color: theme.primaryColor),
+            style: theme.textTheme.headline6?.copyWith(color: theme.primaryColor),
           ),
           ListView.builder(
               shrinkWrap: true,

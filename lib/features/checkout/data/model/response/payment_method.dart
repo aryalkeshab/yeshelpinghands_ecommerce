@@ -1,10 +1,3 @@
-/*
- {
-        "label": "Cash On Delivery",
-        "value": "cashondelivery"
-    },
- */
-
 class PaymentMethod {
   String? label;
   String? value;

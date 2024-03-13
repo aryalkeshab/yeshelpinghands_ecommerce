@@ -26,9 +26,7 @@ class AppSnackbar {
   }
 
   static void showSnackbarWithActionButton(
-      {required BuildContext context,
-      required String message,
-      required IconData snackbarIcon}) {
+      {required BuildContext context, required String message, required IconData snackbarIcon}) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: const Duration(seconds: 3),
       action: SnackBarAction(

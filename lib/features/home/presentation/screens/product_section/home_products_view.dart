@@ -1,17 +1,10 @@
 import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
-import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
-import 'package:yeshelpinghand/features/home/data/models/response/products_model.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/home_controller.dart';
 import 'package:yeshelpinghand/features/product/presentation/product_listing/product_listing_screen.dart';
-
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-import '../../../../product/data/model/request/filter_query_params.dart';
 import '../../../../shared/layouts/product_card.dart';
 
 class HomeProductsView extends StatefulWidget {
@@ -41,7 +34,6 @@ class _HomeProductsViewState extends State<HomeProductsView> {
               return ProductCard.large(
                 productModel: product,
                 onWishlistButtonClick: () {},
-                // onCartButtonClick: () {},
               );
             }),
           );

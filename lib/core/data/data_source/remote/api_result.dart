@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class ApiResponse<T> extends Equatable {
   ApiResponse({this.error, this.data});

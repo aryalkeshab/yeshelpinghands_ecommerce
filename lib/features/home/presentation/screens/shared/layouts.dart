@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yeshelpinghand/core/presentation/resources/colors.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -21,42 +20,28 @@ class SectionHeader extends StatelessWidget {
       height: 35,
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.only(left: 10),
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Theme.of(context).colorScheme.primary),
-      //   borderRadius: BorderRadius.circular(3),
-      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title.toUpperCase(),
+            title,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 16),
           ),
-          InkWell(
-            onTap: onViewAllProductTap,
-            child: Text(
-              "See All >",
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.primary,
+          showViewAll
+              ? InkWell(
+                  onTap: onViewAllProductTap,
+                  child: Text(
+                    "See all",
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
-            ),
-          ),
-          // if (showViewAll)
-          //   InkWell(
-          //     onTap: onViewAllProductTap,
-          //     child: Container(
-          //       width: 35,
-          //       height: double.maxFinite,
-          //       decoration: BoxDecoration(
-          //         color: Theme.of(context).colorScheme.primary,
-          //       ),
-          //       child: const Icon(Icons.keyboard_arrow_right),
-          //     ),
-          //   ),
+                )
+              : Container(),
         ],
       ),
     );

@@ -7,7 +7,6 @@ class HomeBannerResponse {
 
   factory HomeBannerResponse.fromJson(Map<String, dynamic> json) {
     String bannerLink = json['image'];
-    // String categoryId = json['category_id'];
 
     return HomeBannerResponse(bannerLink: bannerLink);
   }

@@ -22,39 +22,6 @@ class CategoryTabView extends StatelessWidget {
       return Expanded(
         child: Stack(
           children: [
-            // Container(
-            //   margin: EdgeInsets.symmetric(
-            //     horizontal: config.appEdgePadding(),
-            //     vertical: config.appVerticalPaddingLarge(),
-            //   ),
-            //   height: MediaQuery.of(context).size.height,
-            //   child: SingleChildScrollView(
-            //     physics: const BouncingScrollPhysics(),
-            //     child: Padding(
-            //       padding: EdgeInsets.symmetric(
-            //           vertical: config.appVerticalPaddingMedium()),
-            //       child: Column(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: List.generate(category.subCategories?.length ?? 0,
-            //             (index) {
-            //           final subCategory = category.subCategories?[index];
-            //           if (subCategory != null) {
-            //             return Column(
-            //               crossAxisAlignment: CrossAxisAlignment.start,
-            //               mainAxisSize: MainAxisSize.min,
-            //               children: [
-            //                 SubCategorySection(subCategory: subCategory),
-            //                 // config.verticalSpaceMedium(),
-            //               ],
-            //             );
-            //           } else {
-            //             return const Text('No subCategory for this product');
-            //           }
-            //         }),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Positioned(
                 top: 10,
                 right: 20,
@@ -90,8 +57,6 @@ class SubCategorySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, config, theme) {
       return Container(
-        // margin:
-        //     EdgeInsets.symmetric(vertical: config.appVerticalPaddingMedium()),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -103,27 +68,22 @@ class SubCategorySection extends StatelessWidget {
               },
               child: Text(
                 StringCapitalize.capitalizeSentence('${subCategory.name}'),
-                style: theme.textTheme.bodyText2
-                    ?.copyWith(fontWeight: FontWeight.w500),
+                style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.w500),
               ),
             ),
             config.verticalSpaceMedium(),
             subCategory.subCategoryChildren?.isEmpty == true
                 ? config.verticalSpaceCustom(0.15)
                 : Wrap(
-                    children: List.generate(
-                        subCategory.subCategoryChildren?.length ?? 0, (index) {
-                      final subCategoryChild =
-                          subCategory.subCategoryChildren![index];
+                    children: List.generate(subCategory.subCategoryChildren?.length ?? 0, (index) {
+                      final subCategoryChild = subCategory.subCategoryChildren![index];
 
                       return InkWell(
                         onTap: () {
                           Get.toNamed(Routes.productListingScreen,
-                              arguments: FilterQueryParams(
-                                  categoryId: subCategoryChild.id));
+                              arguments: FilterQueryParams(categoryId: subCategoryChild.id));
                         },
-                        child: SubCategoryChildCard(
-                            subCategoryChild: subCategoryChild),
+                        child: SubCategoryChildCard(subCategoryChild: subCategoryChild),
                       );
                     }),
                   ),
@@ -166,12 +126,10 @@ class SubCategoryChildCard extends StatelessWidget {
                         horizontal: config.appHorizontalPaddingLarge(),
                         vertical: config.appVerticalPadding(1.5)),
                     decoration: BoxDecoration(
-                        color: theme.primaryColor,
-                        borderRadius: BorderRadius.circular(10)),
+                        color: theme.primaryColor, borderRadius: BorderRadius.circular(10)),
                     child: Text(
                       "${subCategoryChild.name?.substring(0, 1)}",
-                      style: theme.textTheme.bodyText1
-                          ?.copyWith(color: Colors.white),
+                      style: theme.textTheme.bodyText1?.copyWith(color: Colors.white),
                     ),
                   ),
             config.verticalSpaceSmall(),

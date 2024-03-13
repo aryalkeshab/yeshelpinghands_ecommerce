@@ -7,16 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ContactUsController extends GetxController {
   late CRMRepository _CRMRepository;
-
-  // bool isLoading = false;
-
   get data => null;
 
   @override
   void onInit() {
-    // _CRMRepository = Get.find<CRMRepository>();
-
-    // getContactUsDetails(20);
     super.onInit();
   }
 
@@ -30,9 +24,7 @@ class ContactUsController extends GetxController {
   ApiResponse get contactUsApiResponse => _contactUsApiResponse;
 
   getContactUsDetails(int id) async {
-    // isLoading = true;
     contactUsApiResponse = await _CRMRepository.fetchCrmDetails(id);
-    // isLoading = false;
   }
 
   Future<void> lauchPhone(String phoneNumber) async {
@@ -43,8 +35,7 @@ class ContactUsController extends GetxController {
     await launchUrl(launchUri);
   }
 
-  void launchEmail(
-      BuildContext context, String emailAddress, String subject) async {
+  void launchEmail(BuildContext context, String emailAddress, String subject) async {
     final mail = Uri(
       scheme: 'mailto',
       path: emailAddress,
@@ -86,8 +77,7 @@ class ContactUsController extends GetxController {
   }
 
   void launchInstagram(BuildContext context) async {
-    final fallbackInstagramUrl =
-        Uri.parse("instagram://user?username=qmbhypermart");
+    final fallbackInstagramUrl = Uri.parse("instagram://user?username=qmbhypermart");
     final instagramUrl = Uri.parse("https://www.instagram.com/qmbhypermart");
 
     if (await canLaunchUrl(instagramUrl)) {

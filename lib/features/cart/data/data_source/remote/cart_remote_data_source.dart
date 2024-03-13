@@ -27,14 +27,11 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
 
   @override
   Future addToCartItems(CartParams cartParams) {
-    return apiClient.authPost(APIPathHelper.cartAPIs(APIPath.addToCart),
-        data: cartParams.toJson());
+    return apiClient.authPost(APIPathHelper.cartAPIs(APIPath.addToCart), data: cartParams.toJson());
   }
 
   @override
   Future removeProductFromCart(String slug) {
-    // List<String> updateCartParamsList = [];
-    // updateCartParamsList.add(slug);
     return apiClient.authPost(
         APIPathHelper.cartAPIs(
           APIPath.updateCart,
@@ -44,16 +41,11 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
 
   @override
   Future removeAllProductFromCart() {
-    return apiClient
-        .authGet(APIPathHelper.cartAPIs(APIPath.removeAllCartProducts));
+    return apiClient.authGet(APIPathHelper.cartAPIs(APIPath.removeAllCartProducts));
   }
 
   @override
   Future updateCart(UpdateCartParams updateCartParams) {
-    // List<String> updateCartParamsList = [];
-    // List<int> updateCartParamsQtyInt = [];
-    // updateCartParamsList.add(updateCartParams.cartItemId);
-    // updateCartParamsQtyInt.add(updateCartParams.quantity);
     return apiClient.authPost(APIPathHelper.cartAPIs(APIPath.updateCart),
         data: updateCartParams.toJson());
   }

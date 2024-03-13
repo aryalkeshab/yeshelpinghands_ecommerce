@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 class AboutUsController extends GetxController {
   late CRMRepository _CRMRepository;
-  // bool isLoading = false;
 
   get data => null;
   @override
@@ -25,8 +24,6 @@ class AboutUsController extends GetxController {
   ApiResponse get aboutUsApiResponse => _aboutUsApiResponse;
 
   getAboutUsDetails(int id) async {
-    // isLoading = true;
     aboutUsApiResponse = await _CRMRepository.fetchCrmDetails(id);
-    // isLoading = false;
   }
 }

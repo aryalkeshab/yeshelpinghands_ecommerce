@@ -11,13 +11,13 @@ class Order {
   String? discountAmount;
   String? total;
   int? quantity;
-  Null? note;
+  Null note;
   String? orderStatus;
-  Null? addressId;
+  Null addressId;
   String? orderFrom;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  Null deletedAt;
   String? shippingCharge;
 
   Order(

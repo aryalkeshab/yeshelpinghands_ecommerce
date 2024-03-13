@@ -25,8 +25,8 @@ class ConfirmDialogView extends StatelessWidget {
         child: BaseWidget(builder: (context, config, theme) {
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 30),
-            padding: EdgeInsets.symmetric(
-                vertical: 15, horizontal: config.appVerticalPaddingLarge()),
+            padding:
+                EdgeInsets.symmetric(vertical: 15, horizontal: config.appVerticalPaddingLarge()),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Colors.white,
@@ -38,8 +38,7 @@ class ConfirmDialogView extends StatelessWidget {
                 children: [
                   config.verticalSpaceMedium(),
                   Text(primaryText,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText2),
+                      textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText2),
                   config.verticalSpaceMedium(),
                   if (secondaryText != null)
                     Align(

@@ -1,12 +1,9 @@
-import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
 import 'package:yeshelpinghand/features/home/data/models/response/products_model.dart';
-import 'package:yeshelpinghand/features/home/presentation/controller/home_controller.dart';
 import 'package:yeshelpinghand/features/home/presentation/controller/top_rated_controller.dart';
 import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
-import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../shared/layouts/product_card.dart';
@@ -24,8 +21,7 @@ class TopRatedProductsSection extends StatelessWidget {
         final result = controller.topRatedProductApiResponse;
         if (result.hasData) {
           return Container(
-            padding:
-                EdgeInsets.only(bottom: config.appHorizontalPaddingMedium()),
+            padding: EdgeInsets.only(bottom: config.appHorizontalPaddingMedium()),
             decoration: const BoxDecoration(
               color: Colors.white,
             ),
@@ -37,8 +33,7 @@ class TopRatedProductsSection extends StatelessWidget {
                     onViewAllProductTap: () {
                       Get.toNamed(
                         Routes.productListingScreen,
-                        arguments:
-                            FilterQueryParams(topRated: true, pageSize: 40),
+                        arguments: FilterQueryParams(topRated: true, pageSize: 40),
                       );
                     }),
                 SingleChildScrollView(
@@ -68,11 +63,6 @@ class TopRatedProductsSection extends StatelessWidget {
           );
         } else if (result.hasError) {
           return const SizedBox.shrink();
-          return Center(
-            child: ErrorView(
-              title: NetworkException.getErrorMessage(result.error),
-            ),
-          );
         } else {
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -80,8 +70,7 @@ class TopRatedProductsSection extends StatelessWidget {
               children: List.generate(3, (index) {
                 return Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: ShimmerWidget.rounded(
-                      height: 150, width: 120, borderRadius: 5),
+                  child: ShimmerWidget.rounded(height: 150, width: 120, borderRadius: 5),
                 );
               }),
             ),
