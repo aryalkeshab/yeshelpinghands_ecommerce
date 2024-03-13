@@ -137,7 +137,6 @@ class _CartSummaryView extends StatelessWidget {
               _CartSummaryItem(
                 title: 'Sub total',
                 value: cartDetail!.total!.subTotal.toString(),
-                // "${NumberParser.twoDecimalDigit('${cartDetail?.subTotal}')}",
               ),
               config.verticalSpaceSmall(),
               _CartSummaryItem(
@@ -151,12 +150,9 @@ class _CartSummaryView extends StatelessWidget {
               PrimaryButton(
                 label: "Checkout",
                 onPressed: () {
-                  // final confirmOrderParams =
-                  //     ConfirmOrderParams(cartDetail: cartDetail);
                   final confirmOrderParams = ConfirmOrderParams();
                   confirmOrderParams.cartDetail = cartDetail!.carts;
                   confirmOrderParams.cartResponse = cartDetail;
-                  // confirmOrderParams.shippingAddress = cartDetail!.
                   Get.toNamed(Routes.shipping, arguments: confirmOrderParams);
                 },
               ),
@@ -260,7 +256,6 @@ class CartItemCard extends StatelessWidget {
                       ),
                       config.verticalSpaceSmall(),
                       Row(
-                        // mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           RemoveButton(onRemove: () {
@@ -323,7 +318,6 @@ class QuantityChangerButtonsView extends StatelessWidget {
                     context,
                     UpdateCartParams(
                         cartItemId: cartItem.slug.toString(),
-                        // sku: "${cartItem.slug}",
                         quantity: cartItem.qty != null ? cartItem.qty! - 1 : 1));
               }
             },
@@ -340,7 +334,6 @@ class QuantityChangerButtonsView extends StatelessWidget {
                   context,
                   UpdateCartParams(
                       cartItemId: cartItem.slug.toString(),
-                      // sku: "${cartItem.slug}",
                       quantity: cartItem.qty != null ? cartItem.qty! + 1 : 1));
             },
           ),

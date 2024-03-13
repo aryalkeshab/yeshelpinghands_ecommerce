@@ -19,35 +19,15 @@ class ReviewController extends GetxController {
 
   ReviewParams reviewParams = ReviewParams();
 
-  addProductReview(
-      BuildContext context, String id, ReviewParams reviewParams) async {
-    // final normalizedReviews = normalizeRatings(reviewParams);
+  addProductReview(BuildContext context, String id, ReviewParams reviewParams) async {
     showLoadingDialog(context);
-    final result =
-        await Get.find<ReviewRepository>().addProductReview(id, reviewParams);
+    final result = await Get.find<ReviewRepository>().addProductReview(id, reviewParams);
     hideLoadingDialog(context);
     if (result.hasData) {
       showToast(result.data);
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
   }
-
-/***** IF RATING NORMALIZATION IS REQUIRED USE THIS CODE *****/
-  // ReviewParams normalizeRatings(ReviewParams reviewParams) {
-  //   final maxServerRatings = 100;
-  //   final maxCurrentRatings = 5;
-  //   final normalizingValue = maxServerRatings ~/ maxCurrentRatings;
-  //   final normalizedReview = ReviewParams()
-  //     ..qualityRating = reviewParams.qualityRating * normalizingValue
-  //     ..priceRating = reviewParams.priceRating * normalizingValue
-  //     ..valueRating = reviewParams.valueRating * normalizingValue
-  //     ..nickname = reviewParams.nickname
-  //     ..summary = reviewParams.summary
-  //     ..review = reviewParams.review;
-  //
-  //   return normalizedReview;
-  // }
 }

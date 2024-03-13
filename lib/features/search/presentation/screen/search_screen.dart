@@ -1,12 +1,9 @@
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-// import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-
 import '../../../product/data/model/request/filter_query_params.dart';
 
 class SearchScreen extends StatelessWidget {

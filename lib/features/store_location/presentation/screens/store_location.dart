@@ -28,11 +28,8 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
             children: [
               PrimaryFormField(
                 hintIcon: const Icon(Icons.location_city),
-
                 label: "",
                 hintTxt: "Search for Store Nearby.....",
-                // controller: searchController,
-
                 onSaved: (value) {},
               ),
               config.verticalSpaceMedium(),
@@ -43,27 +40,7 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => MapContainer(
-                        //               imageUrl: storeLocation
-                        //                       .dummyStoreLocation[index]
-                        //                       .imageUrl ??
-                        //                   '',
-                        //               latitude: storeLocation
-                        //                       .dummyStoreLocation[index]
-                        //                       .latitude ??
-                        //                   0,
-                        //               longitude: storeLocation
-                        //                       .dummyStoreLocation[index]
-                        //                       .longitude ??
-                        //                   0,
-                        //               storeName: storeLocation
-                        //                       .dummyStoreLocation[index]
-                        //                       .storeName ??
-                        //                   '',
-                        //             )));
+                      
                       },
                       child: Card(
                         child: ListTile(

@@ -1,10 +1,7 @@
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:yeshelpinghand/features/cart/data/model/response/cart_details.dart';
 import 'package:yeshelpinghand/features/cart/presentation/controller/cart_controller.dart';
 import 'package:yeshelpinghand/features/cart/presentation/screen/cart_screen.dart';
 import 'package:yeshelpinghand/features/home/presentation/screens/home_screen.dart';
-import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
-import 'package:yeshelpinghand/features/product/presentation/product_listing/product_listing_screen.dart';
 import 'package:yeshelpinghand/features/profile/presentation/screen/profile_screen.dart';
 import 'package:yeshelpinghand/features/shared/layouts/auth_widget_wrapper.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,13 +10,8 @@ import 'package:get/get.dart';
 import 'package:yeshelpinghand/features/shared/layouts/confirm_dialog_view.dart';
 import 'package:yeshelpinghand/features/wishlist/presentation/controller/wishlist_controller.dart';
 import 'package:yeshelpinghand/features/wishlist/presentation/screen/wishlist_screen.dart';
-
-import '../../../core/presentation/widgets/base_widget.dart';
 import '../../cart/presentation/screen/empty_cart_screen.dart';
 import '../../auth/presentation/screen/login_screen.dart';
-import '../../categories/data/models/response/category.dart';
-import '../../categories/presentation/controller/category_controller.dart';
-import '../../product/presentation/controller/product_listing_controller.dart';
 import '../../wishlist/presentation/screen/widgets/empty_wishlist.dart';
 import '../controllers/dashboard_controller.dart';
 
@@ -57,12 +49,6 @@ class DashboardScreen extends StatelessWidget {
             index: Get.find<DashboardController>().tabIndex,
             children: [
               const HomeScreen(),
-              // ProductListingScreen(
-              //   filterQueryParams: FilterQueryParams(),
-              //   isDash: true,
-              // ),
-
-              // WishListScreen(),
               AuthWidgetBuilder(builder: (context, isAuthenticated) {
                 return isAuthenticated ? WishListScreen() : const EmptyWishListScreen();
               }),
@@ -118,13 +104,10 @@ class DashboardScreen extends StatelessWidget {
                                       child: cartDetail?.length != null
                                           ? Container(
                                               alignment: Alignment.center,
-                                              // height: 18,
                                               padding: const EdgeInsets.all(2),
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: Colors.red,
-                                                // borderRadius:
-                                                //     BorderRadius.circular(9),
                                               ),
                                               constraints: const BoxConstraints(
                                                 minWidth: 10,
@@ -173,8 +156,6 @@ class DashboardScreen extends StatelessWidget {
       icon: GetBuilder<WishListController>(
         builder: ((wishListController) {
           final result = wishListController.wishList;
-          // final CartResponse? cartResponse = result.data;
-          // final cartDetail = cartResponse?.carts;
           return AuthWidgetBuilder(builder: ((context, isAuthenticated) {
             return !isAuthenticated
                 ? Icon(Icons.favorite_border, size: 22)
@@ -189,13 +170,10 @@ class DashboardScreen extends StatelessWidget {
                             child: result?.length != null
                                 ? Container(
                                     alignment: Alignment.center,
-                                    // height: 18,
                                     padding: const EdgeInsets.all(2),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.red,
-                                      // borderRadius:
-                                      //     BorderRadius.circular(9),
                                     ),
                                     constraints: const BoxConstraints(
                                       minWidth: 10,

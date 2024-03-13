@@ -13,8 +13,6 @@ import '../../../../core/presentation/widgets/toast.dart';
 class ProfileController extends GetxController {
   RefreshController refreshController = RefreshController();
 
-  late ProfileRepository _profileRepository;
-
   @override
   void onInit() {
     refreshController = RefreshController();
@@ -33,19 +31,16 @@ class ProfileController extends GetxController {
   ApiResponse get userInfoResponse => _userInfoResponse;
 
   getUserInfoResponse() async {
-    userInfoResponse =
-        await Get.find<ProfileRepository>().fetchProfileDetails();
+    userInfoResponse = await Get.find<ProfileRepository>().fetchProfileDetails();
     refreshController.refreshCompleted();
   }
 
-  void updateCustomerInfo(
-      BuildContext context, RegisterParams registerParams) async {
+  void updateCustomerInfo(BuildContext context, RegisterParams registerParams) async {
     showLoadingDialog(context);
-    final result = await Get.find<ProfileRepository>().editProfile(
-        EditProfileParams(
-            name: registerParams.name,
-            contactNumber: registerParams.contactNumber,
-            userName: registerParams.username));
+    final result = await Get.find<ProfileRepository>().editProfile(EditProfileParams(
+        name: registerParams.name,
+        contactNumber: registerParams.contactNumber,
+        userName: registerParams.username));
 
     hideLoadingDialog(context);
     if (result.hasData) {
@@ -55,8 +50,7 @@ class ProfileController extends GetxController {
       getUserInfoResponse();
     } else if (result.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(result.error));
+          context: context, message: NetworkException.getErrorMessage(result.error));
     }
   }
 }

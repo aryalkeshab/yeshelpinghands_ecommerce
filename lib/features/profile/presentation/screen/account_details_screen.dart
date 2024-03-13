@@ -60,14 +60,13 @@ class _AccountDetailsView extends StatelessWidget {
     return BaseWidget(builder: (context, config, theme) {
       return Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: config.appEdgePadding(),
-            vertical: config.appHorizontalPadding(5)),
+            horizontal: config.appEdgePadding(), vertical: config.appHorizontalPadding(5)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              decoration:
+                  BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
               width: double.maxFinite,
               child: Stack(
                 children: [
@@ -87,8 +86,7 @@ class _AccountDetailsView extends StatelessWidget {
                         ),
                         config.verticalSpaceSmall(),
                         Text("Available membership Point : 0",
-                            style: theme.textTheme.bodyText2
-                                ?.copyWith(color: Colors.grey)),
+                            style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey)),
                         config.verticalSpaceSmall(),
                         const Divider(),
                         config.verticalSpaceSmall(),
@@ -101,8 +99,7 @@ class _AccountDetailsView extends StatelessWidget {
                         config.verticalSpaceSmall(),
                         Text(
                           "You are subscribed to 'General Subscription' ",
-                          style: theme.textTheme.bodyText2
-                              ?.copyWith(color: Colors.grey),
+                          style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                         ),
                       ],
                     ),
@@ -125,9 +122,8 @@ class _AccountDetailsView extends StatelessWidget {
                           ),
                           style: OutlinedButton.styleFrom(
                             padding: EdgeInsets.all(config.appWidth(0)),
-                            side: BorderSide(
-                                width: 2.0,
-                                color: theme.primaryColor.withOpacity(0.5)),
+                            side:
+                                BorderSide(width: 2.0, color: theme.primaryColor.withOpacity(0.5)),
                             shape: const CircleBorder(),
                           ),
                         ),
@@ -137,8 +133,8 @@ class _AccountDetailsView extends StatelessWidget {
             ),
             config.verticalSpaceMedium(),
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              decoration:
+                  BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
               width: double.maxFinite,
               child: Stack(
                 children: [
@@ -158,18 +154,15 @@ class _AccountDetailsView extends StatelessWidget {
                         config.verticalSpaceSmall(),
                         Text(
                           "Srijana Shrees",
-                          style: theme.textTheme.bodyText2
-                              ?.copyWith(color: Colors.grey),
+                          style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                         ),
                         config.verticalSpaceSmall(),
                         Row(
                           children: [
-                            Icon(Icons.location_on_outlined,
-                                color: theme.primaryColor, size: 16),
+                            Icon(Icons.location_on_outlined, color: theme.primaryColor, size: 16),
                             Text(
                               "Lekhnath-27, Rithepani, Pokhara, 33700, Nepal ",
-                              style: theme.textTheme.bodyText2
-                                  ?.copyWith(color: Colors.grey),
+                              style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                             ),
                           ],
                         ),
@@ -184,8 +177,7 @@ class _AccountDetailsView extends StatelessWidget {
                         ),
                         config.verticalSpaceSmall(),
                         Text("No default Address",
-                            style: theme.textTheme.bodyText2
-                                ?.copyWith(color: Colors.grey)),
+                            style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -200,13 +192,10 @@ class _AccountDetailsView extends StatelessWidget {
                         ),
                         child: OutlinedButton(
                           onPressed: () {},
-                          child: SvgPicture.asset(
-                              UIAssets.getSvg("circular_edit_icon.svg"),
+                          child: SvgPicture.asset(UIAssets.getSvg("circular_edit_icon.svg"),
                               color: theme.primaryColor.withOpacity(0.5)),
                           style: OutlinedButton.styleFrom(
-                            // padding: EdgeInsets.all(2),
                             padding: EdgeInsets.all(config.appWidth(0)),
-
                             shape: const CircleBorder(),
                           ),
                         ),
@@ -244,30 +233,26 @@ class _TopProfileSection extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: theme.colorScheme.secondary,
                       shape: BoxShape.circle,
-                      border: Border.all(
-                          width: 3, color: theme.colorScheme.secondary),
+                      border: Border.all(width: 3, color: theme.colorScheme.secondary),
                     ),
                     child: Text(
                       "${user.name?[0].toUpperCase()}",
                       style: theme.textTheme.bodyText1
                           ?.copyWith(fontSize: 22, fontWeight: FontWeight.w600),
                     ),
-                    //  CustomCachedNetworkImage(user.profileImage),
                   )),
               Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
                   onTap: () {
                     Get.toNamed(Routes.register,
-                        arguments: CustomerFormParams(
-                            customerFormType: CustomerFormType.edit));
+                        arguments: CustomerFormParams(customerFormType: CustomerFormType.edit));
                   },
                   child: Container(
                     padding: EdgeInsets.all(config.appWidth(1.5)),
                     margin: EdgeInsets.only(right: config.appEdgePadding()),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                     child: SvgPicture.asset(UIAssets.editIcon, width: 28),
                   ),
                 ),
@@ -277,20 +262,17 @@ class _TopProfileSection extends StatelessWidget {
         ),
         Text(
           "${user.name} ",
-          style:
-              theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+          style: theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
         ),
         config.verticalSpaceSmall(),
         Text(
           '${user.email}',
-          style: theme.textTheme.bodyText2
-              ?.copyWith(fontWeight: FontWeight.normal),
+          style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.normal),
         ),
         config.verticalSpaceSmall(),
         Text(
           '${user.phoneNumber}',
-          style: theme.textTheme.bodyText2
-              ?.copyWith(fontWeight: FontWeight.normal),
+          style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.normal),
         ),
         config.verticalSpaceMedium(),
         Row(

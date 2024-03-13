@@ -34,7 +34,6 @@ class _HomeProductsViewState extends State<HomeProductsView> {
               return ProductCard.large(
                 productModel: product,
                 onWishlistButtonClick: () {},
-                // onCartButtonClick: () {},
               );
             }),
           );

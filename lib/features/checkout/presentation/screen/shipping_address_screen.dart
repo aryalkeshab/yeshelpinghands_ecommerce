@@ -95,10 +95,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Builder(builder: (context) {
-                          // final result = controller.shippingMethodsResponse;
-
                           return HookBaseWidget(builder: (context, config, theme) {
-                            final selectedShippingMethod = useState(0);
                             return Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,13 +103,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                                 GetBuilder<AddressController>(
                                     init: AddressController(),
                                     builder: (controller) {
-                                      // if (controller.isFirstLoad) {
-                                      //   widget.confirmOrderParams.shippingAddress =
-                                      //       controller.defaultShippingAddress;
-                                      //   widget.confirmOrderParams.billingAddress =
-                                      //       controller.defaultBillingAddress;
-                                      //   controller.isFirstLoad = false;
-                                      // }
                                       List<Address> addresses = [];
                                       if (controller.addressResponse.hasData) {
                                         addresses = controller.addressResponse.data;
@@ -202,26 +192,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                               ],
                             );
                           });
-                          // } else if (result.hasError) {
-                          //   return ErrorView(
-                          //       title: NetworkException.getErrorMessage(
-                          //           result.error));
-                          // } else {
-                          //   return Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.start,
-                          //     children: [
-                          //       config.verticalSpaceCustom(0.05),
-                          //       ShimmerWidget.rounded(
-                          //           width: config.appWidth(40), height: 30),
-                          //       config.verticalSpaceLarge(),
-                          //       ShimmerWidget.rounded(
-                          //           width: config.appWidth(80), height: 50),
-                          //       config.verticalSpaceMedium(),
-                          //       ShimmerWidget.rounded(
-                          //           width: config.appWidth(80), height: 50),
-                          //     ],
-                          //   );
-                          // }
                         }),
                       ],
                     );
@@ -235,70 +205,6 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
     });
   }
 }
-
-// class CustomerTypeSelectionView extends StatelessWidget {
-//   const CustomerTypeSelectionView({
-//     Key? key,
-//     required this.onCustomerTypeSelection,
-//     required this.onSaved,
-//   }) : super(key: key);
-//   final Function(CustomerType customerType) onCustomerTypeSelection;
-//   final Function(OrganizationInfo) onSaved;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return HookBaseWidget(builder: (context, config, theme) {
-//       final selectedValue = useState(0);
-//       final organizationInfo = OrganizationInfo();
-//       return Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text("Customer Type",
-//               style: theme.textTheme.bodyText1
-//                   ?.copyWith(fontWeight: FontWeight.w600)),
-//           config.verticalSpaceSmall(),
-//           Column(
-//             children: List.generate(CustomerType.values.length, (index) {
-//               return Padding(
-//                 padding: index != CustomerType.values.length - 1
-//                     ? EdgeInsets.only(bottom: config.appVerticalPaddingSmall())
-//                     : EdgeInsets.zero,
-//                 child: SelectableOption(
-//                   value: CustomerType.values[index].value,
-//                   name: CustomerType.values[index].name,
-//                   isSelected: selectedValue.value == index,
-//                   onTap: () {
-//                     selectedValue.value = index;
-//                     onCustomerTypeSelection(
-//                         CustomerType.values[selectedValue.value]);
-//                   },
-//                 ),
-//               );
-//             }),
-//           ),
-//           if (CustomerType.values[selectedValue.value] ==
-//               CustomerType.organization)
-//             Column(
-//               children: [
-//                 PrimaryFormField(
-//                     hintTxt: "Company VAT Number",
-//                     validator: (value) => Validator.validateEmpty(value!),
-//                     onSaved: (value) {
-//                       organizationInfo.companyVatNumber = value;
-//                     }),
-//                 PrimaryFormField(
-//                     hintTxt: "Company BRN Number",
-//                     validator: (value) => Validator.validateEmpty(value!),
-//                     onSaved: (value) {
-//                       organizationInfo.companyBrnNumber = value;
-//                     }),
-//               ],
-//             ),
-//         ],
-//       );
-//     });
-//   }
-// }
 
 class SelectableOption extends StatelessWidget {
   const SelectableOption({
@@ -387,12 +293,6 @@ class _PrimaryDatePickerState extends State<PrimaryDatePicker> {
         widget.onSaved(pickedDate);
       },
       controller: dateController,
-      // validator: (_) {
-      //   if (pickedDate != null) {
-      //     return null;
-      //   }
-      //   return "You must pick a date";
-      // },
       decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           errorBorder: const OutlineInputBorder(

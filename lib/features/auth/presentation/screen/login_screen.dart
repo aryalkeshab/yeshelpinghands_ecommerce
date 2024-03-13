@@ -25,7 +25,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // bool showBack = showLeading ?? true;
     return Scaffold(
       body: FocusNodeDisabler(
         child: BaseWidget(builder: (context, config, theme) {
@@ -142,47 +141,6 @@ class LoginFormBuilder extends StatelessWidget {
                           }
                         }),
                     config.verticalSpaceLarge(),
-                    // Row(
-                    //   mainAxisSize: MainAxisSize.min,
-                    //   children: [
-                    //     const Expanded(child: Divider()),
-                    //     Padding(
-                    //       padding:
-                    //           EdgeInsets.symmetric(horizontal: config.appWidth(8)),
-                    //       child: Text("or Login using",
-                    //           style: Theme.of(context)
-                    //               .textTheme
-                    //               .bodyMedium
-                    //               ?.copyWith(color: kGrey200)),
-                    //     ),
-                    //     const Expanded(child: Divider()),
-                    //   ],
-                    // ),
-                    // config.verticalSpaceMedium(),
-                    // Row(
-                    //   mainAxisSize: MainAxisSize.min,
-                    //   children: [
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Get.find<LoginController>().loginWithGoogle(context);
-                    //       },
-                    //       child: SvgPicture.asset(
-                    //         UIAssets.googleIcon,
-                    //         width: 40,
-                    //       ),
-                    //     ),
-                    //     config.horizontalSpaceMedium(),
-                    //     InkWell(
-                    //         onTap: () {
-                    //           Get.find<LoginController>()
-                    //               .loginWithFacebook(context);
-                    //         },
-                    //         child: SvgPicture.asset(UIAssets.facebookIcon)),
-                    //     // config.horizontalSpaceSmall(),
-                    //     // SvgPicture.asset(UIAssets.instagramIcon, width: 55),
-                    //   ],
-                    // ),
-                    // config.verticalSpaceLarge(),
                     InkWell(
                       onTap: () {
                         Get.toNamed(Routes.register,

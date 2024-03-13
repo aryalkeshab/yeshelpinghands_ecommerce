@@ -50,9 +50,7 @@ class _ProductListingScreenState extends State<ProductListingScreen> {
           Get.find<ProductListingController>().onProductsFilter(context, widget.filterQueryParams);
         },
       ),
-      body: GetBuilder<ProductListingController>(
-          // init: ,
-          builder: (controller) {
+      body: GetBuilder<ProductListingController>(builder: (controller) {
         return BaseWidget(builder: (context, config, theme) {
           return Padding(
             padding: EdgeInsets.only(

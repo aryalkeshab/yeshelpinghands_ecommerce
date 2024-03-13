@@ -21,10 +21,7 @@ class ErrorView extends StatelessWidget {
           if (title != null)
             Text(
               "$title",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2
-                  ?.copyWith(color: Colors.orange),
+              style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.orange),
             )
         ],
       ),

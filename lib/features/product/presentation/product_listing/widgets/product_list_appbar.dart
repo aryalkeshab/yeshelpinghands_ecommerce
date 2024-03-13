@@ -32,13 +32,7 @@ class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidge
                 onSortParamSelect: (sortParam) {
                   onSortUpdate(
                     (FilterQueryParams filterQueryParams) {
-                      // filterQueryParams.order ??= SortOrder.asc.value;
                       filterQueryParams.sort = sortParam.value;
-                      // if (filterQueryParams.order == SortParameter.bestSeller) {
-                      //   filterQueryParams.bestSeller = true;
-                      // } else if {
-
-                      // }
                       return filterQueryParams;
                     },
                   );
@@ -46,8 +40,6 @@ class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidge
                 onSortOrderSelect: (order) {
                   onSortUpdate(
                     (FilterQueryParams filterQueryParams) {
-                      // filterQueryParams.sort ??= SortParameter.position.value;
-                      // filterQueryParams.order = order.value;
                       return filterQueryParams;
                     },
                   );
@@ -63,7 +55,6 @@ class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidge
             child: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
-              // size: 20,
             ),
           ),
         config.horizontalSpaceSmall(),
@@ -84,7 +75,6 @@ class ProductListingAppBar extends StatelessWidget implements PreferredSizeWidge
                       ),
                       color: const Color(0xfff2f2f2)),
                   child: Row(
-                    // ignore: avoid_redundant_argument_values
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -166,7 +156,6 @@ class _SortHeadingState extends State<_SortHeading> {
 
   @override
   Widget build(BuildContext context) {
-    // final selectedValue =widget.filterQueryParams;
     return BaseWidget(builder: (context, config, theme) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: config.appHorizontalPaddingSmall()),
@@ -180,7 +169,6 @@ class _SortHeadingState extends State<_SortHeading> {
                   onSortTap: widget.onSortOrderSelect,
                 ),
                 Container(
-                  // color: Colors.red,
                   width: MediaQuery.of(context).size.width * 0.359,
                   child: DropdownButton<SortParameter>(
                     dropdownColor: theme.primaryColor,
@@ -282,7 +270,6 @@ enum SortParameter {
   priceLowToHigh,
   priceHighToLow,
   mostReviewed,
-  // position,
 }
 
 extension SortParametersExt on SortParameter {

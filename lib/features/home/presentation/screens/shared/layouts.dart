@@ -20,10 +20,6 @@ class SectionHeader extends StatelessWidget {
       height: 35,
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.only(left: 10),
-      // decoration: BoxDecoration(
-      //   border: Border.all(color: Theme.of(context).colorScheme.primary),
-      //   borderRadius: BorderRadius.circular(3),
-      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -46,18 +42,6 @@ class SectionHeader extends StatelessWidget {
                   ),
                 )
               : Container(),
-          // if (showViewAll)
-          //   InkWell(
-          //     onTap: onViewAllProductTap,
-          //     child: Container(
-          //       width: 35,
-          //       height: double.maxFinite,
-          //       decoration: BoxDecoration(
-          //         color: Theme.of(context).colorScheme.primary,
-          //       ),
-          //       child: const Icon(Icons.keyboard_arrow_right),
-          //     ),
-          //   ),
         ],
       ),
     );

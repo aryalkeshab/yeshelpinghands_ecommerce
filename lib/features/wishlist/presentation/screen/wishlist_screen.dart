@@ -40,7 +40,6 @@ class _WishListScreenState extends State<WishListScreen> {
                     onTap: () {
                       Get.back();
                       Get.find<DashboardController>().changeTabIndex(2);
-                      // Get.find<HomeController>().getWishlist();
                     },
                     child: Padding(
                         padding: EdgeInsets.only(right: config.appEdgePadding()),

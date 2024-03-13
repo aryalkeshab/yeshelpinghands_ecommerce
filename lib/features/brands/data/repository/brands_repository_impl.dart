@@ -9,8 +9,7 @@ class BrandsRepositoryImpl extends BrandsRepository {
   late BrandsRemoteDataSource brandsRemoteDataSource;
   late NetworkInfo networkInfo;
 
-  BrandsRepositoryImpl(
-      {required this.brandsRemoteDataSource, required this.networkInfo});
+  BrandsRepositoryImpl({required this.brandsRemoteDataSource, required this.networkInfo});
 
   @override
   Future<ApiResponse> getBrandsList() async {
@@ -19,8 +18,6 @@ class BrandsRepositoryImpl extends BrandsRepository {
         final result = await brandsRemoteDataSource.getBrandsList();
 
         final brandsList = result.map<Brand>((e) => Brand.fromJson(e)).toList();
-        // final brandsList =
-        //     result[0].map<BrandsModel>((e) => BrandsModel.fromJson(e)).toList();
 
         return ApiResponse(data: brandsList);
       } catch (e) {

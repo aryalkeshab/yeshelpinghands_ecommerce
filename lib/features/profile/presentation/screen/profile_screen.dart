@@ -240,8 +240,6 @@ class _TopSectionView extends StatelessWidget {
           ),
         ),
       );
-      //     }),
-      //   );
     });
   }
 }

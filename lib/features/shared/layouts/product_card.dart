@@ -94,7 +94,6 @@ class _ProductCard extends StatelessWidget {
                   config.verticalSpaceSmall(),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 0),
-                    // padding: EdgeInsets.symmetric(horizontal: config.appHorizontalPaddingSmall()),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -145,10 +144,6 @@ class _ProductCard extends StatelessWidget {
                             ),
                           ],
                         ),
-
-                        // config.verticalSpaceVerySmall(),
-
-                        // // config.verticalSpaceVerySmall(),
                       ],
                     ),
                   ),
@@ -219,8 +214,6 @@ class ProductEmi extends StatelessWidget {
               style: productEmiType == ProductEmiType.small
                   ? theme.textTheme.caption?.copyWith(color: theme.primaryColor)
                   : theme.textTheme.bodyText2?.copyWith(color: theme.primaryColor)),
-          // Text("months*",style: theme.textTheme.caption?.copyWith(color: theme.primaryColor)),
-          // DropdownButtonExample(),
         ],
       );
     });

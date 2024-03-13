@@ -18,7 +18,7 @@ class CustomStepIndicator extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-         mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min,
         children: List.generate(stepperList.length, (index) {
           return Row(
             mainAxisSize: MainAxisSize.min,
@@ -37,14 +37,12 @@ class CustomStepIndicator extends StatelessWidget {
                             : StepState.indexed,
                   ),
                   const SizedBox(height: 5),
-
-                  Text('${stepperList[index]}',textAlign: TextAlign.center),
+                  Text('${stepperList[index]}', textAlign: TextAlign.center),
                 ],
               ),
               if (index != stepperList.length - 1)
                 Container(
-
-                  margin: const EdgeInsets.only(bottom: 10,left: 10,right: 10),
+                  margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                   width: 40,
                   color: Theme.of(context).disabledColor,
                   height: 1,
@@ -67,9 +65,10 @@ class CustomStepIndicator extends StatelessWidget {
             color: Colors.white,
             child: Text(
               '${index + 1}',
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).primaryColor),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  ?.copyWith(fontWeight: FontWeight.w600, color: Theme.of(context).primaryColor),
             ));
       case StepState.completed:
         return const _CircularStepIcon(

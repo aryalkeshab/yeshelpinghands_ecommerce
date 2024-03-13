@@ -44,9 +44,7 @@ class CategorySection extends StatelessWidget {
                             height: config.appHeight(12),
                             width: config.appWidth(18),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20), color: Colors.grey[50]
-                                //  color: Colors.red
-                                ),
+                                borderRadius: BorderRadius.circular(20), color: Colors.grey[50]),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -26,7 +26,6 @@ class HelpFaqsScreen extends StatelessWidget {
                     return SingleChildScrollView(
                         child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      // child: Html(data: result.data.content),
                     ));
                   } else if (result.hasError) {
                     return ErrorView(title: NetworkException.getErrorMessage(result.error));

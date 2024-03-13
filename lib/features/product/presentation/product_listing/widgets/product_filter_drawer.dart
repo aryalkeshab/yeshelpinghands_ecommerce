@@ -80,9 +80,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           widget.filterQueryParams.maxPrice = selectedFilterParams.maxPrice;
                           Get.find<ProductListingController>()
                               .onProductsFilter(context, widget.filterQueryParams);
-
-                          // widget.onFilterUpdate();
-
                           Scaffold.of(context).closeEndDrawer();
                         }),
                   ],

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 class TermsAndConditionsController extends GetxController {
   late CRMRepository _crmRepository;
-  // bool isLoading = false;
 
   get data => null;
   @override
@@ -22,12 +21,9 @@ class TermsAndConditionsController extends GetxController {
     update();
   }
 
-  ApiResponse get termsAndConditionsApiResponse =>
-      _termsAndConditionsApiResponse;
+  ApiResponse get termsAndConditionsApiResponse => _termsAndConditionsApiResponse;
 
   getTermsAndConditionsDetails(int id) async {
-    // isLoading = true;
     termsAndConditionsApiResponse = await _crmRepository.fetchCrmDetails(id);
-    // isLoading = false;
   }
 }

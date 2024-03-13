@@ -27,7 +27,6 @@ class SingleBannerView extends StatelessWidget {
           );
         } else if (result.hasError) {
           return const SizedBox.shrink();
-          // return ErrorView(title: NetworkException.getErrorMessage(result.error));
         } else {
           return ShimmerWidget.rounded(
               height: 120, width: MediaQuery.of(context).size.width / 1.18, borderRadius: 0);
@@ -60,13 +59,11 @@ class MultiBannerView extends StatelessWidget {
                       child: CircularCachedNetworkImageBuilder(
                           borderRadius: 5,
                           isBorderEnabled: false,
-                          // fit: BoxFit.fill,
                           imageUrl: APIPathHelper.baseUrlImage + bannerResponseList[index].image),
                     )),
           );
         } else if (result.hasError) {
           return const SizedBox.shrink();
-          // return ErrorView(title: NetworkException.getErrorMessage(result.error));
         } else {
           return ShimmerWidget.rounded(
               height: 120, width: MediaQuery.of(context).size.width / 1.18, borderRadius: 0);

@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/api_result.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
 import '../../data/response/order_details.dart';
 import '../../domain/repository/order_repository.dart';
 
@@ -39,7 +37,6 @@ class OrderHistoryController extends GetxController {
   ApiResponse get orderHistoryDetailsResponse => _orderHistoryDetailsResponse;
 
   Future<void> fetchOrderHistoryDetails(String id) async {
-    orderHistoryDetailsResponse =
-        await Get.find<OrderRepository>().getOrderDetails(id);
+    orderHistoryDetailsResponse = await Get.find<OrderRepository>().getOrderDetails(id);
   }
 }

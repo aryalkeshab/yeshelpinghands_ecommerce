@@ -6,7 +6,6 @@ import 'package:yeshelpinghand/features/address/data/model/response/address.dart
 import 'package:yeshelpinghand/features/checkout/data/model/request/confirm_order_params.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/controller/order_summary_controller.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/screen/widgets/checkout_stepper.dart';
-
 import '../../../../core/presentation/widgets/base_widget.dart';
 import '../../../../core/utils/number_parser.dart';
 
@@ -213,16 +212,6 @@ class _OrdersSummary extends StatelessWidget {
             config.verticalSpaceSmall(),
             const Divider(),
             config.verticalSpaceSmall(),
-            // Text(
-            //     'SubTotal: $currency ${NumberParser.twoDecimalDigit(orderSummary.subtotal.toString())}'),
-            // config.verticalSpaceSmall(),
-            // Text(
-            //     'Shipping Fee: $currency ${NumberParser.twoDecimalDigit(orderSummary.shippingAmount.toString())}'),
-            // config.verticalSpaceSmall(),
-            // Text(
-            //     'Total: $currency ${NumberParser.twoDecimalDigit(orderSummary.grandTotal.toString())}',
-            //     style: theme.textTheme.bodyText1
-            // ?.copyWith(fontWeight: FontWeight.w600)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -237,21 +226,9 @@ class _OrdersSummary extends StatelessWidget {
               ],
             ),
             config.verticalSpaceSmall(),
-
             Text('Total: $currency ${orderSummary.cartResponse?.total?.grandTotal.toString()}',
                 style: theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600)),
             config.verticalSpaceSmall(),
-            // Container(
-            //     padding: EdgeInsets.symmetric(
-            //       horizontal: config.appVerticalPaddingSmall(),
-            //       vertical: config.appVerticalPaddingSmall(),
-            //     ),
-            //     decoration: BoxDecoration(
-            //       border: Border.all(
-            //           color: Theme.of(context).colorScheme.secondary),
-            //     ),
-            //     child: Text('${orderSummary}')),
-            // config.verticalSpaceMedium(),
             RichText(
                 text: TextSpan(children: [
               TextSpan(text: "Payment Method: ", style: theme.textTheme.bodyText2),

@@ -36,13 +36,6 @@ class OrderSuccessDialog extends StatelessWidget {
                   ),
                   config.verticalSpaceMedium(),
                   Text("Thank you for your purchase!", style: theme.textTheme.bodyText1),
-                  // config.verticalSpaceMedium(),
-                  // Text(
-                  //     "You will recieve an email with the details of your order",
-                  //     textAlign: TextAlign.center,
-                  //     style: theme.textTheme.bodyText2),
-
-                  // Text("Your order ID: 121212456",style: theme.textTheme.bodyText2),
                   config.verticalSpaceLarge(),
                   PrimaryButton(
                     width: 200,

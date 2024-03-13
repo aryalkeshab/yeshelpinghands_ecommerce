@@ -38,8 +38,6 @@ class OrderSummaryController extends GetxController {
     hideLoadingDialog(context);
     if (result.hasData) {
       Get.find<CartController>().getCartDetails();
-      // final OrderPlaceResult orderResult = result.data;
-
       showDialog(context: context, builder: (context) => OrderSuccessDialog());
       Get.find<CartController>().getCartDetails();
     } else if (result.hasError) {

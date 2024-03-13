@@ -18,7 +18,6 @@ class CartItemRemoveDialog extends StatelessWidget {
       onCancelButtonPressed: Get.back,
       onApproveButtonPressed: () {
         Get.find<CartController>().removeProductFromCart(context, cartItem.slug.toString());
-        // Navigator.pop(context);
       },
     );
   }
@@ -34,7 +33,6 @@ class CartClearDialog extends StatelessWidget {
       onCancelButtonPressed: Get.back,
       onApproveButtonPressed: () {
         Get.find<CartController>().removeAllProductFromCart(context);
-        // Get.back();
       },
     );
   }

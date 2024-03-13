@@ -102,8 +102,6 @@ class RegisterFormBuilder extends StatelessWidget {
                   builder: (profileController) {
                     final result = Get.find<ProfileController>().userInfoResponse;
                     final user = result.data;
-                    // print(
-                    //     "this is printed from register screen --${result.data}");
                     return Column(
                       children: [
                         config.verticalSpaceMedium(),

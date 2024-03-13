@@ -18,7 +18,7 @@ class BaseWidget extends StatelessWidget {
 }
 
 /// base hook widget class for hook based shared,
-///
+
 /// provides same information as BaseWidget provides like (theme, sizeConfig
 class HookBaseWidget extends HookWidget {
   final Widget Function(BuildContext context, SizeConfig config, ThemeData themeData) builder;

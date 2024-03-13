@@ -20,8 +20,7 @@ class ReviewsAndRatings extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProductDetailsSectionHeading(
-              title: "REVIEWS AND RATINGS (${reviews?.length ?? 0})"),
+          ProductDetailsSectionHeading(title: "REVIEWS AND RATINGS (${reviews?.length ?? 0})"),
           Column(
             children: List.generate(reviews?.length ?? 0, (index) {
               final review = reviews![index];
@@ -34,9 +33,7 @@ class ReviewsAndRatings extends StatelessWidget {
                   children: [
                     RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                          text: "${review.uName}  ",
-                          style: theme.textTheme.caption),
+                      TextSpan(text: "${review.uName}  ", style: theme.textTheme.caption),
                       TextSpan(
                           text:
                               "-${DateFormatterUtils.formatDateFromString("${review.created_at}")}",
@@ -44,12 +41,8 @@ class ReviewsAndRatings extends StatelessWidget {
                     ])),
                     config.verticalSpaceSmall(),
                     Text("${review.review}",
-                        style: theme.textTheme.bodyText2
-                            ?.copyWith(fontWeight: FontWeight.w500)),
+                        style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.w500)),
                     config.verticalSpaceSmall(),
-                    // Text("${review.details}",
-                    //     style: theme.textTheme.bodyText2?.copyWith(height: 1.2),
-                    //     textAlign: TextAlign.justify),
                     config.verticalSpaceSmall(),
                     ProductRatingsView(review: review),
                   ],
@@ -80,14 +73,6 @@ class ProductRatingsView extends StatelessWidget {
           title: "Ratings",
           value: review.rating.toString(),
         ),
-        // ProductRatingAttribute(
-        //   title: "Quality",
-        //   value: review.ratings?.quality,
-        // ),
-        // ProductRatingAttribute(
-        //   title: "Value",
-        //   value: review.ratings?.value,
-        // ),
       ],
     );
   }
@@ -133,7 +118,6 @@ class RatingsBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RatingBar.builder(
-      // ignoreGestures: onRatingSelection == null,
       itemSize: itemSize,
       initialRating: (double.tryParse("$value") ?? 0) * 0.05,
       minRating: 1,

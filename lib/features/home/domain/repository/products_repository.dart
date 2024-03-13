@@ -6,20 +6,13 @@ abstract class ProductsRepository {
 
   Future<ApiResponse> getAllProducts(FilterQueryParams filterQueryParams);
 
-  Future<ApiResponse> getBestSellingProducts(
-      FilterQueryParams filterQueryParams);
+  Future<ApiResponse> getBestSellingProducts(FilterQueryParams filterQueryParams);
 
-  Future<ApiResponse> fetchTopRatedProducts(
-      FilterQueryParams filterQueryParams);
+  Future<ApiResponse> fetchTopRatedProducts(FilterQueryParams filterQueryParams);
 
-  Future<ApiResponse> getExclusiveDealsProduct(
-      FilterQueryParams filterQueryParams);
+  Future<ApiResponse> getExclusiveDealsProduct(FilterQueryParams filterQueryParams);
 
-  Future<ApiResponse> getCashBackOfferProducts(
-      FilterQueryParams filterQueryParams);
+  Future<ApiResponse> getCashBackOfferProducts(FilterQueryParams filterQueryParams);
 
-  Future<ApiResponse> getNewArrivalProducts(
-      FilterQueryParams filterQueryParams);
-
-  // Future<ApiResponse> getFilterModel(String id);
+  Future<ApiResponse> getNewArrivalProducts(FilterQueryParams filterQueryParams);
 }

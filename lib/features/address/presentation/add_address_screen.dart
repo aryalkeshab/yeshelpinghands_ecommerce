@@ -39,10 +39,6 @@ class AddAddressScreen extends StatefulWidget {
 class _AddAddressScreenState extends State<AddAddressScreen> {
   @override
   void initState() {
-    // if (widget.addressFormParams.addressFormType == AddressFormType.edit) {
-    //   Get.put(RegionFetchController()).getRegionByCountryId(
-    //       "${widget.addressFormParams.address?.country?.code}");
-    // }
     super.initState();
   }
 
@@ -91,26 +87,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       isRequired: true,
                     ),
                     config.verticalSpaceMedium(),
-                    // PrimaryFormField(
-                    //   initialValue:
-                    //       widget.addressFormParams.address?.phoneNumber,
-                    //   isRequired: true,
-                    //   keyboardType: TextInputType.phone,
-                    //   validator: (value) => Validator.validateNumber(value!),
-                    //   onSaved: (value) {
-                    //     addressParams.phoneNumber = value;
-                    //   },
-                    //   label: "Phone Number",
-                    // ),
-                    // config.verticalSpaceMedium(),
-                    // PrimaryFormField(
-                    //   initialValue: widget.addressFormParams.address?.company,
-                    //   onSaved: (value) {
-                    //     addressParams.company = value;
-                    //   },
-                    //   label: "Company",
-                    // ),
-                    // config.verticalSpaceMedium(),
                     PrimaryFormField(
                       initialValue: widget.addressFormParams.address?.address,
                       validator: (value) => Validator.validateEmpty(value!),
@@ -120,100 +96,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       label: "Address",
                       isRequired: true,
                     ),
-                    // config.verticalSpaceMedium(),
-                    // PrimaryFormField(
-                    //   initialValue: widget.addressFormParams.address?.city,
-                    //   isRequired: true,
-                    //   validator: (value) => Validator.validateEmpty(value!),
-                    //   onSaved: (value) {
-                    //     addressParams.city = value;
-                    //   },
-                    //   label: "City",
-                    // ),
-                    config.verticalSpaceMedium(),
-                    // GetBuilder<CountryFetchController>(
-                    //     init: CountryFetchController(),
-                    //     builder: (controller) {
-                    //       final result = controller.countryListResponse;
-                    //       if (result.hasData) {
-                    //         final List<Country> countryList = result.data;
-                    //         return PrimaryDropDownFormField<Country>(
-                    //           key: UniqueKey(),
-                    //           label: "Country",
-                    //           isRequired: true,
-                    //           items: countryList,
-                    //           itemToString: (value) {
-                    //             return "${value.name}";
-                    //           },
-                    //           validator: (value) {
-                    //             if (value == null) {
-                    //               return 'This field is required';
-                    //             }
-                    //             return null;
-                    //           },
-                    //           value: countryList.firstWhereOrNull((element) =>
-                    //               element.code ==
-                    //               widget.addressFormParams.address?.country
-                    //                   ?.code),
-                    //           onChanged: (value) {
-                    //             addressParams.countryCode = value?.code;
-
-                    //             Get.find<RegionFetchController>()
-                    //                 .getRegionByCountryId(
-                    //                     "${addressParams.countryCode}");
-                    //           },
-                    //         );
-                    //       } else if (result.hasError) {
-                    //         return ErrorView(
-                    //             title: NetworkException.getErrorMessage(
-                    //                 result.error));
-                    //       } else {
-                    //         return const CircularProgressIndicator();
-                    //       }
-                    //     }),
-                    // config.verticalSpaceMedium(),
-                    // GetBuilder<RegionFetchController>(
-                    //     init: RegionFetchController(),
-                    //     builder: (controller) {
-                    //       final countryRegionList =
-                    //           controller.countryRegionList;
-                    //       return countryRegionList.isNotEmpty
-                    //           ? PrimaryDropDownFormField<CountryRegion>(
-                    //               key: UniqueKey(),
-                    //               label: "State/Province",
-                    //               isRequired: true,
-                    //               items: countryRegionList,
-                    //               itemToString: (value) {
-                    //                 return "${value.name}";
-                    //               },
-                    //               onChanged: (value) {
-                    //                 addressParams
-                    //                   ..provinceId = value?.code
-                    //                   ..province = value?.name;
-                    //               },
-                    //               validator: (value) {
-                    //                 if (value == null) {
-                    //                   return 'This field is required';
-                    //                 }
-                    //                 return null;
-                    //               },
-                    //               value: countryRegionList.firstWhereOrNull(
-                    //                   (element) =>
-                    //                       element.name ==
-                    //                       widget.addressFormParams.address
-                    //                           ?.province),
-                    //             )
-                    //           : PrimaryFormField(
-                    //               initialValue: widget
-                    //                   .addressFormParams.address?.province,
-                    //               isRequired: true,
-                    //               validator: Validator.validateEmpty,
-                    //               onSaved: (value) {
-                    //                 addressParams.province = value;
-                    //               },
-                    //               label: "State/Province",
-                    //             );
-                    //     }),
                     config.verticalSpaceMedium(),
                     PrimaryFormField(
                       initialValue: widget.addressFormParams.address?.postalCode,

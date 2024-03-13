@@ -27,8 +27,7 @@ class LoginController extends GetxController {
     hideLoadingDialog(context);
     if (loginResponse.hasError) {
       AppSnackbar.showError(
-          context: context,
-          message: NetworkException.getErrorMessage(loginResponse.error));
+          context: context, message: NetworkException.getErrorMessage(loginResponse.error));
     } else {
       showToast(loginResponse.data);
       Get.find<AuthController>().authorize();
@@ -37,12 +36,8 @@ class LoginController extends GetxController {
   }
 
   void loginWithGoogle(BuildContext context) async {
-
     final loginResponse = await loginRepository.loginWithGoogle();
     if (loginResponse.hasError) {
-      // AppSnackbar.showError(
-      //     context: context,
-      //     message: NetworkException.getErrorMessage(loginResponse.error));
     } else {
       showToast(loginResponse.data);
       Get.find<AuthController>().authorize();
@@ -52,13 +47,9 @@ class LoginController extends GetxController {
   void loginWithFacebook(BuildContext context) async {
     final loginResponse = await loginRepository.loginWithFacebook();
     if (loginResponse.hasError) {
-      // AppSnackbar.showError(
-      //     context: context,
-      //     message: NetworkException.getErrorMessage(loginResponse.error));
     } else {
       showToast(loginResponse.data);
       Get.find<AuthController>().authorize();
     }
-
   }
 }

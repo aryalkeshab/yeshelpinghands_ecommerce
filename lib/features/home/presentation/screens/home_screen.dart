@@ -170,8 +170,8 @@ class _DrawerMenuItem extends StatelessWidget {
 
   final VoidCallback onPressed;
 
-  /// Icon for home drawer menu item
-  ///
+  ///Icon for home drawer menu item
+
   /// [icon] can be String or IconData
   final dynamic icon;
 

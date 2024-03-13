@@ -20,9 +20,7 @@ class OrderCard extends StatelessWidget {
     return BaseWidget(
       builder: (context, config, themeData) {
         return InkWell(
-          onTap: () {
-            // Get.toNamed(Routes.orderHistoryDetail, arguments: order.orderNo);
-          },
+          onTap: () {},
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(color: kWhite400, borderRadius: BorderRadius.circular(10)),

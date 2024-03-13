@@ -20,7 +20,6 @@ class AuthController extends GetxController {
     await authRepository.logout();
 
     isLoggedIn.value = false;
-    // Get.offAndToNamed(Routes.loginPage);
   }
 
   authorize() async {

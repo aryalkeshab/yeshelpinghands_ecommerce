@@ -17,12 +17,10 @@ import '../data/response/order_details.dart';
 class OrderHistoryDetailsScreen extends StatefulWidget {
   final String orderNo;
 
-  const OrderHistoryDetailsScreen({Key? key, required this.orderNo})
-      : super(key: key);
+  const OrderHistoryDetailsScreen({Key? key, required this.orderNo}) : super(key: key);
 
   @override
-  State<OrderHistoryDetailsScreen> createState() =>
-      _OrderHistoryDetailsScreenState();
+  State<OrderHistoryDetailsScreen> createState() => _OrderHistoryDetailsScreenState();
 }
 
 class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
@@ -62,14 +60,11 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Builder(builder: (context) {
-                                  final orderStatus =
-                                      OrderStatusExtension.getStatus(
-                                          orderHistoryDetails.status ?? "");
+                                  final orderStatus = OrderStatusExtension.getStatus(
+                                      orderHistoryDetails.status ?? "");
                                   return Text("${orderStatus.name}",
-                                      style: theme.textTheme.bodyText1
-                                          ?.copyWith(
-                                              color: orderStatus.color,
-                                              fontWeight: FontWeight.w600));
+                                      style: theme.textTheme.bodyText1?.copyWith(
+                                          color: orderStatus.color, fontWeight: FontWeight.w600));
                                 }),
                                 Text(
                                   'Purchased on  ${DateFormatterUtils.formatDateFromString(orderHistoryDetails.date)}',
@@ -78,8 +73,8 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: config.appVerticalPaddingMedium()),
+                              padding:
+                                  EdgeInsets.symmetric(vertical: config.appVerticalPaddingMedium()),
                               child: const Divider(),
                             ),
                             Column(
@@ -87,24 +82,21 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text("Items",
-                                    style: theme.textTheme.bodyText1?.copyWith(
-                                        fontWeight: FontWeight.w600)),
+                                    style: theme.textTheme.bodyText1
+                                        ?.copyWith(fontWeight: FontWeight.w600)),
                                 config.verticalSpaceSmall(),
                                 Builder(builder: (context) {
-                                  final orderInfo =
-                                      orderHistoryDetails.orderInfo;
+                                  final orderInfo = orderHistoryDetails.orderInfo;
                                   return Container(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      children: List.generate(
-                                          orderInfo?.orderItems?.length ?? 0,
+                                      children: List.generate(orderInfo?.orderItems?.length ?? 0,
                                           (index) {
                                         return Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             OrderDetailItemCard(
-                                                orderItem: orderInfo
-                                                    ?.orderItems?[index]),
+                                                orderItem: orderInfo?.orderItems?[index]),
                                             config.verticalSpaceSmall(),
                                           ],
                                         );
@@ -114,15 +106,12 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                                 }),
                                 Container(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          config.appHorizontalPaddingSmall(),
-                                      vertical:
-                                          config.appVerticalPaddingSmall()),
+                                      horizontal: config.appHorizontalPaddingSmall(),
+                                      vertical: config.appVerticalPaddingSmall()),
                                   width: double.maxFinite,
                                   color: kWhite400,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text.rich(
                                         TextSpan(children: [
@@ -168,67 +157,53 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      vertical:
-                                          config.appVerticalPaddingMedium()),
+                                      vertical: config.appVerticalPaddingMedium()),
                                   child: const Divider(),
                                 ),
                                 _ShippingAddressInfo(
                                   title: 'Shipping Address',
-                                  shippingAddress:
-                                      orderHistoryDetails.shippingAddress,
+                                  shippingAddress: orderHistoryDetails.shippingAddress,
                                 ),
                                 config.verticalSpaceLarge(),
                                 _ShippingAddressInfo(
                                   title: "Billing Address",
-                                  shippingAddress:
-                                      orderHistoryDetails.billingAddress,
+                                  shippingAddress: orderHistoryDetails.billingAddress,
                                 ),
                                 config.verticalSpaceLarge(),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 3, horizontal: 5),
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  theme.colorScheme.secondary)),
+                                          border: Border.all(color: theme.colorScheme.secondary)),
                                       child: Column(
                                         children: [
                                           Text(
                                             "Payment Method",
                                             style: theme.textTheme.bodyText2
-                                                ?.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                ?.copyWith(fontWeight: FontWeight.w600),
                                           ),
                                           config.verticalSpaceSmall(),
-                                          Text(
-                                              "${orderHistoryDetails.paymentMethod}")
+                                          Text("${orderHistoryDetails.paymentMethod}")
                                         ],
                                       ),
                                     ),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 3, horizontal: 5),
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  theme.colorScheme.secondary)),
+                                          border: Border.all(color: theme.colorScheme.secondary)),
                                       child: Column(
                                         children: [
                                           Text(
                                             "Shipping Method",
                                             style: theme.textTheme.bodyText2
-                                                ?.copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                ?.copyWith(fontWeight: FontWeight.w600),
                                           ),
                                           config.verticalSpaceSmall(),
-                                          Text(
-                                              "${orderHistoryDetails.shippingMethodInfo?.name}")
+                                          Text("${orderHistoryDetails.shippingMethodInfo?.name}")
                                         ],
                                       ),
                                     )
@@ -251,30 +226,20 @@ class _OrderHistoryDetailsScreenState extends State<OrderHistoryDetailsScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ShimmerWidget.rounded(
-                                    width: config.appWidth(20),
-                                    height: 15,
-                                    borderRadius: 3),
+                                    width: config.appWidth(20), height: 15, borderRadius: 3),
                                 ShimmerWidget.rounded(
-                                    width: config.appWidth(35),
-                                    height: 15,
-                                    borderRadius: 3),
+                                    width: config.appWidth(35), height: 15, borderRadius: 3),
                               ],
                             ),
                             config.verticalSpaceCustom(0.13),
                             ShimmerWidget.rounded(
-                                width: config.appWidth(25),
-                                height: 15,
-                                borderRadius: 3),
+                                width: config.appWidth(25), height: 15, borderRadius: 3),
                             config.verticalSpaceMedium(),
                             ShimmerWidget.rounded(
-                                width: double.maxFinite,
-                                height: 100,
-                                borderRadius: 3),
+                                width: double.maxFinite, height: 100, borderRadius: 3),
                             config.verticalSpaceMedium(),
                             ShimmerWidget.rounded(
-                                width: double.maxFinite,
-                                height: 100,
-                                borderRadius: 3),
+                                width: double.maxFinite, height: 100, borderRadius: 3),
                           ],
                         );
                       }
@@ -307,13 +272,11 @@ class _ShippingAddressInfo extends StatelessWidget {
         children: [
           Text(
             title,
-            style: theme.textTheme.bodyText2
-                ?.copyWith(fontWeight: FontWeight.w600),
+            style: theme.textTheme.bodyText2?.copyWith(fontWeight: FontWeight.w600),
           ),
           config.verticalSpaceSmall(),
           Text(
             "${shippingAddress?.city} ",
-            // "${shippingAddress?.firstName} ${shippingAddress?.lastName}",
             style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
           ),
           config.verticalSpaceSmall(),
@@ -331,15 +294,12 @@ class _ShippingAddressInfo extends StatelessWidget {
                 children: [
                   Text(
                     "${shippingAddress?.country}, ${shippingAddress?.city}, ${shippingAddress?.postalCode}, ${shippingAddress?.address}",
-                    style:
-                        theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
+                    style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                   ),
                   config.verticalSpaceSmall(),
                   Text(
-                    // "${shippingAddress?.phoneNumber}","phon"
                     "phone_number",
-                    style:
-                        theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
+                    style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                   )
                 ],
               )

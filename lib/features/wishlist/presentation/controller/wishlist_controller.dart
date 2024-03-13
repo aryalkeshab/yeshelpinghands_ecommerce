@@ -125,7 +125,6 @@ class WishListController extends GetxController {
   }
 
   //getWishList
-
   ApiResponse _wishListResponse = ApiResponse();
 
   set wishlistResponse(ApiResponse response) {

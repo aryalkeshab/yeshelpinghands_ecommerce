@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 class BillingAddressController extends GetxController {
   @override
   void onInit() {
-    fetchSavedShippingAddresses();
     super.onInit();
   }
 
@@ -16,9 +15,4 @@ class BillingAddressController extends GetxController {
   }
 
   ApiResponse get billingAddressesResponse => _billingAddressesResponse;
-
-  void fetchSavedShippingAddresses() {
-    // billingAddressesResponse = ApiResponse(data: dummyShippingAddresses);
-    // billingAddressesResponse = ApiResponse(error: "Some error");
-  }
 }

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
@@ -106,7 +105,6 @@ class HomeAppBarBottomSection extends StatelessWidget implements PreferredSizeWi
   @override
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, config, theme) {
-      final appbarMenuSpacing = config.horizontalSpaceSmall();
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [

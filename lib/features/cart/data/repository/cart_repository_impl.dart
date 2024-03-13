@@ -12,22 +12,13 @@ class CartRepositoryImpl implements CartRepository {
   final CartRemoteDataSource cartRemoteDataSource;
   final NetworkInfo networkInfo;
 
-  CartRepositoryImpl(
-      {required this.cartRemoteDataSource, required this.networkInfo});
+  CartRepositoryImpl({required this.cartRemoteDataSource, required this.networkInfo});
 
   @override
   Future<ApiResponse> getCartDetails() async {
     if (await networkInfo.isConnected) {
       try {
         final result = await cartRemoteDataSource.getCartDetails();
-        // final cartItemList = result["data"]
-        //     .map<CartResponse>((e) => CartResponse.fromJson(e))
-        //     .toList();
-
-        // if (result.isEmpty) {
-        //   return ApiResponse(data: cartItemList);
-        // }
-
         final cartResponse = CartResponse.fromJson(result["data"]);
         return ApiResponse(data: cartResponse);
       } catch (e) {
@@ -85,15 +76,13 @@ class CartRepositoryImpl implements CartRepository {
   Future<ApiResponse> updateCart(UpdateCartParams updateCartParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final response =
-            await cartRemoteDataSource.updateCart(updateCartParams);
+        final response = await cartRemoteDataSource.updateCart(updateCartParams);
 
         return ApiResponse(data: response['message']);
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
-              error: NetworkException.defaultError(
-                  value: "${e.response?.data['error'] ?? ''}"));
+              error: NetworkException.defaultError(value: "${e.response?.data['error'] ?? ''}"));
         }
         {
           return ApiResponse(error: NetworkException.getException(e));

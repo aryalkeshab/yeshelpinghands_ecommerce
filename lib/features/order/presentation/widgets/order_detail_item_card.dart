@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yeshelpinghand/core/utils/constants.dart';
-
 import '../../../../core/presentation/widgets/base_widget.dart';
 import '../../../../core/utils/number_parser.dart';
 import '../../data/response/order_details.dart';
@@ -19,8 +18,7 @@ class OrderDetailItemCard extends StatelessWidget {
       return Container(
         padding: EdgeInsets.all(config.appVerticalPaddingSmall()),
         margin: EdgeInsets.only(bottom: config.appVerticalPaddingMedium()),
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -32,16 +30,6 @@ class OrderDetailItemCard extends StatelessWidget {
                   "$currency ${NumberParser.twoDecimalDigit(orderItem?.price.toString())}",
                 ),
                 config.horizontalSpaceLarge(),
-                // Text.rich(
-                //   TextSpan(children: [
-                //     TextSpan(
-                //       text: "SKU : ",
-                //       style: theme.textTheme.bodyText2
-                //           ?.copyWith(color: Colors.grey),
-                //     ),
-                //     TextSpan(text: "${orderItem?.sku}"),
-                //   ]),
-                // ),
               ],
             ),
             config.verticalSpaceMedium(),
@@ -52,8 +40,7 @@ class OrderDetailItemCard extends StatelessWidget {
                   TextSpan(children: [
                     TextSpan(
                       text: "Qty. : ",
-                      style: theme.textTheme.bodyText2
-                          ?.copyWith(color: Colors.grey),
+                      style: theme.textTheme.bodyText2?.copyWith(color: Colors.grey),
                     ),
                     TextSpan(text: "${orderItem?.quantity}"),
                   ]),

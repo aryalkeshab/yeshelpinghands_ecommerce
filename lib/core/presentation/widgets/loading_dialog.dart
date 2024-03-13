@@ -6,8 +6,7 @@ class CustomLoadingDialog extends StatelessWidget {
   final bool backgroundColor;
   final bool radius;
 
-  const CustomLoadingDialog(
-      {this.width, this.backgroundColor = true, this.radius = true});
+  const CustomLoadingDialog({this.width, this.backgroundColor = true, this.radius = true});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +35,7 @@ void showLoadingDialog(BuildContext context, {Widget? loadingWidget}) {
   showDialog(
     barrierDismissible: false,
     context: context,
-    builder: (BuildContext context) =>
-        loadingWidget ?? const CustomLoadingDialog(),
+    builder: (BuildContext context) => loadingWidget ?? const CustomLoadingDialog(),
   );
 }
 

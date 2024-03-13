@@ -60,7 +60,6 @@ class PasswordResetScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // const Circularapp_Icon(),
                         config.verticalSpaceMedium(),
                         Text("Forgot your password?", style: theme.textTheme.headline6),
                         config.verticalSpaceSmall(),

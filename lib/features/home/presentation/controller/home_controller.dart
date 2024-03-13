@@ -28,10 +28,6 @@ class HomeController extends GetxController {
     refreshController = RefreshController();
     filterQueryParams = FilterQueryParams();
 
-    // fetchHomePageTopBanners();
-    // final wishlist = Get.find<WishListController>();
-    // var wishlistLength = wishlist.wishlistResponse.data;
-    //
     super.onInit();
   }
 

@@ -26,9 +26,6 @@ class ProductDetailsView extends StatelessWidget {
     required this.productDetails,
   });
 
-// This ctr and function are for image zoom
-  final _transformationController = TransformationController();
-
 // diaglog box for image zoom
   _displayDialog(String imageUrl, BuildContext context) {
     showGeneralDialog(
@@ -49,7 +46,6 @@ class ProductDetailsView extends StatelessWidget {
           children: [
             PinchZoom(
               child: CustomCachedNetworkImage(imageUrl, isCompleteUrl: false, fit: BoxFit.contain),
-              // resetDuration: const Duration(milliseconds: 100),
               maxScale: 2.5,
               onZoomStart: () {},
               onZoomEnd: () {},
@@ -78,10 +74,8 @@ class ProductDetailsView extends StatelessWidget {
     return BaseWidget(builder: (context, config, theme) {
       return SafeArea(
         child: Container(
-          // color: Colors.red,
           padding: EdgeInsets.symmetric(horizontal: config.appHorizontalPaddingSmall()),
           child: CustomScrollView(
-            // controller: _scrollController,
             slivers: <Widget>[
               SliverAppBar(
                 backgroundColor: Theme.of(context).primaryColor,
@@ -219,9 +213,6 @@ class ProductDetailsView extends StatelessWidget {
                         children: [
                           config.verticalSpaceSmall(),
                           Text(
-                            // StringUtils.capitalizeSentence(
-                            //     "${productDetails.name}"),
-
                             "${productDetails.name?.capitalize}",
                             maxLines: 2,
                             softWrap: false,
@@ -231,7 +222,6 @@ class ProductDetailsView extends StatelessWidget {
                           config.verticalSpaceSmall(),
                           Text(
                             "${productDetails.description}",
-                            // maxLines: 2,
                             textAlign: TextAlign.justify,
                             style: theme.textTheme.headline6?.copyWith(fontWeight: FontWeight.w200),
                           ),
@@ -361,7 +351,6 @@ class ProductDetailsView extends StatelessWidget {
                     ),
                     const Text(
                       "\u2022",
-                      // style: ,
                     ), //bullet text
                     const SizedBox(
                       width: 10,

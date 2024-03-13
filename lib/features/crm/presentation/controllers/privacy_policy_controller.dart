@@ -5,8 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PrivacyPolicyController extends GetxController {
   late CRMRepository _CRMRepository;
-  // bool isLoading = false;
-
   get data => null;
   @override
   void onInit() {
@@ -37,8 +35,6 @@ class PrivacyPolicyController extends GetxController {
   ApiResponse get privacyPolicyAPIResponse => _privacyPolicyApiResponse;
 
   getPrivacyPolicy(int id) async {
-    // isLoading = true;
     privacyPolicyAPIResponse = await _CRMRepository.fetchCrmDetails(id);
-    // isLoading = false;
   }
 }

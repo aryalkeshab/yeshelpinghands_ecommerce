@@ -23,9 +23,7 @@ class PaymentSelectionScreen extends StatelessWidget {
         },
         currentStep: 2,
         child: _PaymentSelectionView(
-          onPaymentSelect: (paymentMethod) {
-            // confirmOrderParams.paymentMethod = paymentMethod;
-          },
+          onPaymentSelect: (paymentMethod) {},
         ),
       );
     });

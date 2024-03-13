@@ -50,12 +50,10 @@ class ProductListingController extends GetxController {
 
   void onProductsFilter(BuildContext context, FilterQueryParams filterQueryParams,
       {bool filterData = true}) async {
-    // showLoadingDialog(context);
     currentPage = 1;
     filterQueryParams.currentPage = currentPage;
 
     await fetchProductList(filterQueryParams, filterData: filterData);
-    // hideLoadingDialog(context);
   }
 
   @override

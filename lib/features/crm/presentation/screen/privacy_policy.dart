@@ -14,8 +14,6 @@ class PrivacyPolicyScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: PrivacyPolicyWidget(),
         ),
-
-        ///
       );
     });
   }

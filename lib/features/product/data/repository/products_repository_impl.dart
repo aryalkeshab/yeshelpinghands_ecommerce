@@ -23,19 +23,12 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final productsList =
             result['data']["data"].map<ProductModel>((e) => ProductModel.fromJson(e)).toList();
 
-        // TODO: page size manage
-
         return ApiResponse(
             data: PagedResponse<ProductModel>(
                 items: productsList,
                 perPage: result["data"]["current_page"],
                 isNextPageAvailable: true,
                 totalCount: result["data"]["total"]));
-        // data: PagedResponse<ProductModel>(
-        // items: productsList,
-        // perPage: result[0]["page_size"],
-        // isNextPageAvailable: result[0]["isNextPageAvailable"],
-        // totalCount: result[0]["total_count"]));
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
       }
@@ -125,13 +118,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
         final productsList =
             result['data']["data"].map<ProductModel>((e) => ProductModel.fromJson(e)).toList();
 
-        return ApiResponse(data: productsList
-            // data: PagedResponse<ProductModel>(
-            //       items: productsList,
-            //       perPage: result[0]["page_size"],
-            //       isNextPageAvailable: result[0]["product_exists"],
-            //       totalCount: result[0]["total_count"])
-            );
+        return ApiResponse(data: productsList);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
       }
@@ -145,8 +132,6 @@ class ProductsRepositoryImpl implements ProductsRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await productsRemoteDataSource.getProductDetails(sku);
-
-        // final productList = ProductDetails.fromJson(result["data"]);
         final productList = ProductDetails.fromJson(result["data"]);
 
         return ApiResponse(data: productList);
@@ -157,20 +142,4 @@ class ProductsRepositoryImpl implements ProductsRepository {
       return ApiResponse(error: NetworkException.noInternetConnection());
     }
   }
-
-  // @override
-  // Future<ApiResponse> getFilterModel(String id) async {
-  //   if (await networkInfo.isConnected) {
-  //     try {
-  //       final result = await productsRemoteDataSource.getFilterModel(id);
-
-  //       final filterModel = FilterDrawerModel.fromJson(result[0]);
-  //       return ApiResponse(data: filterModel);
-  //     } catch (e) {
-  //       return ApiResponse(data: FilterDrawerModel.init());
-  //     }
-  //   } else {
-  //     return ApiResponse(error: NetworkException.noInternetConnection());
-  //   }
-  // }
 }

@@ -25,16 +25,4 @@ class RegionFetchController extends GetxController {
   var _countryRegionList = <CountryRegion>[];
 
   List<CountryRegion> get countryRegionList => _countryRegionList;
-
-  // getRegionByCountryId(String id) async {
-  //   regionListResponse =
-  //       await Get.find<AddressRepository>().getRegionByCountryId(id);
-  //   if (regionListResponse.hasData) {
-  //     countryRegionList
-  //       ..clear()
-  //       ..addAll(regionListResponse.data);
-  //   } else if (regionListResponse.hasError) {
-  //     countryRegionList.clear();
-  //   }
-  // }
 }

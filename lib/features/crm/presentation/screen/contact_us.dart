@@ -18,7 +18,6 @@ class ContactUsScreen extends StatelessWidget {
         builder: (profileController) {
           final result = Get.find<ProfileController>().userInfoResponse;
           final user = result.data;
-          final mapUrl = "https://goo.gl/maps/mZurBia3HJFHk5cR9";
           return BaseWidget(builder: (context, config, theme) {
             return Scaffold(
                 body: Padding(

@@ -27,7 +27,6 @@ class IntroScreen extends StatelessWidget {
         PageViewModel(
             image:
                 "https://static.vecteezy.com/system/resources/previews/014/550/733/original/trucks-deliver-goods-to-the-recipient-online-ordering-concept-png.png",
-            // "https://startupnation.com/wp-content/uploads/2018/02/Screen-Shot-2018-02-05-at-10.29.47-AM.png",
             title: "Quick Delivery",
             body: dummyIntroBody),
       ],
@@ -93,7 +92,6 @@ class IntroductionScreen extends HookWidget {
                         physics: const BouncingScrollPhysics(),
                         controller: pageController,
                         onPageChanged: (pageNo) => pageIndex.value = pageNo,
-                        // itemCount: pController.boardingPages.length,
                         itemCount: pages.length,
                         itemBuilder: (context, index) {
                           final page = pages[index];
