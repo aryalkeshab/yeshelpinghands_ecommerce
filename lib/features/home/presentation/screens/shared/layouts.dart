@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yeshelpinghand/core/presentation/resources/colors.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -29,22 +28,24 @@ class SectionHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title.toUpperCase(),
+            title,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 16),
           ),
-          InkWell(
-            onTap: onViewAllProductTap,
-            child: Text(
-              "See All >",
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.primary,
+          showViewAll
+              ? InkWell(
+                  onTap: onViewAllProductTap,
+                  child: Text(
+                    "See all",
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
-            ),
-          ),
+                )
+              : Container(),
           // if (showViewAll)
           //   InkWell(
           //     onTap: onViewAllProductTap,

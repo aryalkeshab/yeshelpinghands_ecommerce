@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:yeshelpinghand/core/presentation/resources/ui_assets.dart';
-
 import '../../../core/presentation/resources/colors.dart';
 
 class LoadingPulse extends StatelessWidget {

@@ -1,6 +1,4 @@
 import 'package:yeshelpinghand/features/cart/data/model/response/cart_details.dart';
-import 'package:yeshelpinghand/features/checkout/data/model/response/payment_method.dart';
-
 import '../../../../address/data/model/response/address.dart';
 
 class ConfirmOrderParams {

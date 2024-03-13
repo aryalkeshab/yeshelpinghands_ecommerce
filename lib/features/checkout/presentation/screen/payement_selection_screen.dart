@@ -1,24 +1,17 @@
 import 'package:get/get.dart';
-import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
-import 'package:yeshelpinghand/core/presentation/routes/app_pages.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/request/confirm_order_params.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/response/payment_method.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/controller/payment_methods_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:yeshelpinghand/features/checkout/presentation/screen/widgets/checkout_stepper.dart';
-import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
-
 import '../../../../core/presentation/resources/ui_assets.dart';
 import '../../../../core/presentation/widgets/base_widget.dart';
-import '../../../../core/presentation/widgets/focus_node_disabler.dart';
-import 'utils/payement_type_enum.dart';
 
 class PaymentSelectionScreen extends StatelessWidget {
   final ConfirmOrderParams confirmOrderParams;
 
-  PaymentSelectionScreen({Key? key, required this.confirmOrderParams})
-      : super(key: key);
+  PaymentSelectionScreen({Key? key, required this.confirmOrderParams}) : super(key: key);
   PaymentMethod? paymentMethod;
 
   @override
@@ -26,8 +19,7 @@ class PaymentSelectionScreen extends StatelessWidget {
     return BaseWidget(builder: (context, config, theme) {
       return CheckoutStepper(
         onProceed: () {
-          Get.find<PaymentMethodsController>()
-              .setPaymentMethod(context, confirmOrderParams);
+          Get.find<PaymentMethodsController>().setPaymentMethod(context, confirmOrderParams);
         },
         currentStep: 2,
         child: _PaymentSelectionView(
@@ -61,8 +53,7 @@ class _PaymentSelectionView extends StatelessWidget {
         children: [
           Text(
             'Select Payment Type',
-            style: theme.textTheme.bodyText1
-                ?.copyWith(fontWeight: FontWeight.w600),
+            style: theme.textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
           ),
           config.verticalSpaceSmall(),
           Column(
@@ -105,9 +96,8 @@ class _PaymentCard extends StatelessWidget {
         onTap: onSelect,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: isSelected
-              ? BoxDecoration(border: Border.all(color: theme.primaryColor))
-              : null,
+          decoration:
+              isSelected ? BoxDecoration(border: Border.all(color: theme.primaryColor)) : null,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

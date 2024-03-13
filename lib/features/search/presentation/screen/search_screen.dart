@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
         body: FloatingSearchAppBar(
           elevation: 1,
           alwaysOpened: true,
-          hint: "Keyword here...",
+          hint: "Search your products",
           hintStyle: Theme.of(context).textTheme.bodyText2,
           controller: _controller,
           onSubmitted: (query) {
@@ -32,13 +32,12 @@ class SearchScreen extends StatelessWidget {
           actions: [
             FloatingSearchBarAction.icon(
               icon: const Icon(
-                CupertinoIcons.search,
+                Icons.search,
                 size: 20,
               ),
               onTap: () {
                 Get.offAndToNamed(Routes.productListingScreen,
-                    arguments:
-                        FilterQueryParams(searchQuery: _controller.query));
+                    arguments: FilterQueryParams(searchQuery: _controller.query));
               },
               showIfOpened: true,
               showIfClosed: false,

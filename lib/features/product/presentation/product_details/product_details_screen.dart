@@ -34,12 +34,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).scaffoldBackgroundColor, //backgroundLight,
-      bottomSheet: GetBuilder<ProductDetailsController>(builder: (controller) {
+      backgroundColor: Colors.white, //backgroundLight,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
+      floatingActionButton: GetBuilder<ProductDetailsController>(builder: (controller) {
         final result = controller.productDetailsResponse;
         if (result.hasData) {
-          return ProductDetailsBottomSheet(productDetails: result.data);
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ProductDetailsBottomSheet(productDetails: result.data),
+          );
         } else {
           return const SizedBox();
         }
@@ -60,9 +63,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     );
                   } else if (result.hasError) {
                     return Center(
-                      child: ErrorView(
-                          title:
-                              "${NetworkException.getErrorMessage(result.error)}"),
+                      child: ErrorView(title: "${NetworkException.getErrorMessage(result.error)}"),
                     );
                   } else {
                     return const ProductDetailsLoading();
@@ -78,21 +79,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 class ProductDetailsBottomSheet extends StatelessWidget {
   final ProductDetails productDetails;
 
-  const ProductDetailsBottomSheet({Key? key, required this.productDetails})
-      : super(key: key);
+  const ProductDetailsBottomSheet({Key? key, required this.productDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BaseWidget(builder: (context, config, theme) {
       return AuthWidgetBuilder(builder: (context, isAuthenticated) {
-        return Container(
+        return SizedBox(
             height: 50,
-            padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
             child: PrimaryButton(
               color: productDetails.inStock! ? theme.primaryColor : lightGreen,
               label: productDetails.inStock!
                   ? "ADD TO CART"
-                  : productDetails.isCart == false
+                  : productDetails.isCart == true
                       ? "Already in cart"
                       : "OUT OF STOCK",
               labelWeight: FontWeight.w600,
@@ -100,8 +99,8 @@ class ProductDetailsBottomSheet extends StatelessWidget {
                   ? () {
                       if (productDetails.inStock!) {
                         if (productDetails.isCart == false) {
-                          Get.find<CartController>().addToCart(context,
-                              CartParams(slug: productDetails.slug, qty: 1));
+                          Get.find<CartController>()
+                              .addToCart(context, CartParams(slug: productDetails.slug, qty: 1));
                         } else {
                           showFailureToast("Product is already in cart");
                         }

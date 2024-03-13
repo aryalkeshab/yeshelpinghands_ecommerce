@@ -113,7 +113,7 @@ class PrimaryOutlinedButton extends StatelessWidget {
           style: BorderStyle.solid,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(radius ?? 4)),
+          borderRadius: BorderRadius.all(Radius.circular(radius ?? 20)),
         ),
       ),
       onPressed: () {
@@ -131,9 +131,7 @@ class PrimaryOutlinedButton extends StatelessWidget {
                     child: icon,
                   ),
                 ),
-              Text(title,
-                  style: TextStyle(
-                      color: borderColor ?? Theme.of(context).primaryColor)),
+              Text(title, style: TextStyle(color: borderColor ?? Theme.of(context).primaryColor)),
             ],
           ),
     );

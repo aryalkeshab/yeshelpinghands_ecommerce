@@ -3,8 +3,6 @@ import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.da
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
 import 'package:yeshelpinghand/features/dashboard/controllers/dashboard_controller.dart';
-import 'package:yeshelpinghand/features/home/presentation/controller/home_controller.dart';
-
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import 'package:yeshelpinghand/features/wishlist/data/model/wishlist.dart';
 import 'package:yeshelpinghand/features/wishlist/presentation/controller/wishlist_controller.dart';
@@ -45,8 +43,7 @@ class _WishListScreenState extends State<WishListScreen> {
                       // Get.find<HomeController>().getWishlist();
                     },
                     child: Padding(
-                        padding:
-                            EdgeInsets.only(right: config.appEdgePadding()),
+                        padding: EdgeInsets.only(right: config.appEdgePadding()),
                         child: GetBuilder<WishListController>(
                           builder: (controller) {
                             return InkWell(
@@ -59,19 +56,19 @@ class _WishListScreenState extends State<WishListScreen> {
                                               "Are you sure you want to clear all the items from your wishlist?",
                                           onApproveButtonPressed: () {
                                             Get.find<WishListController>()
-                                                .clearProductFromWishList(
-                                                    context);
+                                                .clearProductFromWishList(context);
                                           },
                                           onCancelButtonPressed: Get.back);
                                     },
                                   );
                                 },
                                 child: Visibility(
-                                    visible: controller.wishlistResponse.data
-                                            ?.isNotEmpty ==
-                                        true,
+                                    visible: controller.wishlistResponse.data?.isNotEmpty == true,
                                     replacement: const SizedBox.shrink(),
-                                    child: const Icon(CupertinoIcons.delete)));
+                                    child: const Icon(
+                                      CupertinoIcons.delete,
+                                      size: 18,
+                                    )));
                           },
                         )));
               })
@@ -88,11 +85,9 @@ class _WishListScreenState extends State<WishListScreen> {
                   enablePullDown: true,
                   onRefresh: () => controller.getWishList(),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: config.appEdgePadding()),
+                    padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
                     child: GetBuilder<WishListController>(builder: (context) {
-                      final result =
-                          Get.find<WishListController>().wishlistResponse;
+                      final result = Get.find<WishListController>().wishlistResponse;
 
                       if (result.hasData) {
                         final List<WishListProduct> wishlists = result.data;
@@ -112,8 +107,7 @@ class _WishListScreenState extends State<WishListScreen> {
                       } else if (result.hasError) {
                         return Center(
                           child: ErrorView(
-                            title:
-                                "${NetworkException.getErrorMessage(result.error)}",
+                            title: "${NetworkException.getErrorMessage(result.error)}",
                           ),
                         );
                       } else {
@@ -153,9 +147,7 @@ class WishlistLoadingView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ShimmerWidget.rounded(
-                        width: config.appWidth(25),
-                        height: config.appWidth(20)),
+                    ShimmerWidget.rounded(width: config.appWidth(25), height: config.appWidth(20)),
                     config.horizontalSpaceMedium(),
                     Expanded(
                       child: Column(
@@ -163,26 +155,18 @@ class WishlistLoadingView extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ShimmerWidget.rounded(
-                              width: config.appWidth(30),
-                              height: 12,
-                              borderRadius: 3),
+                              width: config.appWidth(30), height: 12, borderRadius: 3),
                           config.verticalSpaceMedium(),
                           ShimmerWidget.rounded(
-                              width: config.appWidth(10),
-                              height: 12,
-                              borderRadius: 3),
+                              width: config.appWidth(10), height: 12, borderRadius: 3),
                           config.verticalSpaceMedium(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ShimmerWidget.rounded(
-                                  width: config.appWidth(20),
-                                  height: 15,
-                                  borderRadius: 3),
+                                  width: config.appWidth(20), height: 15, borderRadius: 3),
                               ShimmerWidget.rounded(
-                                  width: config.appWidth(15),
-                                  height: 15,
-                                  borderRadius: 3),
+                                  width: config.appWidth(15), height: 15, borderRadius: 3),
                             ],
                           ),
                         ],

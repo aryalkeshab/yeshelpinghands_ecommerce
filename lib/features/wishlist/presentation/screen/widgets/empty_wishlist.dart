@@ -22,8 +22,7 @@ class EmptyWishListScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
+              padding: EdgeInsets.symmetric(horizontal: config.appEdgePadding()),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -35,20 +34,20 @@ class EmptyWishListScreen extends StatelessWidget {
                   config.verticalSpaceLarge(),
                   Text(
                     'You have no items in your wish list',
-                    style: theme.textTheme.bodyText1?.copyWith(
-                        fontWeight: FontWeight.w600, color: theme.primaryColor),
+                    style: theme.textTheme.bodyText1
+                        ?.copyWith(fontWeight: FontWeight.w600, color: theme.primaryColor),
                   ),
                   config.verticalSpaceMedium(),
                   Text(
                     "Tap any heart next to a product to favorite. We'll save them for you here!",
-                    style: theme.textTheme.caption
-                        ?.copyWith(fontSize: 14, color: theme.primaryColor),
+                    style:
+                        theme.textTheme.caption?.copyWith(fontSize: 14, color: theme.primaryColor),
                   ),
                   config.verticalSpaceLarge(),
                   PrimaryButton(
                       label: "Start Shopping",
                       onPressed: () {
-                        Get.back();
+                        Get.put(DashboardController()).changeTabIndex(0);
                       }),
                 ],
               ),

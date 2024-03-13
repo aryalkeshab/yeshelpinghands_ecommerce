@@ -1,12 +1,5 @@
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
-import 'package:yeshelpinghand/core/presentation/widgets/shimmer_widget.dart';
-import 'package:yeshelpinghand/features/crm/presentation/controllers/privacy_policy_controller.dart';
-import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_html/flutter_html.dart';
-import 'package:get/get.dart';
-
-import '../../../../core/data/data_source/remote/network_exception.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   PrivacyPolicyScreen({Key? key}) : super(key: key);

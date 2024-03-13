@@ -1,14 +1,9 @@
 import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/textfields.dart';
-import 'package:yeshelpinghand/features/shared/layouts/appbar_home.dart';
 import 'package:yeshelpinghand/features/store_location/presentation/controllers/store_controller.dart';
-import 'package:yeshelpinghand/features/store_location/presentation/screens/widgets/google_map.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class StoreLocationScreen extends StatefulWidget {
   const StoreLocationScreen({Key? key}) : super(key: key);
@@ -75,17 +70,13 @@ class _StoreLocationScreenState extends State<StoreLocationScreen> {
                           leading: SizedBox(
                               width: 80,
                               child: CachedNetworkImage(
-                                  imageUrl: storeLocation
-                                          .dummyStoreLocation[index].imageUrl ??
-                                      '')),
+                                  imageUrl:
+                                      storeLocation.dummyStoreLocation[index].imageUrl ?? '')),
                           title: Text(
-                            storeLocation.dummyStoreLocation[index].storeName ??
-                                '',
+                            storeLocation.dummyStoreLocation[index].storeName ?? '',
                             overflow: TextOverflow.ellipsis,
                           ),
-                          subtitle: Text(storeLocation
-                                  .dummyStoreLocation[index].description ??
-                              ''),
+                          subtitle: Text(storeLocation.dummyStoreLocation[index].description ?? ''),
                           trailing: const Icon(
                             Icons.arrow_forward_ios,
                             size: 16,

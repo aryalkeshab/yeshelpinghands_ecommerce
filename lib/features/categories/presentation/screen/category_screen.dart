@@ -7,15 +7,10 @@ import 'package:yeshelpinghand/core/presentation/widgets/base_widget.dart';
 import 'package:yeshelpinghand/features/categories/data/models/response/category.dart';
 import 'package:yeshelpinghand/features/categories/presentation/controller/category_controller.dart';
 import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_loading_view.dart';
-import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_tab_view.dart';
-import 'package:yeshelpinghand/features/categories/presentation/screen/layouts/category_vertical_tabs.dart';
 import 'package:yeshelpinghand/features/product/data/model/request/filter_query_params.dart';
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
-
 import '../../../../core/data/data_source/remote/api_constants.dart';
-import '../../../../core/presentation/resources/colors.dart';
 import '../../../../core/presentation/widgets/cached_network_image_builder.dart';
-import '../../../shared/layouts/appbar_home.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -81,8 +76,7 @@ class CategoryBody extends StatelessWidget {
                       onTap: () {
                         selectedCategoryId.value = category.id;
                         Get.toNamed(Routes.productListingScreen,
-                            arguments:
-                                FilterQueryParams(categoryId: category.id));
+                            arguments: FilterQueryParams(categoryId: category.id));
                       },
                     );
                   },
@@ -126,11 +120,10 @@ class CategoryCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        color: pasminaColor,
+        // color: pasminaColor,
         elevation: 4.0,
         child: Container(
-          constraints: BoxConstraints(
-              maxHeight: 200), // Adjust the maximum height as needed
+          constraints: BoxConstraints(maxHeight: 200), // Adjust the maximum height as needed
           child: ListView(
             physics: NeverScrollableScrollPhysics(),
             children: [

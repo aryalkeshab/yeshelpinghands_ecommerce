@@ -1,15 +1,10 @@
-import 'package:yeshelpinghand/core/data/data_source/remote/api_result.dart';
-import 'package:yeshelpinghand/core/data/data_source/remote/network_exception.dart';
 import 'package:yeshelpinghand/core/presentation/widgets/loading_dialog.dart';
-import 'package:yeshelpinghand/core/presentation/widgets/snackbar.dart';
 import 'package:yeshelpinghand/features/address/data/model/response/address.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:yeshelpinghand/features/address/domain/repository/address_repository.dart';
 import 'package:yeshelpinghand/features/checkout/data/model/request/confirm_order_params.dart';
 
 import '../../../../core/presentation/routes/app_pages.dart';
-import '../../domain/repository/checkout_repository.dart';
 
 class ShippingAddressController extends GetxController {
   late GlobalKey<FormState> shippingKey;
@@ -36,8 +31,7 @@ class ShippingAddressController extends GetxController {
   //   }
   // }
 
-  setCheckoutShippingInfo(
-      BuildContext context, ConfirmOrderParams confirmOrderParams) async {
+  setCheckoutShippingInfo(BuildContext context, ConfirmOrderParams confirmOrderParams) async {
     showLoadingDialog(context);
     // final result = await Get.find<CheckoutRepository>()
     //     .setShippingInfo(confirmOrderParams);

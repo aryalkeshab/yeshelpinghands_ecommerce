@@ -2,16 +2,11 @@ import 'package:yeshelpinghand/features/address/presentation/utils/address_type_
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/presentation/resources/ui_assets.dart';
-import '../../../../core/presentation/routes/app_pages.dart';
 import '../../../../core/presentation/widgets/base_widget.dart';
 import '../../../../core/utils/size_config.dart';
 import '../../../shared/layouts/confirm_dialog_view.dart';
 import '../../data/model/response/address.dart';
-import '../add_address_screen.dart';
 import '../controller/address_controller.dart';
-import '../utils/address_form_type_enum.dart';
 import 'warning_message.dart';
 
 class AddressBottomModalSheet extends StatelessWidget {
@@ -33,8 +28,7 @@ class AddressBottomModalSheet extends StatelessWidget {
       return Container(
         height: config.appHeight(28),
         margin: EdgeInsets.symmetric(
-            horizontal: config.appEdgePadding(),
-            vertical: config.appVerticalPaddingLarge()),
+            horizontal: config.appEdgePadding(), vertical: config.appVerticalPaddingLarge()),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,8 +68,7 @@ class AddressBottomModalSheet extends StatelessWidget {
                     context: buildContext,
                     builder: (ctx) {
                       return ConfirmDialogView(
-                        primaryText:
-                            "Are you sure you want to delete this address?",
+                        primaryText: "Are you sure you want to delete this address?",
                         onApproveButtonPressed: () {
                           Get.back();
                           Get.find<AddressController>()
@@ -135,8 +128,7 @@ class _BottomModalMenuItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
           // color: Colors.transparent,
-          padding:
-              EdgeInsets.symmetric(vertical: _config.appVerticalPaddingSmall()),
+          padding: EdgeInsets.symmetric(vertical: _config.appVerticalPaddingSmall()),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

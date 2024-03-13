@@ -6,11 +6,11 @@ class UIAssets {
   static const String flareDir = "assets/flares";
 
   static const String appLogo = "$imageDir/logo.png";
+  static const String appIcon = "$imageDir/app_logo_yhh.png";
   static const String appLongLogo = "$imageDir/long-logo.png";
 
   static const String placeHolderImage = "$imageDir/image-load-error.png";
-  static const String termsandconditionImage =
-      "$imageDir/terms-and-conditions.png";
+  static const String termsandconditionImage = "$imageDir/terms-and-conditions.png";
   static const String app_Icon = "$imageDir/app_logo.png";
 
   static const String privacypolicyImage = "$imageDir/compliant.png";

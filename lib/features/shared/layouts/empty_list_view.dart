@@ -1,7 +1,6 @@
 import 'package:yeshelpinghand/core/presentation/resources/ui_assets.dart';
 import 'package:yeshelpinghand/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class EmptyListView extends StatelessWidget {
   final String? title;
