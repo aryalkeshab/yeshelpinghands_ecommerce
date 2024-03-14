@@ -23,19 +23,16 @@ class BannerRemoteDataSourceImpl implements BannerRemoteDataSource {
 
   @override
   Future getBannerList() {
-    return apiClient.get(
-        APIPathHelper.homeAPIs(APIPath.banners, keyword: "qmb-col-banners"));
+    return apiClient.get(APIPathHelper.homeAPIs(APIPath.banners, keyword: "yhh-col-banners"));
   }
 
   @override
   Future getSingleBanner() {
-    return apiClient.get(
-        APIPathHelper.homeAPIs(APIPath.banners, keyword: "qmb-single-banner"));
+    return apiClient.get(APIPathHelper.homeAPIs(APIPath.banners, keyword: "yhh-single-banner"));
   }
 
   @override
   Future getFeaturedCategoryBanners() {
-    return apiClient.get(
-        APIPathHelper.homeAPIs(APIPath.banners, keyword: "qmb-slider-banners"));
+    return apiClient.get(APIPathHelper.homeAPIs(APIPath.banners, keyword: "yhh-slider-banners"));
   }
 }

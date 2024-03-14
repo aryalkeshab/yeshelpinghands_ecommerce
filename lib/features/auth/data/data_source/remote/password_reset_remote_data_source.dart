@@ -5,15 +5,14 @@ abstract class PasswordResetRemoteDataSource {
   Future<dynamic> resetPassword({required String email});
 }
 
-class PasswordResetRemoteDataSourceImpl
-    implements PasswordResetRemoteDataSource {
+class PasswordResetRemoteDataSourceImpl implements PasswordResetRemoteDataSource {
   final ApiClient apiClient;
 
   PasswordResetRemoteDataSourceImpl({required this.apiClient});
 
   @override
   Future resetPassword({required String email}) {
-    return apiClient.validatedPut(
+    return apiClient.post(
       APIPathHelper.authAPIs(APIPath.passwordReset),
       data: {
         "email": email,

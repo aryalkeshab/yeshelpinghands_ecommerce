@@ -68,107 +68,100 @@ class LoginFormBuilder extends StatelessWidget {
     return HookBaseWidget(
       builder: (context, config, theme) {
         final _loginFormKey = useMemoized(GlobalKey<FormState>.new);
-        return Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+        return Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: config.appHorizontalPaddingMedium(),
+              vertical: config.appVerticalPaddingMedium()),
+          child: Form(
+            key: _loginFormKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: config.appEdgePadding(),
               ),
-              border: Border.all(width: 0.5, color: Colors.grey.shade200)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Form(
-              key: _loginFormKey,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: config.appEdgePadding(),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    PrimaryFormField(
-                      hintIcon: Icon(
-                        Icons.email,
-                        size: 25,
-                        color: theme.primaryColor,
-                      ),
-                      label: "Email".tr,
-                      isRequired: true,
-                      validator: (value) => Validator.validateEmail(value!),
-                      onSaved: (value) {
-                        loginParams.email = value;
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  PrimaryFormField(
+                    hintIcon: Icon(
+                      Icons.email,
+                      size: 25,
+                      color: theme.primaryColor,
+                    ),
+                    label: "Email".tr,
+                    isRequired: true,
+                    validator: (value) => Validator.validateEmail(value!),
+                    onSaved: (value) {
+                      loginParams.email = value;
+                    },
+                  ),
+                  config.verticalSpaceMedium(),
+                  PrimaryFormField(
+                    isPassword: true,
+                    hintIcon: Icon(
+                      Icons.lock,
+                      color: theme.primaryColor,
+                      size: 25,
+                    ),
+                    isRequired: true,
+                    label: "Password".tr,
+                    validator: (value) => Validator.validateEmpty(value!),
+                    onSaved: (value) {
+                      loginParams.password = value;
+                    },
+                  ),
+                  config.verticalSpaceMedium(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: PrimaryTextButton(
+                      isSmallButton: true,
+                      labelColor: theme.primaryColor,
+                      label: 'Forgot Your Password ?',
+                      onPressed: () {
+                        Get.toNamed(Routes.passwordReset);
                       },
                     ),
-                    config.verticalSpaceMedium(),
-                    PrimaryFormField(
-                      isPassword: true,
-                      hintIcon: Icon(
-                        Icons.lock,
-                        color: theme.primaryColor,
-                        size: 25,
-                      ),
-                      isRequired: true,
-                      label: "Password".tr,
-                      validator: (value) => Validator.validateEmpty(value!),
-                      onSaved: (value) {
-                        loginParams.password = value;
-                      },
-                    ),
-                    config.verticalSpaceMedium(),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: PrimaryTextButton(
-                        isSmallButton: true,
-                        labelColor: theme.primaryColor,
-                        label: 'Forgot Your Password ?',
-                        onPressed: () {
-                          Get.toNamed(Routes.passwordReset);
-                        },
-                      ),
-                    ),
-                    config.verticalSpaceLarge(),
-                    PrimaryButton(
-                        label: "SIGN IN",
-                        onPressed: () {
-                          final currentState = _loginFormKey.currentState;
-                          if (currentState != null) {
-                            currentState.save();
+                  ),
+                  config.verticalSpaceLarge(),
+                  PrimaryButton(
+                      label: "SIGN IN",
+                      onPressed: () {
+                        final currentState = _loginFormKey.currentState;
+                        if (currentState != null) {
+                          currentState.save();
 
-                            if (currentState.validate()) {
-                              Get.find<LoginController>().requestLogin(loginParams, context);
-                            }
+                          if (currentState.validate()) {
+                            Get.find<LoginController>().requestLogin(loginParams, context);
                           }
-                        }),
-                    config.verticalSpaceLarge(),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed(Routes.register,
-                            arguments:
-                                CustomerFormParams(customerFormType: CustomerFormType.create));
-                      },
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'NEW CUSTOMER ? ',
-                                style: theme.textTheme.bodyText2
-                                    ?.copyWith(color: theme.textTheme.caption?.color),
-                              ),
-                              TextSpan(
-                                text: 'START HERE',
-                                style: theme.textTheme.bodyText2?.copyWith(
-                                    color: theme.primaryColor, fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
+                        }
+                      }),
+                  config.verticalSpaceLarge(),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.register,
+                          arguments: CustomerFormParams(customerFormType: CustomerFormType.create));
+                    },
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'NEW CUSTOMER ? ',
+                              style: theme.textTheme.bodyText2
+                                  ?.copyWith(color: theme.textTheme.caption?.color),
+                            ),
+                            TextSpan(
+                              text: 'START HERE',
+                              style: theme.textTheme.bodyText2?.copyWith(
+                                  color: theme.primaryColor, fontWeight: FontWeight.w600),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

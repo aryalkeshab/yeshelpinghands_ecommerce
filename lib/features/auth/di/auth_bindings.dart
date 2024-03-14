@@ -2,7 +2,6 @@ import 'package:yeshelpinghand/core/data/data_source/remote/api_client.dart';
 import 'package:yeshelpinghand/core/data/data_source/remote/network_info.dart';
 import 'package:yeshelpinghand/features/auth/data/data_source/local/auth_local_data_source.dart';
 import 'package:yeshelpinghand/features/auth/data/data_source/remote/auth_remote_data_source.dart';
-import 'package:yeshelpinghand/features/auth/data/data_source/remote/social_login_data_source.dart';
 import 'package:yeshelpinghand/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:yeshelpinghand/features/auth/domain/repository/auth_repository.dart';
 import 'package:yeshelpinghand/features/auth/presentation/controller/auth_controller.dart';
@@ -13,17 +12,12 @@ class AuthBindings extends Bindings {
   @override
   void dependencies() {
     Get
-      ..put<AuthLocalDataSource>(
-          AuthLocalDataSourceImpl(Get.find<FlutterSecureStorage>()),
+      ..put<AuthLocalDataSource>(AuthLocalDataSourceImpl(Get.find<FlutterSecureStorage>()),
           permanent: true)
-      ..put<AuthRemoteDataSource>(
-          AuthRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()),
+      ..put<AuthRemoteDataSource>(AuthRemoteDataSourceImpl(apiClient: Get.find<ApiClient>()),
           permanent: true)
-      ..put<SocialLoginDataSource>(
-          SocialLoginDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<AuthRepository>(
           AuthRepositoryImpl(
-              socialLoginDataSource: Get.find<SocialLoginDataSource>(),
               networkInfo: Get.find<NetworkInfo>(),
               authLocalDataSource: Get.find<AuthLocalDataSource>(),
               authRemoteDataSource: Get.find<AuthRemoteDataSource>()),

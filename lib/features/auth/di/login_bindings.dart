@@ -1,4 +1,3 @@
-import 'package:yeshelpinghand/features/auth/data/data_source/remote/social_login_data_source.dart';
 import 'package:yeshelpinghand/features/auth/domain/repository/login_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -14,7 +13,6 @@ class LoginBindings extends Bindings {
   void dependencies() {
     Get
       ..put<LoginRemoteDataSource>(LoginRemoteDataSourceImpl(Get.find<ApiClient>()))
-      ..put<SocialLoginDataSource>(SocialLoginDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<LoginRepository>(LoginRepositoryImpl(
         loginRemoteDataSource: Get.find<LoginRemoteDataSource>(),
         networkInfo: Get.find<NetworkInfo>(),

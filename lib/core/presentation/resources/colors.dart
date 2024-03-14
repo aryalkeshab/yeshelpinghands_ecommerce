@@ -30,6 +30,6 @@ final grey500 = Colors.grey.withOpacity(0.5);
 final darkGrey = Colors.black.withOpacity(0.6);
 const lightGreen = Color(0xFF8BC3A0);
 LinearGradient pasminaColor = LinearGradient(colors: [
-  primaryColor.withOpacity(0.5),
+  primaryColor.withOpacity(0.4),
   primaryColor,
 ], begin: Alignment.bottomLeft, end: Alignment.topRight);

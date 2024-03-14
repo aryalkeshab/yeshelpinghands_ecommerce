@@ -95,7 +95,7 @@ class ProductDetailsView extends StatelessWidget {
                         size: 25,
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Get.back();
                       },
                     ),
                   ),
@@ -175,12 +175,10 @@ class ProductDetailsView extends StatelessWidget {
                               Get.until((route) => route.settings.name == Routes.dashboard);
                               Get.find<DashboardController>().changeTabIndex(3);
                             },
-                      icon: CircleAvatar(
-                          backgroundColor: scaffoldBackgroundColor,
-                          child: productDetails.isWishlist == true
-                              ? const Icon(CupertinoIcons.heart_solid,
-                                  color: Colors.red, size: 25.0)
-                              : Icon(CupertinoIcons.heart, color: theme.primaryColor, size: 25.0)),
+                      icon: productDetails.isWishlist == true
+                          ? const Icon(Icons.favorite, color: Colors.red, size: 25.0)
+                          : Icon(Icons.favorite_border_rounded,
+                              color: theme.primaryColor, size: 25.0),
                     );
                   }),
                 ],
