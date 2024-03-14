@@ -34,22 +34,4 @@ class LoginController extends GetxController {
       Get.back();
     }
   }
-
-  void loginWithGoogle(BuildContext context) async {
-    final loginResponse = await loginRepository.loginWithGoogle();
-    if (loginResponse.hasError) {
-    } else {
-      showToast(loginResponse.data);
-      Get.find<AuthController>().authorize();
-    }
-  }
-
-  void loginWithFacebook(BuildContext context) async {
-    final loginResponse = await loginRepository.loginWithFacebook();
-    if (loginResponse.hasError) {
-    } else {
-      showToast(loginResponse.data);
-      Get.find<AuthController>().authorize();
-    }
-  }
 }

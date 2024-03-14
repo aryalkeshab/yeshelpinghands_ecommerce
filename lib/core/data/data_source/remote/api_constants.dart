@@ -75,7 +75,6 @@ enum APIPath {
 }
 
 class APIPathHelper {
-  // static const String baseUrl = "https://qmbmart.com";
   static const String baseUrl = "https://yeshelpinghand.com";
 
   static const String baseUrlImage = "https://yeshelpinghand.com/";
@@ -89,16 +88,13 @@ class APIPathHelper {
         return "/api/V1/register";
 
       case APIPath.passwordReset:
-        return "/rest/V1/customers/password";
+        return "/api/V1/customers/password";
 
       case APIPath.passwordUpdate:
-        return "/rest/V1/customers/me/password";
+        return "/api/V1/customers/me/password";
 
       case APIPath.logout:
         return "/api/V1/logout";
-
-      case APIPath.loginWithSocialMedia:
-        return "/rest/V1/social-auth/social-authenticate";
 
       default:
         return "";

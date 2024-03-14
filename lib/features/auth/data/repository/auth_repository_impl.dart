@@ -24,13 +24,6 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<void> logout() async {
-    final loginType = await authLocalDataSource.checkLoginType;
-    if (loginType == LoginType.facebook) {
-      await socialLoginDataSource.facebookSignOut();
-    } else if (loginType == LoginType.google) {
-      await socialLoginDataSource.googleSignOut();
-    } else {}
-
     try {
       await authRemoteDataSource.logout();
     } catch (e) {}

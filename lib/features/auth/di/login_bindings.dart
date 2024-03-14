@@ -13,15 +13,12 @@ class LoginBindings extends Bindings {
   @override
   void dependencies() {
     Get
-      ..put<LoginRemoteDataSource>(
-          LoginRemoteDataSourceImpl(Get.find<ApiClient>()))
-      ..put<SocialLoginDataSource>(
-          SocialLoginDataSourceImpl(apiClient: Get.find<ApiClient>()))
+      ..put<LoginRemoteDataSource>(LoginRemoteDataSourceImpl(Get.find<ApiClient>()))
+      ..put<SocialLoginDataSource>(SocialLoginDataSourceImpl(apiClient: Get.find<ApiClient>()))
       ..put<LoginRepository>(LoginRepositoryImpl(
         loginRemoteDataSource: Get.find<LoginRemoteDataSource>(),
         networkInfo: Get.find<NetworkInfo>(),
         secureStorage: Get.find<FlutterSecureStorage>(),
-        socialLoginDataSource: Get.find<SocialLoginDataSource>(),
       ))
       ..put(LoginController());
   }

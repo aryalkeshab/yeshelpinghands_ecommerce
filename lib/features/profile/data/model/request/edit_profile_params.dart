@@ -11,9 +11,9 @@ class EditProfileParams {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['user_name'] = name;
     map['mobile'] = contactNumber;
-    map['user_username '] = userName;
+    map['name'] = name;
+    map['username'] = userName;
     return map;
   }
 }
