@@ -19,9 +19,8 @@ class ImageSliderRepositoryImpl extends ImageSliderRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await imageSliderRemoteDataSource.getSingleBanner();
-        final mappedImageSlider = response[0]['image']
-            .map((e) => BannerResponse.fromJson(e))
-            .toList();
+        final mappedImageSlider =
+            response[0]['image'].map((e) => BannerResponse.fromJson(e)).toList();
         return ApiResponse(data: mappedImageSlider);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

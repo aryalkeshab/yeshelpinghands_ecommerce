@@ -10,18 +10,15 @@ class FeaturedCategoryRepositoryImpl extends FeaturedCategoryRepository {
   late NetworkInfo networkInfo;
 
   FeaturedCategoryRepositoryImpl(
-      {required this.featuredCategoryRemoteDataSource,
-      required this.networkInfo});
+      {required this.featuredCategoryRemoteDataSource, required this.networkInfo});
 
   @override
   Future<ApiResponse> getFeaturedCategory() async {
     if (await networkInfo.isConnected) {
       try {
-        final response =
-            await featuredCategoryRemoteDataSource.getFeaturedCategory();
+        final response = await featuredCategoryRemoteDataSource.getFeaturedCategory();
         final featuredCategoryList = response[0]['image']
-            .map<FeaturedCategoryModel>(
-                (e) => FeaturedCategoryModel.fromJson(e))
+            .map<FeaturedCategoryModel>((e) => FeaturedCategoryModel.fromJson(e))
             .toList();
         return ApiResponse(data: featuredCategoryList);
       } catch (e) {

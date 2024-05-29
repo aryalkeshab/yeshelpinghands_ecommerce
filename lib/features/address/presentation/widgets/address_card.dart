@@ -71,8 +71,6 @@ class AddressCard extends StatelessWidget {
                       );
                     },
                   );
-                  // Get.find<AddressController>()
-                  //     .deleteAddress(context, address.id.toString());
                 },
                 child: Icon(
                   Icons.delete,

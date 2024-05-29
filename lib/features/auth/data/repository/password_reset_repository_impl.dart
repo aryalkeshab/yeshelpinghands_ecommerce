@@ -19,15 +19,12 @@ class PasswordResetRepositoryImpl implements PasswordResetRepository {
   Future<ApiResponse> resetPassword({required String email}) async {
     if (await networkInfo.isConnected) {
       try {
-        final result =
-            await passwordResetRemoteDataSource.resetPassword(email: email);
-        return ApiResponse(
-            data: "Password reset link has been sent to your email");
+        final result = await passwordResetRemoteDataSource.resetPassword(email: email);
+        return ApiResponse(data: "Password reset link has been sent to your email");
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
-              error: NetworkException.defaultError(
-                  value: e.response?.data['message'] ?? ''));
+              error: NetworkException.defaultError(value: e.response?.data['message'] ?? ''));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

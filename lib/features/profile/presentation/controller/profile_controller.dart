@@ -33,6 +33,7 @@ class ProfileController extends GetxController {
   getUserInfoResponse() async {
     userInfoResponse = await Get.find<ProfileRepository>().fetchProfileDetails();
     refreshController.refreshCompleted();
+    update();
   }
 
   void updateCustomerInfo(BuildContext context, RegisterParams registerParams) async {
@@ -52,5 +53,6 @@ class ProfileController extends GetxController {
       AppSnackbar.showError(
           context: context, message: NetworkException.getErrorMessage(result.error));
     }
+    update();
   }
 }

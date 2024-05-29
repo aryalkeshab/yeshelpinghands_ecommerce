@@ -23,6 +23,8 @@ class HomeController extends GetxController {
   RefreshController refreshController = RefreshController();
   late FilterQueryParams filterQueryParams;
 
+  var selectedValue = '';
+
   @override
   void onInit() {
     refreshController = RefreshController();

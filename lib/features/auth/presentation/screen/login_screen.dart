@@ -14,6 +14,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import '../../../../core/presentation/resources/ui_assets.dart';
 import '../../../../core/presentation/widgets/clipper.dart';
+import '../../../../core/presentation/widgets/custom_dropdown.dart';
 
 class LoginScreen extends StatelessWidget {
   final bool? showLeading;
@@ -131,7 +132,8 @@ class LoginFormBuilder extends StatelessWidget {
                           currentState.save();
 
                           if (currentState.validate()) {
-                            Get.find<LoginController>().requestLogin(loginParams, context);
+                            Get.put<LoginController>(LoginController())
+                                .requestLogin(loginParams, context);
                           }
                         }
                       }),

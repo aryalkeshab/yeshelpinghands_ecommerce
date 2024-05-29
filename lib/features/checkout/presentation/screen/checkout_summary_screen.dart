@@ -123,7 +123,7 @@ class _AddressSummaryCard extends StatelessWidget {
                       '${address?.country}, ${address?.city}, ${address?.postalCode}, ${address?.address}',
                     ),
                     config.verticalSpaceSmall(),
-                    Text("To: ${address?.city} ${address?.address}",
+                    Text("To: ${address?.city}, ${address?.address}",
                         style: theme.textTheme.caption),
                   ],
                 ),

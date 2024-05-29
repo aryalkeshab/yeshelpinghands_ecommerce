@@ -24,8 +24,7 @@ class CategoryController extends GetxController {
   ApiResponse get categoryApiResponse => _categoryApiResponse;
 
   fetchCategoryList() async {
-    categoryApiResponse =
-        await Get.find<CategoryRepository>().getAllCategories();
+    categoryApiResponse = await Get.find<CategoryRepository>().getAllCategories();
     refreshController.refreshCompleted();
   }
 }

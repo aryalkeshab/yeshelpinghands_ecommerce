@@ -20,8 +20,7 @@ class BannerRepositoryImpl implements BannerRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await bannerRemoteDataSource.getBannerList();
-        final mappedHomeBanner =
-            response["data"].map((e) => AdBannerResponse.fromJson(e)).toList();
+        final mappedHomeBanner = response["data"].map((e) => AdBannerResponse.fromJson(e)).toList();
         return ApiResponse(data: mappedHomeBanner);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
@@ -36,8 +35,7 @@ class BannerRepositoryImpl implements BannerRepository {
     if (await networkInfo.isConnected) {
       try {
         final response = await bannerRemoteDataSource.getSliderImageList();
-        final mappedImageSlider =
-            response['data'].map((e) => BannerResponse.fromJson(e)).toList();
+        final mappedImageSlider = response['data'].map((e) => BannerResponse.fromJson(e)).toList();
         return ApiResponse(data: mappedImageSlider);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));
@@ -67,10 +65,8 @@ class BannerRepositoryImpl implements BannerRepository {
   Future<ApiResponse> fetchFeaturedCategoryBanner() async {
     if (await networkInfo.isConnected) {
       try {
-        final response =
-            await bannerRemoteDataSource.getFeaturedCategoryBanners();
-        final mappedImageSlider =
-            response["data"].map((e) => BannerResponse.fromJson(e)).toList();
+        final response = await bannerRemoteDataSource.getFeaturedCategoryBanners();
+        final mappedImageSlider = response["data"].map((e) => BannerResponse.fromJson(e)).toList();
         return ApiResponse(data: mappedImageSlider);
       } catch (e) {
         return ApiResponse(error: NetworkException.getException(e));

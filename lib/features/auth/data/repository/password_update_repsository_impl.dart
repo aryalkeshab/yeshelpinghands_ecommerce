@@ -11,23 +11,19 @@ class PasswordUpdateRepositoryImpl implements PasswordUpdateRepository {
   final PasswordUpdateRemoteDataSource passwordUpdateRemoteDataSource;
 
   PasswordUpdateRepositoryImpl(
-      {required this.networkInfo,
-      required this.passwordUpdateRemoteDataSource});
+      {required this.networkInfo, required this.passwordUpdateRemoteDataSource});
 
   @override
   Future updatePassword(UpdatePasswordParams updatePasswordParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final result = await passwordUpdateRemoteDataSource
-            .updatePassword(updatePasswordParams);
+        final result = await passwordUpdateRemoteDataSource.updatePassword(updatePasswordParams);
         return ApiResponse(
-            data:
-                "Password updated successful. You can login with your new password");
+            data: "Password updated successful. You can login with your new password");
       } catch (e) {
         if (e is DioError && e.type == DioErrorType.badResponse) {
           return ApiResponse(
-              error: NetworkException.defaultError(
-                  value: "${e.response?.data["message"] ?? ''}"));
+              error: NetworkException.defaultError(value: "${e.response?.data["message"] ?? ''}"));
         }
         return ApiResponse(error: NetworkException.getException(e));
       }

@@ -19,6 +19,7 @@ import 'package:yeshelpinghand/features/home/presentation/screens/product_sectio
 import 'package:yeshelpinghand/features/shared/layouts/error_view.dart';
 import '../../../../core/data/data_source/remote/api_constants.dart';
 import '../../../../core/presentation/resources/ui_assets.dart';
+import '../../../../core/presentation/widgets/custom_dropdown.dart';
 import '../../../shared/layouts/appbar_home.dart';
 import 'product_section/best_seller_section.dart';
 import 'product_section/categories_section.dart';
@@ -99,6 +100,13 @@ class HomeScreen extends StatelessWidget {
                       child: ListView(
                         physics: const BouncingScrollPhysics(),
                         children: [
+                          // config.verticalSpaceMedium(),
+                          // CustomDropdownFormField(
+                          //   value: controller.selectedValue,
+                          //   onChanged: (String? value) {
+                          //     controller.selectedValue = value!;
+                          //   },
+                          // ),
                           config.verticalSpaceMedium(),
                           HomeCarousal(),
                           config.verticalSpaceSmall(),
